@@ -43,9 +43,24 @@
         "padding-block-start": 100,
         "padding-block-end": 72
       }
+    },
+    "featured_collection_grid_1": {
+      "type": "featured-collection-grid",
+      "settings": {
+        "heading": "The Collection",
+        "description": "Meticulously crafted essentials for the modern individual.",
+        "cta_label": "View Collection",
+        "columns": 4,
+        "image_ratio": "3 / 4",
+        "grid_gap": 24,
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
-    "hero_jVaWmY"
+    "hero_jVaWmY",
+    "featured_collection_grid_1"
   ]
 }

@@ -1,8 +1,7 @@
 {% comment %}
-  HOOSH — Product Pairing Section
-  Pairs a "singles" collection with a "packages" collection.
-  Products are matched by index: package[0] contains the single item from singles[0], etc.
-  The user navigates through packages; the single item updates in sync.
+  HOOSH — Product Pairing Section (v2)
+  Full-viewport, asymmetric layout: small single item + dominant package.
+  Decorative floating elements for visual interest.
 {% endcomment %}
 
 {% liquid
@@ -19,152 +18,147 @@
   endif
 %}
 
-<div
-  class="product-pairing color-{{ section.settings.color_scheme }}"
-  style="
-    --pp-padding-top: {{ section.settings.padding_top }}px;
-    --pp-padding-bottom: {{ section.settings.padding_bottom }}px;
-  "
+<section
+  class="pp color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
 >
-  <div class="product-pairing__inner">
+  {%- comment -%} ── Decorative layer ── {%- endcomment -%}
+  <div class="pp__decor" aria-hidden="true">
+    <svg class="pp__decor-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="180" x2="1440" y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
+      <line x1="0" y1="450" x2="1440" y2="450" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
+      <line x1="0" y1="720" x2="1440" y2="720" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
+      <line x1="480" y1="0" x2="480" y2="900" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
+      <line x1="960" y1="0" x2="960" y2="900" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
+      <line x1="100" y1="0" x2="500" y2="900" stroke="currentColor" stroke-width="0.4" opacity="0.04"/>
+      <line x1="900" y1="0" x2="1300" y2="900" stroke="currentColor" stroke-width="0.4" opacity="0.04"/>
+    </svg>
+    <div class="pp__float pp__float--1"></div>
+    <div class="pp__float pp__float--2"></div>
+    <div class="pp__float pp__float--3"></div>
+    <div class="pp__float pp__float--4"></div>
+    <div class="pp__float pp__float--5"></div>
+    <div class="pp__dot-grid pp__dot-grid--left"></div>
+    <div class="pp__dot-grid pp__dot-grid--right"></div>
+  </div>
 
-    {%- comment -%} ── Section header ── {%- endcomment -%}
-    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
-      <div class="product-pairing__header">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="product-pairing__heading">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-        {%- if section.settings.subheading != blank -%}
-          <p class="product-pairing__subheading">{{ section.settings.subheading }}</p>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    {%- comment -%} ── Helper text — tells the user how the section works ── {%- endcomment -%}
-    {%- if section.settings.helper_text != blank -%}
-      <p class="product-pairing__helper">
-        <span class="product-pairing__helper-icon" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M8 7v4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="8" cy="4.75" r="0.75" fill="currentColor"/>
-          </svg>
-        </span>
-        {{ section.settings.helper_text }}
-      </p>
-    {%- endif -%}
+  <div class="pp__inner">
 
     {%- if product_count > 0 -%}
-      <div class="product-pairing__grid" data-pairing-container>
+      <div class="pp__layout" data-pairing-container>
 
         {%- comment -%} ══════════════════════════════════
-             LEFT — The single item
+             LEFT — Single item (compact, text overlay)
         ══════════════════════════════════ {%- endcomment -%}
-        <div class="product-pairing__single" aria-live="polite">
-          <span class="product-pairing__label">{{ section.settings.single_label | default: 'Single' }}</span>
+        <div class="pp__single" aria-live="polite">
+
+          {%- comment -%} ── Small label ── {%- endcomment -%}
+          <span class="pp__tag">{{ section.settings.single_label | default: 'Single' }}</span>
 
           {%- for product in singles.products limit: product_count -%}
             <div
-              class="product-pairing__single-item{% if forloop.first %} is-active{% endif %}"
+              class="pp__single-card{% if forloop.first %} is-active{% endif %}"
               data-pairing-single="{{ forloop.index0 }}"
             >
-              <a href="{{ product.url }}" class="product-pairing__single-link">
-                <div class="product-pairing__single-image-wrap">
+              <a href="{{ product.url }}" class="pp__single-link">
+                <div class="pp__single-img-wrap">
                   {%- if product.featured_image != blank -%}
                     <img
-                      src="{{ product.featured_image | image_url: width: 700 }}"
+                      src="{{ product.featured_image | image_url: width: 500 }}"
                       srcset="
-                        {{ product.featured_image | image_url: width: 400 }} 400w,
-                        {{ product.featured_image | image_url: width: 700 }} 700w
+                        {{ product.featured_image | image_url: width: 300 }} 300w,
+                        {{ product.featured_image | image_url: width: 500 }} 500w
                       "
-                      sizes="(min-width: 750px) 40vw, 90vw"
+                      sizes="(min-width: 750px) 28vw, 45vw"
                       alt="{{ product.featured_image.alt | escape }}"
                       loading="lazy"
                       width="{{ product.featured_image.width }}"
                       height="{{ product.featured_image.height }}"
-                      class="product-pairing__image"
+                      class="pp__img"
                     >
                   {%- else -%}
-                    <div class="product-pairing__placeholder">
-                      {{ 'product-1' | placeholder_svg_tag }}
-                    </div>
+                    <div class="pp__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
                   {%- endif -%}
-                </div>
 
-                <div class="product-pairing__single-info">
-                  <h3 class="product-pairing__product-title">{{ product.title }}</h3>
-                  {%- if product.description != blank -%}
-                    <div class="product-pairing__product-desc">
-                      {{ product.description | strip_html | truncate: 120 }}
-                    </div>
-                  {%- endif -%}
-                  <span class="product-pairing__product-price">{{ product.price | money }}</span>
+                  {%- comment -%} ── Text overlay on the image ── {%- endcomment -%}
+                  <div class="pp__single-overlay">
+                    <span class="pp__single-overlay-label">{{ section.settings.overlay_text | default: 'Also available as' }}</span>
+                    <h3 class="pp__single-overlay-title">{{ product.title }}</h3>
+                    <span class="pp__single-overlay-price">{{ product.price | money }}</span>
+                  </div>
                 </div>
               </a>
             </div>
           {%- endfor -%}
-        </div>
 
-        {%- comment -%} ── Pairing indicator (the visual "link" between the two) ── {%- endcomment -%}
-        <div class="product-pairing__connector" aria-hidden="true">
-          <div class="product-pairing__connector-line"></div>
-          <span class="product-pairing__connector-label">{{ section.settings.connector_text | default: 'Included in' }}</span>
-          <div class="product-pairing__connector-line"></div>
+          {%- comment -%} ── Connector arrow ── {%- endcomment -%}
+          <div class="pp__connector" aria-hidden="true">
+            <span class="pp__connector-text">{{ section.settings.connector_text | default: 'Included in' }}</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
 
         {%- comment -%} ══════════════════════════════════
-             RIGHT — The package
+             RIGHT — Package (dominant, large)
         ══════════════════════════════════ {%- endcomment -%}
-        <div class="product-pairing__package">
-          <span class="product-pairing__label">{{ section.settings.package_label | default: 'Package of 10' }}</span>
+        <div class="pp__package">
+
+          {%- comment -%} ── Package header with label + counter ── {%- endcomment -%}
+          <div class="pp__package-header">
+            <span class="pp__tag">{{ section.settings.package_label | default: 'Package of 10' }}</span>
+            <div class="pp__counter" aria-label="Showing pair 1 of {{ product_count }}">
+              <span data-pairing-current>01</span>
+              <span class="pp__counter-sep">&mdash;</span>
+              <span>{{ product_count | prepend: '00' | slice: -2, 2 }}</span>
+            </div>
+          </div>
 
           {%- comment -%} ── Nav: Previous ── {%- endcomment -%}
           <button
-            class="product-pairing__nav product-pairing__nav--prev"
+            class="pp__nav pp__nav--prev"
             data-pairing-nav="prev"
             aria-label="Previous package"
             {% if product_count <= 1 %}disabled{% endif %}
           >
-            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M1 7L7 1l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1 9L8 2l7 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="product-pairing__nav-text">Previous flavour</span>
+            <span>{{ section.settings.prev_text | default: 'Previous' }}</span>
           </button>
 
-          {%- comment -%} ── Package product (one visible at a time) ── {%- endcomment -%}
-          <div class="product-pairing__package-viewport" aria-live="polite">
+          {%- comment -%} ── Package product viewport ── {%- endcomment -%}
+          <div class="pp__package-viewport" aria-live="polite">
             {%- for product in packages.products limit: product_count -%}
               <div
-                class="product-pairing__package-item{% if forloop.first %} is-active{% endif %}"
+                class="pp__package-card{% if forloop.first %} is-active{% endif %}"
                 data-pairing-package="{{ forloop.index0 }}"
               >
-                <a href="{{ product.url }}" class="product-pairing__package-link">
-                  <div class="product-pairing__package-image-wrap">
+                <a href="{{ product.url }}" class="pp__package-link">
+                  <div class="pp__package-img-wrap">
                     {%- if product.featured_image != blank -%}
                       <img
-                        src="{{ product.featured_image | image_url: width: 700 }}"
+                        src="{{ product.featured_image | image_url: width: 900 }}"
                         srcset="
-                          {{ product.featured_image | image_url: width: 400 }} 400w,
-                          {{ product.featured_image | image_url: width: 700 }} 700w
+                          {{ product.featured_image | image_url: width: 500 }} 500w,
+                          {{ product.featured_image | image_url: width: 700 }} 700w,
+                          {{ product.featured_image | image_url: width: 900 }} 900w
                         "
-                        sizes="(min-width: 750px) 40vw, 90vw"
+                        sizes="(min-width: 750px) 55vw, 90vw"
                         alt="{{ product.featured_image.alt | escape }}"
                         loading="lazy"
                         width="{{ product.featured_image.width }}"
                         height="{{ product.featured_image.height }}"
-                        class="product-pairing__image"
+                        class="pp__img pp__img--package"
                       >
                     {%- else -%}
-                      <div class="product-pairing__placeholder">
-                        {{ 'product-2' | placeholder_svg_tag }}
-                      </div>
+                      <div class="pp__placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
                     {%- endif -%}
                   </div>
-
-                  <div class="product-pairing__package-info">
-                    <h3 class="product-pairing__product-title">{{ product.title }}</h3>
-                    <span class="product-pairing__product-price">{{ product.price | money }}</span>
+                  <div class="pp__package-info">
+                    <h3 class="pp__package-title">{{ product.title }}</h3>
+                    <span class="pp__package-price">{{ product.price | money }}</span>
                   </div>
                 </a>
               </div>
@@ -173,47 +167,39 @@
 
           {%- comment -%} ── Nav: Next ── {%- endcomment -%}
           <button
-            class="product-pairing__nav product-pairing__nav--next"
+            class="pp__nav pp__nav--next"
             data-pairing-nav="next"
             aria-label="Next package"
             {% if product_count <= 1 %}disabled{% endif %}
           >
-            <span class="product-pairing__nav-text">Next flavour</span>
-            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <span>{{ section.settings.next_text | default: 'Next' }}</span>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-
-          {%- comment -%} ── Counter — shows which pair you're viewing ── {%- endcomment -%}
-          <div class="product-pairing__counter" aria-label="Showing pair 1 of {{ product_count }}">
-            <span data-pairing-current>1</span>
-            <span class="product-pairing__counter-sep">/</span>
-            <span>{{ product_count }}</span>
-          </div>
         </div>
 
       </div>
 
-      {%- comment -%} ── Bottom helper — explains the pairing to the customer ── {%- endcomment -%}
+      {%- comment -%} ── Bottom note ── {%- endcomment -%}
       {%- if section.settings.bottom_note != blank -%}
-        <p class="product-pairing__bottom-note">{{ section.settings.bottom_note }}</p>
+        <p class="pp__note">{{ section.settings.bottom_note }}</p>
       {%- endif -%}
 
     {%- else -%}
-      {%- comment -%} ── Empty state for theme editor ── {%- endcomment -%}
-      <div class="product-pairing__empty">
+      <div class="pp__empty">
         <p>Select a <strong>Singles</strong> collection and a <strong>Packages</strong> collection in the section settings.</p>
-        <p class="product-pairing__empty-hint">Products are paired by position: the 1st single matches the 1st package, the 2nd matches the 2nd, and so on.</p>
+        <p class="pp__empty-hint">Products are paired by position — 1st single ↔ 1st package, 2nd ↔ 2nd, and so on.</p>
       </div>
     {%- endif -%}
+
   </div>
-</div>
+</section>
 
 <script>
   (function() {
     const section = document.querySelector('[data-section-id="{{ section.id }}"]');
     if (!section) return;
-
     const container = section.querySelector('[data-pairing-container]');
     if (!container) return;
 
@@ -225,39 +211,32 @@
     const total = Math.min(singles.length, packages.length);
     let current = 0;
 
+    function pad(n) { return String(n).padStart(2, '0'); }
+
     function goTo(index) {
       if (index < 0 || index >= total) return;
+      const oldS = container.querySelector('[data-pairing-single].is-active');
+      const oldP = container.querySelector('[data-pairing-package].is-active');
+      if (oldS) { oldS.classList.remove('is-active'); oldS.classList.add('is-leaving'); }
+      if (oldP) { oldP.classList.remove('is-active'); oldP.classList.add('is-leaving'); }
 
-      /* Fade out current */
-      const oldSingle = container.querySelector('[data-pairing-single].is-active');
-      const oldPackage = container.querySelector('[data-pairing-package].is-active');
-
-      if (oldSingle) oldSingle.classList.remove('is-active');
-      if (oldPackage) oldPackage.classList.remove('is-active');
-
-      /* Activate new */
       current = index;
-      singles[current].classList.add('is-active');
-      packages[current].classList.add('is-active');
 
-      /* Update counter */
-      if (counterEl) counterEl.textContent = current + 1;
+      requestAnimationFrame(function() {
+        if (oldS) oldS.classList.remove('is-leaving');
+        if (oldP) oldP.classList.remove('is-leaving');
+        singles[current].classList.add('is-active');
+        packages[current].classList.add('is-active');
+      });
 
-      /* Update button states */
+      if (counterEl) counterEl.textContent = pad(current + 1);
       if (prevBtn) prevBtn.disabled = current === 0;
       if (nextBtn) nextBtn.disabled = current === total - 1;
-
-      /* Update aria */
-      const counterWrap = container.querySelector('.product-pairing__counter');
-      if (counterWrap) {
-        counterWrap.setAttribute('aria-label', 'Showing pair ' + (current + 1) + ' of ' + total);
-      }
     }
 
     if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
 
-    /* Keyboard support */
     container.addEventListener('keydown', function(e) {
       if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
@@ -267,351 +246,426 @@
 
 {% stylesheet %}
   /* ═══════════════════════════════════════
-     Product Pairing — Layout
+     Product Pairing v2 — Full-viewport
   ═══════════════════════════════════════ */
-  .product-pairing {
-    padding-top: var(--pp-padding-top);
-    padding-bottom: var(--pp-padding-bottom);
-  }
-
-  .product-pairing__inner {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding-inline: var(--padding-lg);
-  }
-
-  /* ── Header ── */
-  .product-pairing__header {
-    text-align: center;
-    margin-bottom: 12px;
-  }
-
-  .product-pairing__heading {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-foreground-heading);
-    margin: 0 0 0.5em;
-    line-height: 1.15;
-  }
-
-  .product-pairing__subheading {
-    font-family: var(--font-body--family);
-    font-size: clamp(0.85rem, 1.1vw, 1rem);
-    color: var(--color-foreground);
-    opacity: 0.65;
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* ── Helper text with info icon ── */
-  .product-pairing__helper {
+  .pp {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: var(--font-body--family);
-    font-size: 0.8rem;
-    color: var(--color-foreground);
-    opacity: 0.5;
-    margin: 0 auto 40px;
-    letter-spacing: 0.01em;
-    text-align: center;
-    max-width: 400px;
-    line-height: 1.5;
+    overflow: hidden;
   }
 
-  .product-pairing__helper-icon {
-    flex-shrink: 0;
-    display: flex;
+  .pp__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 40px var(--padding-lg);
   }
 
   /* ═══════════════════════════════════════
-     The Grid — Desktop: 2 columns
+     Decorative Elements
   ═══════════════════════════════════════ */
-  .product-pairing__grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 0;
-    align-items: center;
+  .pp__decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
   }
 
-  /* ── Labels (Single / Package) ── */
-  .product-pairing__label {
-    display: block;
+  .pp__decor-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-foreground);
+  }
+
+  /* ── Floating circles ── */
+  .pp__float {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  .pp__float--1 {
+    width: 320px;
+    height: 320px;
+    top: -80px;
+    right: -60px;
+    animation: ppFloat 18s ease-in-out infinite;
+  }
+
+  .pp__float--2 {
+    width: 180px;
+    height: 180px;
+    bottom: 60px;
+    left: -40px;
+    border-style: dashed;
+    animation: ppFloat 14s ease-in-out infinite reverse;
+  }
+
+  .pp__float--3 {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    left: 38%;
+    background: rgb(var(--color-foreground-rgb) / 0.02);
+    animation: ppFloat 10s ease-in-out infinite 2s;
+  }
+
+  .pp__float--4 {
+    width: 12px;
+    height: 12px;
+    top: 20%;
+    right: 20%;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+    animation: ppFloat 8s ease-in-out infinite 1s;
+  }
+
+  .pp__float--5 {
+    width: 6px;
+    height: 6px;
+    bottom: 25%;
+    left: 30%;
+    background: rgb(var(--color-foreground-rgb) / 0.1);
+    animation: ppFloat 12s ease-in-out infinite 3s;
+  }
+
+  /* ── Dot grids ── */
+  .pp__dot-grid {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-image: radial-gradient(circle, rgb(var(--color-foreground-rgb) / 0.07) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  .pp__dot-grid--left {
+    bottom: 80px;
+    left: 40px;
+  }
+
+  .pp__dot-grid--right {
+    top: 60px;
+    right: 80px;
+    width: 80px;
+    height: 80px;
+    background-size: 12px 12px;
+  }
+
+  @keyframes ppFloat {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(8px, -12px); }
+    66% { transform: translate(-6px, 8px); }
+  }
+
+  /* ═══════════════════════════════════════
+     Layout — Asymmetric 2-col (35% / 60%)
+  ═══════════════════════════════════════ */
+  .pp__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+    min-height: calc(100vh - 160px);
+    min-height: calc(100dvh - 160px);
+  }
+
+  /* ═══════════════════════════════════════
+     Tag labels
+  ═══════════════════════════════════════ */
+  .pp__tag {
+    display: inline-block;
     font-family: var(--font-body--family);
     font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-foreground);
     opacity: 0.4;
-    margin-bottom: 16px;
-    text-align: center;
+    margin-bottom: 14px;
   }
 
   /* ═══════════════════════════════════════
-     LEFT — Single Item
+     LEFT — Single item (compact, overlay text)
   ═══════════════════════════════════════ */
-  .product-pairing__single {
+  .pp__single {
     position: relative;
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .product-pairing__single-item {
+  .pp__single-card {
     display: none;
-    animation: ppFadeIn 0.4s ease;
+    width: 100%;
+    animation: ppSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .product-pairing__single-item.is-active {
+  .pp__single-card.is-active {
     display: block;
   }
 
-  .product-pairing__single-link {
+  .pp__single-link {
     text-decoration: none;
     color: inherit;
     display: block;
   }
 
-  .product-pairing__single-image-wrap {
-    aspect-ratio: 3 / 4;
+  .pp__single-img-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
     background: rgb(var(--color-foreground-rgb) / 0.03);
     border-radius: var(--product-corner-radius, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
   }
 
-  .product-pairing__single-info {
-    text-align: center;
-    padding: 0 12px;
+  .pp__single-link:hover .pp__img {
+    transform: scale(1.05);
   }
 
-  .product-pairing__product-desc {
-    font-family: var(--font-body--family);
-    font-size: 0.82rem;
-    color: var(--color-foreground);
-    opacity: 0.55;
-    line-height: 1.65;
-    margin-bottom: 10px;
-    max-width: 320px;
-    margin-inline: auto;
-  }
-
-  /* ═══════════════════════════════════════
-     CENTER — Connector
-  ═══════════════════════════════════════ */
-  .product-pairing__connector {
+  /* ── Text overlay on single image ── */
+  .pp__single-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 20px;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0) 100%);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 0 clamp(16px, 3vw, 40px);
-    align-self: center;
+    gap: 4px;
   }
 
-  .product-pairing__connector-line {
-    width: 1px;
-    height: 40px;
-    background: var(--color-border);
-  }
-
-  .product-pairing__connector-label {
+  .pp__single-overlay-label {
     font-family: var(--font-body--family);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .pp__single-overlay-title {
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    color: #fff;
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+
+  .pp__single-overlay-price {
+    font-family: var(--font-body--family);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ── Connector (arrow between single → package) ── */
+  .pp__connector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    color: var(--color-foreground);
+    opacity: 0.3;
+  }
+
+  .pp__connector-text {
+    font-family: var(--font-body--family);
+    font-size: 0.62rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-foreground);
-    opacity: 0.35;
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    transform: rotate(180deg);
     white-space: nowrap;
   }
 
   /* ═══════════════════════════════════════
-     RIGHT — Package
+     RIGHT — Package (dominant, large)
   ═══════════════════════════════════════ */
-  .product-pairing__package {
-    position: relative;
+  .pp__package {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     gap: 0;
   }
 
-  .product-pairing__package-viewport {
-    position: relative;
-    min-height: 200px;
-  }
-
-  .product-pairing__package-item {
-    display: none;
-    animation: ppFadeIn 0.4s ease;
-  }
-
-  .product-pairing__package-item.is-active {
-    display: block;
-  }
-
-  .product-pairing__package-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .product-pairing__package-image-wrap {
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    background: rgb(var(--color-foreground-rgb) / 0.03);
-    border-radius: var(--product-corner-radius, 0);
+  .pp__package-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
   }
 
-  .product-pairing__package-info {
-    text-align: center;
-  }
-
-  /* ── Shared image styles ── */
-  .product-pairing__image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    padding: 8%;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .product-pairing__single-link:hover .product-pairing__image,
-  .product-pairing__package-link:hover .product-pairing__image {
-    transform: scale(1.04);
-  }
-
-  .product-pairing__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.12;
-    padding: 20%;
-  }
-
-  /* ── Shared text styles ── */
-  .product-pairing__product-title {
+  .pp__counter {
     font-family: var(--font-body--family);
-    font-weight: 500;
-    font-size: clamp(0.82rem, 1vw, 0.95rem);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--color-foreground-heading);
-    margin: 0 0 6px;
-    line-height: 1.4;
-  }
-
-  .product-pairing__product-price {
-    font-family: var(--font-body--family);
-    font-weight: 400;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
     color: var(--color-foreground);
-    opacity: 0.5;
+    opacity: 0.3;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  /* ═══════════════════════════════════════
-     Navigation Buttons
-  ═══════════════════════════════════════ */
-  .product-pairing__nav {
+  .pp__counter-sep {
+    font-size: 0.55rem;
+  }
+
+  /* ── Nav buttons ── */
+  .pp__nav {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
-    padding: 14px 20px;
-    border: 1px solid var(--color-border);
+    padding: 14px 24px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
     background: transparent;
     color: var(--color-foreground-heading);
     cursor: pointer;
     font-family: var(--font-body--family);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: background 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
+    transition: background 0.25s ease, opacity 0.25s ease, border-color 0.3s ease;
   }
 
-  .product-pairing__nav:hover:not(:disabled) {
+  .pp__nav:hover:not(:disabled) {
     background: rgb(var(--color-foreground-rgb) / 0.04);
-    border-color: var(--color-foreground-heading);
+    border-color: rgb(var(--color-foreground-rgb) / 0.25);
   }
 
-  .product-pairing__nav:disabled {
-    opacity: 0.2;
+  .pp__nav:disabled {
+    opacity: 0.15;
     cursor: not-allowed;
   }
 
-  .product-pairing__nav--prev {
+  .pp__nav--prev {
     flex-direction: column;
     border-radius: var(--product-corner-radius, 0) var(--product-corner-radius, 0) 0 0;
     border-bottom: none;
-    margin-bottom: 0;
   }
 
-  .product-pairing__nav--next {
+  .pp__nav--next {
     flex-direction: column;
     border-radius: 0 0 var(--product-corner-radius, 0) var(--product-corner-radius, 0);
     border-top: none;
-    margin-top: 0;
   }
 
-  .product-pairing__nav-text {
+  /* ── Package viewport ── */
+  .pp__package-viewport {
+    position: relative;
+  }
+
+  .pp__package-card {
+    display: none;
+    animation: ppSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pp__package-card.is-active {
     display: block;
   }
 
-  /* ── Counter ── */
-  .product-pairing__counter {
-    text-align: center;
-    margin-top: 16px;
-    font-family: var(--font-body--family);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    color: var(--color-foreground);
-    opacity: 0.35;
+  .pp__package-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
-  .product-pairing__counter-sep {
-    margin: 0 2px;
+  .pp__package-img-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: rgb(var(--color-foreground-rgb) / 0.03);
+    border-left: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+    border-right: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pp__package-link:hover .pp__img--package {
+    transform: scale(1.03);
+  }
+
+  .pp__package-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 4px 0;
+  }
+
+  .pp__package-title {
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-foreground-heading);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .pp__package-price {
+    font-family: var(--font-body--family);
+    font-size: 0.85rem;
+    color: var(--color-foreground);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  /* ── Shared image styles ── */
+  .pp__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 6%;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pp__img--package {
+    padding: 4%;
+  }
+
+  .pp__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.1;
+    padding: 25%;
   }
 
   /* ── Bottom note ── */
-  .product-pairing__bottom-note {
+  .pp__note {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 32px;
     font-family: var(--font-body--family);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--color-foreground);
-    opacity: 0.4;
+    opacity: 0.3;
     letter-spacing: 0.01em;
     line-height: 1.55;
-    max-width: 460px;
+    max-width: 420px;
     margin-inline: auto;
   }
 
   /* ── Empty state ── */
-  .product-pairing__empty {
+  .pp__empty {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
     border: 1px dashed var(--color-border);
     border-radius: 8px;
   }
 
-  .product-pairing__empty p {
+  .pp__empty p {
     font-family: var(--font-body--family);
     font-size: 0.9rem;
     color: var(--color-foreground);
@@ -619,18 +673,18 @@
     line-height: 1.6;
   }
 
-  .product-pairing__empty-hint {
+  .pp__empty-hint {
     opacity: 0.5;
     font-size: 0.82rem !important;
   }
 
   /* ═══════════════════════════════════════
-     Animation
+     Animations
   ═══════════════════════════════════════ */
-  @keyframes ppFadeIn {
+  @keyframes ppSlideIn {
     from {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -639,95 +693,126 @@
   }
 
   /* ═══════════════════════════════════════
-     MOBILE — Side-by-side compact card
-     Both products stay visible together
-     so the "pairing" relationship is clear
+     MOBILE
   ═══════════════════════════════════════ */
   @media screen and (max-width: 749px) {
-    .product-pairing__grid {
-      grid-template-columns: 1fr;
-      gap: 0;
+    .pp {
+      min-height: 100vh;
+      min-height: 100dvh;
+      align-items: stretch;
     }
 
-    /* On mobile, reorder: nav top → pairing card → nav bottom */
-    .product-pairing__single { order: 1; }
-    .product-pairing__connector { order: 2; }
-    .product-pairing__package { order: 3; }
+    .pp__inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px var(--padding-lg);
+    }
 
-    /* ── The pairing card: both items side by side ── */
-    .product-pairing__single,
-    .product-pairing__package-viewport {
+    .pp__layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
       min-height: auto;
     }
 
-    /* ── Connector becomes horizontal ── */
-    .product-pairing__connector {
-      flex-direction: row;
-      padding: 16px 0;
+    /* ── Package first on mobile (it's the star) ── */
+    .pp__package { order: 1; }
+    .pp__single { order: 2; }
+
+    /* ── Single becomes a compact horizontal strip ── */
+    .pp__single-card.is-active {
+      display: flex;
+      align-items: center;
     }
 
-    .product-pairing__connector-line {
-      width: 32px;
-      height: 1px;
+    .pp__single-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
     }
 
-    .product-pairing__connector-label {
-      writing-mode: horizontal-tb;
-      transform: none;
-    }
-
-    /* ── Nav buttons become horizontal ── */
-    .product-pairing__nav {
-      flex-direction: row;
-    }
-
-    .product-pairing__nav--prev {
+    .pp__single-img-wrap {
+      width: 80px;
+      min-width: 80px;
+      aspect-ratio: 1;
       border-radius: var(--product-corner-radius, 0);
-      border-bottom: 1px solid var(--color-border);
-      margin-bottom: 12px;
     }
 
-    .product-pairing__nav--next {
+    .pp__single-overlay {
+      position: static;
+      background: none;
+      padding: 0;
+    }
+
+    .pp__single-overlay-label {
+      color: var(--color-foreground);
+      opacity: 0.4;
+    }
+
+    .pp__single-overlay-title {
+      color: var(--color-foreground-heading);
+      font-size: 0.82rem;
+    }
+
+    .pp__single-overlay-price {
+      color: var(--color-foreground);
+      opacity: 0.5;
+    }
+
+    .pp__connector {
+      display: none;
+    }
+
+    /* ── Package image taller on mobile ── */
+    .pp__package-img-wrap {
+      aspect-ratio: 3 / 4;
+    }
+
+    /* ── Nav horizontal on mobile ── */
+    .pp__nav--prev,
+    .pp__nav--next {
+      flex-direction: row;
+    }
+
+    .pp__nav--prev {
       border-radius: var(--product-corner-radius, 0);
-      border-top: 1px solid var(--color-border);
-      margin-top: 12px;
+      border-bottom: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+      margin-bottom: 4px;
     }
 
-    .product-pairing__nav--prev svg {
-      transform: rotate(-90deg);
+    .pp__nav--next {
+      border-radius: var(--product-corner-radius, 0);
+      border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+      margin-top: 4px;
     }
 
-    .product-pairing__nav--next svg {
-      transform: rotate(-90deg);
-    }
+    .pp__nav--prev svg { transform: rotate(-90deg); }
+    .pp__nav--next svg { transform: rotate(-90deg); }
 
-    /* Smaller images on mobile */
-    .product-pairing__single-image-wrap,
-    .product-pairing__package-image-wrap {
-      aspect-ratio: 1 / 1;
-    }
+    /* ── Scale down decorative elements ── */
+    .pp__float--1 { width: 160px; height: 160px; }
+    .pp__float--2 { width: 100px; height: 100px; }
+    .pp__dot-grid--right { display: none; }
+    .pp__dot-grid--left { width: 60px; height: 60px; }
 
-    .product-pairing__product-desc {
-      font-size: 0.78rem;
+    .pp__note {
+      margin-top: 20px;
+      font-size: 0.68rem;
     }
   }
 
-  /* ═══════════════════════════════════════
-     Very small screens — tighter spacing
-  ═══════════════════════════════════════ */
+  /* ── Very small screens ── */
   @media screen and (max-width: 399px) {
-    .product-pairing__single-image-wrap,
-    .product-pairing__package-image-wrap {
-      aspect-ratio: 1 / 1;
+    .pp__single-img-wrap {
+      width: 64px;
+      min-width: 64px;
     }
 
-    .product-pairing__product-title {
-      font-size: 0.78rem;
-    }
-
-    .product-pairing__nav {
-      padding: 12px 16px;
-      font-size: 0.68rem;
+    .pp__nav {
+      padding: 10px 16px;
+      font-size: 0.62rem;
     }
   }
 {% endstylesheet %}
@@ -754,41 +839,11 @@
       "type": "collection",
       "id": "packages_collection",
       "label": "Packages collection",
-      "info": "The bundled packs (e.g. pack of 10). Products are paired by position — 1st single ↔ 1st package, and so on."
+      "info": "The bundled packs (e.g. pack of 10). Products are paired by position — 1st single ↔ 1st package."
     },
     {
       "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Buy One or Bundle Up"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Every package contains the same product you know and love — just more of it."
-    },
-    {
-      "type": "text",
-      "id": "helper_text",
-      "label": "Helper text (with info icon)",
-      "default": "Use the arrows to browse flavours — the single and package stay in sync.",
-      "info": "Shown below the heading to guide the customer."
-    },
-    {
-      "type": "text",
-      "id": "bottom_note",
-      "label": "Bottom note",
-      "default": "Each package contains 10 individually wrapped items of the selected flavour.",
-      "info": "Appears below the grid for extra clarity."
-    },
-    {
-      "type": "header",
-      "content": "Labels"
+      "content": "Labels & text"
     },
     {
       "type": "text",
@@ -804,10 +859,35 @@
     },
     {
       "type": "text",
+      "id": "overlay_text",
+      "label": "Overlay label (on single image)",
+      "default": "Also available as",
+      "info": "Small text shown above the product title on the single item image."
+    },
+    {
+      "type": "text",
       "id": "connector_text",
       "label": "Connector text",
       "default": "Included in",
-      "info": "The text between the single and the package."
+      "info": "Shown between the single and the package on desktop."
+    },
+    {
+      "type": "text",
+      "id": "prev_text",
+      "label": "Previous button text",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_text",
+      "label": "Next button text",
+      "default": "Next"
+    },
+    {
+      "type": "text",
+      "id": "bottom_note",
+      "label": "Bottom note",
+      "default": "Each package contains 10 individually wrapped items of the selected flavour."
     },
     {
       "type": "header",
@@ -818,30 +898,6 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 150,
-      "step": 5,
-      "unit": "px",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 150,
-      "step": 5,
-      "unit": "px",
-      "default": 80
     }
   ],
   "presets": [

@@ -1,6 +1,6 @@
 {% comment %}
-  HOOSH — Product Pairing Section (v4)
-  Compact viewport, horizontal nav for package, auto-ratio single image.
+  HOOSH — Product Pairing Section (v5)
+  Clean layout, no backgrounds, title below bundle, helper text pointing to arrows.
 {% endcomment %}
 
 {% liquid
@@ -21,34 +21,12 @@
   class="pp color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
 >
-  {%- comment -%} ── Decorative layer ── {%- endcomment -%}
-  <div class="pp__decor" aria-hidden="true">
-    <svg class="pp__decor-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="180" x2="1440" y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
-      <line x1="0" y1="450" x2="1440" y2="450" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
-      <line x1="0" y1="720" x2="1440" y2="720" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
-      <line x1="480" y1="0" x2="480" y2="900" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
-      <line x1="960" y1="0" x2="960" y2="900" stroke="currentColor" stroke-width="0.5" opacity="0.06"/>
-      <line x1="100" y1="0" x2="500" y2="900" stroke="currentColor" stroke-width="0.4" opacity="0.04"/>
-      <line x1="900" y1="0" x2="1300" y2="900" stroke="currentColor" stroke-width="0.4" opacity="0.04"/>
-    </svg>
-    <div class="pp__float pp__float--1"></div>
-    <div class="pp__float pp__float--2"></div>
-    <div class="pp__float pp__float--3"></div>
-    <div class="pp__float pp__float--4"></div>
-    <div class="pp__float pp__float--5"></div>
-    <div class="pp__dot-grid pp__dot-grid--left"></div>
-    <div class="pp__dot-grid pp__dot-grid--right"></div>
-  </div>
-
   <div class="pp__inner">
 
     {%- if product_count > 0 -%}
       <div class="pp__layout" data-pairing-container>
 
-        {%- comment -%} ══════════════════════════════════
-             LEFT — Single item (compact, auto ratio, first image only)
-        ══════════════════════════════════ {%- endcomment -%}
+        {%- comment -%} ── LEFT — Single item ── {%- endcomment -%}
         <div class="pp__single" aria-live="polite">
           <span class="pp__tag">{{ section.settings.single_label | default: 'Single' }}</span>
 
@@ -95,9 +73,7 @@
           </div>
         </div>
 
-        {%- comment -%} ══════════════════════════════════
-             RIGHT — Package with horizontal nav
-        ══════════════════════════════════ {%- endcomment -%}
+        {%- comment -%} ── RIGHT — Package with horizontal nav ── {%- endcomment -%}
         <div class="pp__package">
           <div class="pp__package-header">
             <span class="pp__tag">{{ section.settings.package_label | default: 'Package of 10' }}</span>
@@ -108,7 +84,6 @@
             </div>
           </div>
 
-          {%- comment -%} ── Horizontal nav wraps around viewport ── {%- endcomment -%}
           <div class="pp__package-row">
             <button
               class="pp__nav-h pp__nav-h--prev"
@@ -146,11 +121,12 @@
                       {%- else -%}
                         <div class="pp__placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
                       {%- endif -%}
+                    </div>
 
-                      <div class="pp__badge pp__badge--lg">
-                        <span class="pp__badge-title">{{ product.title }}</span>
-                        <span class="pp__badge-price">{{ product.price | money }}</span>
-                      </div>
+                    {%- comment -%} ── Title + price below the image ── {%- endcomment -%}
+                    <div class="pp__package-info">
+                      <span class="pp__package-title">{{ product.title }}</span>
+                      <span class="pp__package-price">{{ product.price | money }}</span>
                     </div>
                   </a>
                 </div>
@@ -172,9 +148,20 @@
 
       </div>
 
-      {%- if section.settings.bottom_note != blank -%}
-        <p class="pp__note">{{ section.settings.bottom_note }}</p>
-      {%- endif -%}
+      {%- comment -%} ── Bottom helper pointing to arrows ── {%- endcomment -%}
+      <div class="pp__bottom-helper">
+        <span class="pp__bottom-arrow" aria-hidden="true">
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 1l4 4-4 4M1 5h12" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="pp__bottom-text">{{ section.settings.bottom_note | default: 'Use the arrows to browse through the available flavours' }}</span>
+        <span class="pp__bottom-arrow pp__bottom-arrow--flip" aria-hidden="true">
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 1l4 4-4 4M1 5h12" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
 
     {%- else -%}
       <div class="pp__empty">
@@ -230,9 +217,6 @@
 </script>
 
 {% stylesheet %}
-  /* ═══════════════════════════════════════
-     Product Pairing v4
-  ═══════════════════════════════════════ */
   .pp {
     position: relative;
     height: 100vh;
@@ -249,53 +233,8 @@
     max-width: var(--page-width);
     margin: 0 auto;
     padding: 0 var(--padding-lg);
-  }
-
-  /* ═══════════════════════════════════════
-     Decorative
-  ═══════════════════════════════════════ */
-  .pp__decor {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .pp__decor-lines {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    color: var(--color-foreground);
-  }
-
-  .pp__float {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgb(var(--color-foreground-rgb) / 0.06);
-  }
-
-  .pp__float--1 { width: 320px; height: 320px; top: -80px; right: -60px; animation: ppFloat 18s ease-in-out infinite; }
-  .pp__float--2 { width: 180px; height: 180px; bottom: 60px; left: -40px; border-style: dashed; animation: ppFloat 14s ease-in-out infinite reverse; }
-  .pp__float--3 { width: 80px; height: 80px; top: 30%; left: 38%; background: rgb(var(--color-foreground-rgb) / 0.02); animation: ppFloat 10s ease-in-out infinite 2s; }
-  .pp__float--4 { width: 12px; height: 12px; top: 20%; right: 20%; background: rgb(var(--color-foreground-rgb) / 0.08); animation: ppFloat 8s ease-in-out infinite 1s; }
-  .pp__float--5 { width: 6px; height: 6px; bottom: 25%; left: 30%; background: rgb(var(--color-foreground-rgb) / 0.1); animation: ppFloat 12s ease-in-out infinite 3s; }
-
-  .pp__dot-grid {
-    position: absolute;
-    width: 120px; height: 120px;
-    background-image: radial-gradient(circle, rgb(var(--color-foreground-rgb) / 0.07) 1px, transparent 1px);
-    background-size: 16px 16px;
-  }
-
-  .pp__dot-grid--left { bottom: 80px; left: 40px; }
-  .pp__dot-grid--right { top: 60px; right: 80px; width: 80px; height: 80px; background-size: 12px 12px; }
-
-  @keyframes ppFloat {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(8px, -12px); }
-    66% { transform: translate(-6px, 8px); }
+    display: flex;
+    flex-direction: column;
   }
 
   /* ═══════════════════════════════════════
@@ -321,7 +260,7 @@
   }
 
   /* ═══════════════════════════════════════
-     Badges
+     Badge (single item only)
   ═══════════════════════════════════════ */
   .pp__badge {
     position: absolute;
@@ -335,7 +274,6 @@
     z-index: 2;
   }
 
-  /* Small badge — single item */
   .pp__badge--sm {
     padding: 6px 10px;
     max-width: 70%;
@@ -347,23 +285,6 @@
 
   .pp__badge--sm .pp__badge-price {
     font-size: 0.55rem;
-  }
-
-  /* Large badge — package */
-  .pp__badge--lg {
-    padding: 10px 16px;
-    max-width: 55%;
-  }
-
-  .pp__badge--lg .pp__badge-title {
-    font-size: 0.78rem;
-    white-space: normal;
-    line-height: 1.35;
-  }
-
-  .pp__badge--lg .pp__badge-price {
-    font-size: 0.72rem;
-    margin-top: 2px;
   }
 
   .pp__badge-title {
@@ -428,15 +349,12 @@
   .pp__single-img-wrap {
     position: relative;
     overflow: hidden;
-    background: rgb(var(--color-foreground-rgb) / 0.025);
   }
 
-  /* Auto ratio — image dictates height */
   .pp__img--single {
     display: block;
     width: 100%;
     height: auto;
-    object-fit: cover;
   }
 
   .pp__connector {
@@ -457,7 +375,7 @@
   }
 
   /* ═══════════════════════════════════════
-     RIGHT — Package with horizontal nav
+     RIGHT — Package (no background, title below)
   ═══════════════════════════════════════ */
   .pp__package {
     display: flex;
@@ -488,7 +406,7 @@
   /* ── Horizontal row: prev | viewport | next ── */
   .pp__package-row {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 0;
   }
 
@@ -498,7 +416,9 @@
     justify-content: center;
     width: 48px;
     min-width: 48px;
+    height: 48px;
     border: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+    border-radius: 50%;
     background: transparent;
     color: var(--color-foreground-heading);
     cursor: pointer;
@@ -512,14 +432,6 @@
   }
 
   .pp__nav-h:disabled { opacity: 0.15; cursor: not-allowed; }
-
-  .pp__nav-h--prev {
-    border-right: none;
-  }
-
-  .pp__nav-h--next {
-    border-left: none;
-  }
 
   .pp__package-viewport {
     position: relative;
@@ -538,25 +450,67 @@
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: rgb(var(--color-foreground-rgb) / 0.025);
   }
 
-  /* ── Bottom note ── */
-  .pp__note {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    margin-top: 20px;
+  /* ── Title + price below image ── */
+  .pp__package-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 8px 0;
+  }
+
+  .pp__package-title {
     font-family: var(--font-body--family);
-    font-size: 0.65rem;
+    font-weight: 500;
+    font-size: clamp(0.78rem, 1vw, 0.9rem);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-foreground-heading);
+    line-height: 1.4;
+  }
+
+  .pp__package-price {
+    font-family: var(--font-body--family);
+    font-size: 0.82rem;
+    color: var(--color-foreground);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════════════
+     Bottom helper — points to arrows
+  ═══════════════════════════════════════ */
+  .pp__bottom-helper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
     color: var(--color-foreground);
     opacity: 0.3;
-    line-height: 1.55;
-    max-width: 420px;
-    margin-inline: auto;
   }
 
-  /* ── Empty state ── */
+  .pp__bottom-text {
+    font-family: var(--font-body--family);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pp__bottom-arrow {
+    display: flex;
+    align-items: center;
+  }
+
+  .pp__bottom-arrow--flip {
+    transform: scaleX(-1);
+  }
+
+  /* ═══════════════════════════════════════
+     Empty state
+  ═══════════════════════════════════════ */
   .pp__empty {
     text-align: center;
     padding: 80px 20px;
@@ -580,7 +534,7 @@
   }
 
   /* ═══════════════════════════════════════
-     MOBILE — keep same as before
+     MOBILE
   ═══════════════════════════════════════ */
   @media screen and (max-width: 749px) {
     .pp {
@@ -590,8 +544,6 @@
     }
 
     .pp__inner {
-      display: flex;
-      flex-direction: column;
       justify-content: center;
       padding: 24px var(--padding-lg);
     }
@@ -634,15 +586,11 @@
       max-width: none;
     }
 
-    .pp__badge--sm .pp__badge-title,
-    .pp__badge--lg .pp__badge-title { font-size: 0.72rem; }
-
-    .pp__badge--sm .pp__badge-price,
-    .pp__badge--lg .pp__badge-price { font-size: 0.65rem; }
+    .pp__badge--sm .pp__badge-title { font-size: 0.72rem; }
+    .pp__badge--sm .pp__badge-price { font-size: 0.65rem; }
 
     .pp__connector { display: none; }
 
-    /* Mobile: vertical nav buttons instead of horizontal */
     .pp__package-row {
       flex-direction: column;
     }
@@ -651,17 +599,8 @@
       width: 100%;
       min-width: auto;
       height: 40px;
+      border-radius: 0;
       padding: 10px;
-    }
-
-    .pp__nav-h--prev {
-      border-right: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
-      border-bottom: none;
-    }
-
-    .pp__nav-h--next {
-      border-left: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
-      border-top: none;
     }
 
     .pp__nav-h--prev svg { transform: rotate(90deg); }
@@ -669,12 +608,15 @@
 
     .pp__package-img-wrap { aspect-ratio: 3 / 4; }
 
-    .pp__float--1 { width: 160px; height: 160px; }
-    .pp__float--2 { width: 100px; height: 100px; }
-    .pp__dot-grid--right { display: none; }
-    .pp__dot-grid--left { width: 60px; height: 60px; }
+    .pp__bottom-helper {
+      margin-top: 16px;
+    }
 
-    .pp__note { margin-top: 16px; font-size: 0.62rem; }
+    .pp__bottom-text {
+      font-size: 0.6rem;
+      white-space: normal;
+      text-align: center;
+    }
   }
 
   @media screen and (max-width: 399px) {
@@ -732,21 +674,9 @@
     },
     {
       "type": "text",
-      "id": "prev_text",
-      "label": "Previous button text",
-      "default": "Previous"
-    },
-    {
-      "type": "text",
-      "id": "next_text",
-      "label": "Next button text",
-      "default": "Next"
-    },
-    {
-      "type": "text",
       "id": "bottom_note",
-      "label": "Bottom note",
-      "default": "Each package contains 10 individually wrapped items of the selected flavour."
+      "label": "Bottom helper text",
+      "default": "Use the arrows to browse through the available flavours"
     },
     {
       "type": "header",

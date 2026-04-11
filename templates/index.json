@@ -247,16 +247,14 @@
       "settings": {
         "singles_collection": "e-pod-0",
         "packages_collection": "e-pod-package-0",
-        "heading": "Buy One or Bundle Up",
-        "subheading": "Every package contains the same product you know and love — just more of it.",
-        "helper_text": "Use the arrows to browse flavours — the single and package stay in sync.",
-        "bottom_note": "Each package contains 10 individually wrapped items of the selected flavour.",
         "single_label": "Single",
         "package_label": "Package of 10",
+        "overlay_text": "Also available as",
         "connector_text": "Included in",
-        "color_scheme": "scheme-5",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "prev_text": "Previous",
+        "next_text": "Next",
+        "bottom_note": "Each package contains 10 individually wrapped items of the selected flavour.",
+        "color_scheme": "scheme-1"
       }
     }
   },

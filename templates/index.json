@@ -245,6 +245,8 @@
     "product_pairing_1": {
       "type": "product-pairing",
       "settings": {
+        "singles_collection": "e-pod-0",
+        "packages_collection": "e-pod-package-0",
         "heading": "Buy One or Bundle Up",
         "subheading": "Every package contains the same product you know and love — just more of it.",
         "helper_text": "Use the arrows to browse flavours — the single and package stay in sync.",

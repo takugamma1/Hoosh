@@ -197,6 +197,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/Untitled_design_-_2026-04-11T171118.942.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -213,10 +214,10 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
+        "section_height": "custom",
+        "section_height_custom": 60,
         "color_scheme": "scheme-5",
-        "toggle_overlay": true,
+        "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
@@ -224,22 +225,6 @@
         "reflection_opacity": 75,
         "padding-block-start": 40,
         "padding-block-end": 40
-      }
-    },
-    "featured_collection_grid_WG9HQA": {
-      "type": "featured-collection-grid",
-      "name": "Featured Collection Grid",
-      "settings": {
-        "collection": "",
-        "heading": "The Collection",
-        "description": "Meticulously crafted essentials for the modern individual.",
-        "cta_label": "View Collection",
-        "columns": 4,
-        "image_ratio": "3 / 4",
-        "grid_gap": 24,
-        "color_scheme": "",
-        "padding_top": 80,
-        "padding_bottom": 80
       }
     },
     "product_pairing_1": {
@@ -263,7 +248,6 @@
     "featured_collection_grid_1",
     "hero_tW4gan",
     "hero_bnjA7C",
-    "featured_collection_grid_WG9HQA",
     "product_pairing_1"
   ]
 }

@@ -38,7 +38,12 @@
         "social_1": {
           "type": "social",
           "settings": {
-            "title": "Follow Us"
+            "title": "Follow Us",
+            "instagram": "shopify://collections/e-heads",
+            "tiktok": "shopify://products/black-e-head",
+            "facebook": "shopify://products/e-pod-0-никотин-amalfi-breeze-пакет-от-10-e-pods",
+            "youtube": "shopify://pages/contact",
+            "twitter": "shopify://pages/contact"
           }
         }
       },
@@ -49,7 +54,10 @@
         "social_1"
       ],
       "settings": {
-        "logo_text": "HOOSH"
+        "logo_text": "HOOSH",
+        "whatsapp": "",
+        "telegram": "",
+        "phone": ""
       }
     }
   },

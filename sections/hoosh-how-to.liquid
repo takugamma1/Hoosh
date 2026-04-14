@@ -1,0 +1,228 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+<section class="hht h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hht__header h-reveal">
+      <span class="h-label">{{ section.settings.label | default: 'How It Works' }}</span>
+      <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Setup in Seconds' }}</h2>
+    </div>
+
+    {%- comment -%} Steps row {%- endcomment -%}
+    <div class="hht__steps">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          <div class="hht__step h-reveal" {{ block.shopify_attributes }}>
+            <div class="hht__step-media">
+              {%- if block.settings.video != blank -%}
+                <video
+                  src="{{ block.settings.video.sources[0].url }}"
+                  autoplay muted loop playsinline
+                  poster="{{ block.settings.image | image_url: width: 600 }}"
+                ></video>
+              {%- elsif block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="hht__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+              {%- endif -%}
+            </div>
+            <div class="hht__step-info">
+              <span class="hht__step-num">{{ forloop.index }}</span>
+              <h3 class="hht__step-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.description != blank -%}
+                <p class="hht__step-desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Optional full-width showcase video {%- endcomment -%}
+    {%- if section.settings.showcase_video != blank -%}
+      <div class="hht__showcase h-reveal">
+        <video
+          src="{{ section.settings.showcase_video.sources[0].url }}"
+          autoplay muted loop playsinline
+          {%- if section.settings.showcase_poster != blank %}
+          poster="{{ section.settings.showcase_poster | image_url: width: 1200 }}"
+          {%- endif %}
+        ></video>
+        {%- if section.settings.showcase_caption != blank -%}
+          <p class="hht__showcase-caption">{{ section.settings.showcase_caption }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .hht__header {
+    text-align: center;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* Steps grid */
+  .hht__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--h-card-gap, 2rem);
+  }
+  .hht__step {
+    background: var(--h-bg-card, #111);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .hht__step-media {
+    aspect-ratio: 1;
+    background: var(--h-bg-elevated, #0a0a0a);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hht__step-media video,
+  .hht__step-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hht__placeholder {
+    width: 50%;
+    opacity: 0.08;
+  }
+  .hht__step-info {
+    padding: 24px;
+  }
+  .hht__step-num {
+    font-family: var(--h-font-display);
+    font-size: 2rem;
+    color: var(--h-pink, #FF1493);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .hht__step-title {
+    font-family: var(--h-font-display);
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-tight);
+    color: var(--h-text);
+    margin: 0 0 8px;
+  }
+  .hht__step-desc {
+    font-family: var(--h-font-body);
+    font-size: var(--h-small);
+    color: var(--h-text-secondary, #888);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Showcase video */
+  .hht__showcase {
+    margin-top: clamp(2rem, 4vw, 4rem);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hht__showcase video {
+    width: 100%;
+    display: block;
+  }
+  .hht__showcase-caption {
+    text-align: center;
+    font-family: var(--h-font-body);
+    font-size: var(--h-small);
+    color: var(--h-text-muted, #555);
+    padding: 16px 0;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hht__steps {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH How-To",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Setup in Seconds"
+    },
+    {
+      "type": "header",
+      "content": "Showcase video"
+    },
+    {
+      "type": "video",
+      "id": "showcase_video",
+      "label": "Full-width showcase video (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_poster",
+      "label": "Showcase poster image"
+    },
+    {
+      "type": "text",
+      "id": "showcase_caption",
+      "label": "Showcase caption"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Insert the Pod"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Step video (overrides image)"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HOOSH How-To",
+    "blocks": [
+      { "type": "step", "settings": { "title": "Choose Your Flavour", "description": "Pick from our range of premium pod flavours." } },
+      { "type": "step", "settings": { "title": "Click It In", "description": "The magnetic pod snaps into the cup in one motion." } },
+      { "type": "step", "settings": { "title": "Enjoy", "description": "That's it. Premium shisha, zero hassle." } }
+    ]
+  }]
+}
+{% endschema %}

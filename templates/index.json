@@ -9,57 +9,18 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
-      "disabled": true,
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/Untitled_design_-_2026-04-10T195131.322.png",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "custom",
-        "section_height_custom": 100,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
-    },
-    "hoosh_hero_McYPBf": {
+    "hoosh_hero_1": {
       "type": "hoosh-hero",
-      "name": "HOOSH Hero",
       "settings": {
         "bg_image": "shopify://shop_images/Untitled_design_-_2026-04-10T195131.322.png",
-        "bg_video": "",
         "logo_image": "shopify://shop_images/cabd1164-490f-405f-afc0-ecaf2e41e602.png",
         "heading": "HOOSH",
         "tagline": "Redefine the ritual",
         "cta_text": "Explore the Collection"
       }
     },
-    "hoosh_product_grid_LeP4c9": {
+    "hoosh_product_grid_heads": {
       "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
       "settings": {
         "label": "The Heads",
         "heading": "Choose Your Head",
@@ -67,62 +28,36 @@
         "max_products": 6
       }
     },
-    "hoosh_marquee_hWzb3M": {
+    "hoosh_marquee_1": {
       "type": "hoosh-marquee",
-      "blocks": {
-        "image_E3TrDa": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_hYAj9x": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_TjnG7b": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_raWMUi": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_JpcPhj": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_M3QpQd": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "image_E3TrDa",
-        "image_hYAj9x",
-        "image_TjnG7b",
-        "image_raWMUi",
-        "image_JpcPhj",
-        "image_M3QpQd"
-      ],
-      "name": "HOOSH Marquee",
       "settings": {
         "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
-        "text_color": "#ff1493"
+        "text_color": "#FF1493"
       }
     },
-    "hoosh_ecosystem_bundle_kgw6x3": {
-      "type": "hoosh-ecosystem-bundle",
-      "name": "HOOSH Ecosystem — Bundle",
-      "settings": {
-        "label": "The Bundle",
-        "heading": "10 Pods. One Pack.",
-        "description": "Stock up with a bundle of 10 pods in your favourite flavour. Less reordering, more enjoying.",
-        "cta_text": "View Bundles",
-        "cta_link": "shopify://pages/contact"
-      }
+    "hoosh_feature_cards_1": {
+      "type": "hoosh-feature-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "label": "Legacy Compatible",
+            "heading": "Works Any Way"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "label": "Change Flavours With Ease",
+            "heading": "Switch It Up!"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2"],
+      "settings": {}
     },
-    "hoosh_product_grid_n7b3q3": {
+    "hoosh_product_grid_pods": {
       "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
       "settings": {
         "label": "0% НИКОТИН",
         "heading": "ИЗБЕРЕТЕ ВАШИЯ ВКУС",
@@ -130,64 +65,98 @@
         "max_products": 6
       }
     },
-    "hoosh_ecosystem_shisha_eWwVVM": {
+    "hoosh_eco_shisha_1": {
       "type": "hoosh-ecosystem-shisha",
-      "name": "HOOSH Ecosystem — Shisha",
       "settings": {
         "label": "The Shisha",
         "heading": "The Centrepiece",
         "description": "Premium build. Magnetic cup system. Engineered for ritual, designed for display.",
         "image": "shopify://shop_images/20240920-_DSC8467_e64185f5-aeb1-494e-ae3a-d239987b51bf.jpg",
-        "cta_text": "Explore Shisha",
-        "cta_link": "shopify://products/black-e-head"
+        "cta_text": "Explore Shisha"
       }
     },
-    "hoosh_trust_strip_p6W4AH": {
-      "type": "hoosh-trust-strip",
+    "hoosh_how_to_1": {
+      "type": "hoosh-how-to",
       "blocks": {
-        "trust_item_inetXA": {
-          "type": "trust_item",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "text": "Premium Quality"
+            "title": "Choose Your Flavour",
+            "description": "Pick from our range of premium pod flavours."
           }
         },
-        "trust_item_ttaWdB": {
-          "type": "trust_item",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "text": "Fast Shipping"
+            "title": "Click It In",
+            "description": "The magnetic pod snaps into the cup in one motion."
           }
         },
-        "trust_item_EVCHUg": {
-          "type": "trust_item",
+        "step_3": {
+          "type": "step",
           "settings": {
-            "text": "Satisfaction Guaranteed"
-          }
-        },
-        "trust_item_yPMdQC": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Secure Payments"
+            "title": "Enjoy",
+            "description": "That's it. Premium shisha, zero hassle."
           }
         }
       },
-      "block_order": [
-        "trust_item_inetXA",
-        "trust_item_ttaWdB",
-        "trust_item_EVCHUg",
-        "trust_item_yPMdQC"
-      ],
-      "name": "HOOSH Trust Strip",
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "label": "How It Works",
+        "heading": "Setup in Seconds"
+      }
+    },
+    "hoosh_trust_1": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "text": "Premium Quality" } },
+        "trust_2": { "type": "trust_item", "settings": { "text": "Fast Shipping" } },
+        "trust_3": { "type": "trust_item", "settings": { "text": "Satisfaction Guaranteed" } },
+        "trust_4": { "type": "trust_item", "settings": { "text": "Secure Payments" } }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
       "settings": {}
+    },
+    "hoosh_social_grid_1": {
+      "type": "hoosh-social-grid",
+      "blocks": {
+        "photo_1": { "type": "photo", "settings": {} },
+        "photo_2": { "type": "photo", "settings": {} },
+        "photo_3": { "type": "photo", "settings": {} },
+        "photo_4": { "type": "photo", "settings": {} },
+        "photo_5": { "type": "photo", "settings": {} },
+        "photo_6": { "type": "photo", "settings": {} },
+        "photo_7": { "type": "photo", "settings": {} },
+        "photo_8": { "type": "photo", "settings": {} },
+        "photo_9": { "type": "photo", "settings": {} },
+        "photo_10": { "type": "photo", "settings": {} }
+      },
+      "block_order": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6", "photo_7", "photo_8", "photo_9", "photo_10"],
+      "settings": {
+        "label": "Join the Community",
+        "heading": "Follow Us",
+        "handle": "hoosh_bg"
+      }
+    },
+    "hoosh_cta_1": {
+      "type": "hoosh-final-cta",
+      "settings": {
+        "label": "Get in Touch",
+        "heading": "Ready to Elevate Your Ritual?",
+        "description": "Reach out on any channel — we're here to help you find the perfect setup."
+      }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "hoosh_hero_McYPBf",
-    "hoosh_product_grid_LeP4c9",
-    "hoosh_marquee_hWzb3M",
-    "hoosh_ecosystem_bundle_kgw6x3",
-    "hoosh_product_grid_n7b3q3",
-    "hoosh_ecosystem_shisha_eWwVVM",
-    "hoosh_trust_strip_p6W4AH"
+    "hoosh_hero_1",
+    "hoosh_product_grid_heads",
+    "hoosh_marquee_1",
+    "hoosh_feature_cards_1",
+    "hoosh_product_grid_pods",
+    "hoosh_eco_shisha_1",
+    "hoosh_how_to_1",
+    "hoosh_trust_1",
+    "hoosh_social_grid_1",
+    "hoosh_cta_1"
   ]
 }

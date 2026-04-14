@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════
-   HOOSH — Product Modal
-   Opens on "Learn More" click, shows product
-   details + contact buttons.
+   HOOSH — Full-Screen Product View
+   Gallery + info + contact, no page nav.
 ═══════════════════════════════════════ */
 (function () {
   const modal = document.getElementById('hoosh-modal');
@@ -10,24 +9,70 @@
   const overlay = modal.querySelector('[data-modal-overlay]');
   const closeBtn = modal.querySelector('[data-modal-close]');
   const nameEl = modal.querySelector('[data-modal-name]');
+  const labelEl = modal.querySelector('[data-modal-label]');
   const descEl = modal.querySelector('[data-modal-desc]');
-  const imgEl = modal.querySelector('[data-modal-img]');
-  const specsEl = modal.querySelector('[data-modal-specs]');
+  const mainImg = modal.querySelector('[data-modal-img]');
+  const thumbsWrap = modal.querySelector('[data-modal-thumbs]');
   const waBtn = modal.querySelector('[data-modal-wa]');
 
-  function open(trigger) {
-    const data = trigger.dataset;
-    if (nameEl) nameEl.textContent = data.productName || '';
-    if (descEl) descEl.textContent = data.productDesc || '';
-    if (imgEl) {
-      imgEl.src = data.productImg || '';
-      imgEl.alt = data.productName || '';
+  function setMainImage(src, alt) {
+    if (!mainImg) return;
+    mainImg.src = src;
+    mainImg.alt = alt || '';
+  }
+
+  function buildThumbs(images, name) {
+    if (!thumbsWrap) return;
+    thumbsWrap.innerHTML = '';
+    if (!images || images.length < 2) {
+      thumbsWrap.style.display = 'none';
+      return;
     }
-    if (specsEl) specsEl.innerHTML = data.productSpecs || '';
-    if (waBtn && data.productName) {
-      const waBase = waBtn.dataset.waBase || '';
+    thumbsWrap.style.display = 'flex';
+    images.forEach(function (src, i) {
+      var thumb = document.createElement('button');
+      thumb.className = 'hm__thumb' + (i === 0 ? ' is-active' : '');
+      thumb.setAttribute('aria-label', 'View image ' + (i + 1));
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = name || '';
+      img.loading = 'lazy';
+      thumb.appendChild(img);
+      thumb.addEventListener('click', function () {
+        setMainImage(src, name);
+        thumbsWrap.querySelectorAll('.hm__thumb').forEach(function (t) {
+          t.classList.remove('is-active');
+        });
+        thumb.classList.add('is-active');
+      });
+      thumbsWrap.appendChild(thumb);
+    });
+  }
+
+  function open(trigger) {
+    var data = trigger.dataset;
+    var name = data.productName || '';
+    var label = data.productLabel || '';
+    var desc = data.productDesc || '';
+    var images = [];
+
+    try {
+      images = JSON.parse(data.productImages || '[]');
+    } catch (e) {
+      if (data.productImg) images = [data.productImg];
+    }
+    if (!images.length && data.productImg) images = [data.productImg];
+
+    if (nameEl) nameEl.textContent = name;
+    if (labelEl) labelEl.textContent = label;
+    if (descEl) descEl.innerHTML = desc;
+    if (images.length) setMainImage(images[0], name);
+    buildThumbs(images, name);
+
+    if (waBtn && name) {
+      var waBase = waBtn.dataset.waBase || '';
       if (waBase) {
-        waBtn.href = waBase + '?text=' + encodeURIComponent('Hi, I\'m interested in ' + data.productName);
+        waBtn.href = waBase + '?text=' + encodeURIComponent("Hi, I'm interested in " + name);
       }
     }
 
@@ -35,8 +80,7 @@
     document.body.classList.add('h-modal-open');
     modal.setAttribute('aria-hidden', 'false');
 
-    /* Trap focus */
-    const focusable = modal.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    var focusable = modal.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
     if (focusable.length) focusable[0].focus();
   }
 
@@ -46,9 +90,8 @@
     modal.setAttribute('aria-hidden', 'true');
   }
 
-  /* Bind triggers */
   document.addEventListener('click', function (e) {
-    const trigger = e.target.closest('[data-modal-trigger]');
+    var trigger = e.target.closest('[data-modal-trigger]');
     if (trigger) {
       e.preventDefault();
       open(trigger);

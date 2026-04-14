@@ -278,7 +278,8 @@
           "type": "card",
           "settings": {
             "label": "Change Flavours With Ease",
-            "heading": "Switch It Up!"
+            "heading": "Switch It Up!",
+            "image": "shopify://shop_images/Screenshot_2026-04-14_at_20.06.50.png"
           }
         }
       },

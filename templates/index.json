@@ -106,7 +106,7 @@
       "name": "HOOSH Marquee",
       "settings": {
         "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
-        "text_color": "#FF1493"
+        "text_color": "#ff1493"
       }
     },
     "hoosh_ecosystem_bundle_kgw6x3": {
@@ -120,6 +120,18 @@
         "cta_text": "View Bundles",
         "cta_link": "shopify://pages/contact"
       }
+    },
+    "hoosh_ecosystem_hose_aE4Ctx": {
+      "type": "hoosh-ecosystem-hose",
+      "name": "HOOSH Ecosystem — Hose",
+      "settings": {
+        "label": "The Hose",
+        "heading": "Complete the Setup",
+        "description": "Premium silicone hose with an aluminium mouthpiece. The finishing touch for your HOOSH ritual.",
+        "image": "shopify://shop_images/Untitleddesign-2026-04-11T172250.786.png",
+        "cta_text": "View Hose",
+        "cta_link": "shopify://pages/contact"
+      }
     }
   },
   "order": [
@@ -127,6 +139,7 @@
     "hoosh_hero_McYPBf",
     "hoosh_product_grid_LeP4c9",
     "hoosh_marquee_hWzb3M",
-    "hoosh_ecosystem_bundle_kgw6x3"
+    "hoosh_ecosystem_bundle_kgw6x3",
+    "hoosh_ecosystem_hose_aE4Ctx"
   ]
 }

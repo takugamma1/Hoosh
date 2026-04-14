@@ -197,10 +197,26 @@
       "name": "Featured Collection Grid",
       "settings": {
         "collection": "e-pod-0",
+        "heading": "0% НИКОТИН",
+        "description": "Meticulously crafted essentials for the modern individual.",
+        "cta_label": "View Collection",
+        "columns": 6,
+        "image_ratio": "3 / 4",
+        "grid_gap": 24,
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "featured_collection_grid_bgpFdP": {
+      "type": "featured-collection-grid",
+      "name": "Featured Collection Grid",
+      "settings": {
+        "collection": "e-pod-package-0",
         "heading": "The Collection",
         "description": "Meticulously crafted essentials for the modern individual.",
         "cta_label": "View Collection",
-        "columns": 4,
+        "columns": 3,
         "image_ratio": "3 / 4",
         "grid_gap": 24,
         "color_scheme": "",
@@ -213,6 +229,7 @@
     "hero_jVaWmY",
     "featured_collection_grid_1",
     "hero_tW4gan",
-    "featured_collection_grid_xqxt3Y"
+    "featured_collection_grid_xqxt3Y",
+    "featured_collection_grid_bgpFdP"
   ]
 }

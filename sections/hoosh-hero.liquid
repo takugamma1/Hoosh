@@ -1,0 +1,146 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+<section class="hoosh-hero" data-hoosh>
+  {%- if section.settings.bg_image != blank -%}
+    <img
+      class="hoosh-hero__bg"
+      src="{{ section.settings.bg_image | image_url: width: 1920 }}"
+      srcset="{{ section.settings.bg_image | image_url: width: 1024 }} 1024w, {{ section.settings.bg_image | image_url: width: 1920 }} 1920w"
+      sizes="100vw"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+
+  {%- if section.settings.bg_video != blank -%}
+    <video class="hoosh-hero__bg" autoplay muted loop playsinline>
+      <source src="{{ section.settings.bg_video }}" type="video/mp4">
+    </video>
+  {%- endif -%}
+
+  <div class="hoosh-hero__overlay"></div>
+
+  <div class="hoosh-hero__content">
+    {%- if section.settings.logo_image != blank -%}
+      <img
+        class="hoosh-hero__logo"
+        src="{{ section.settings.logo_image | image_url: width: 400 }}"
+        alt="{{ shop.name }}"
+        width="200"
+        loading="eager"
+      >
+    {%- else -%}
+      <h1 class="hoosh-hero__title h-display">{{ section.settings.heading | default: shop.name }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.tagline != blank -%}
+      <p class="hoosh-hero__tagline">{{ section.settings.tagline }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_text != blank -%}
+      <a href="#hoosh-products" class="h-btn h-btn--primary hoosh-hero__cta">
+        {{ section.settings.cta_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .hoosh-hero {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--h-bg);
+    overflow: hidden;
+  }
+  .hoosh-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hoosh-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7));
+  }
+  .hoosh-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 var(--h-section-px);
+  }
+  .hoosh-hero__logo {
+    width: clamp(160px, 20vw, 280px);
+    height: auto;
+  }
+  .hoosh-hero__title {
+    font-size: var(--h-hero);
+  }
+  .hoosh-hero__tagline {
+    font-family: var(--h-font-body);
+    font-size: var(--h-body);
+    color: var(--h-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-wide);
+    margin: 0;
+    max-width: 500px;
+  }
+  .hoosh-hero__cta {
+    margin-top: 12px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Hero",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "url",
+      "id": "bg_video",
+      "label": "Background video URL (mp4)",
+      "info": "Overrides background image if set."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image",
+      "info": "If empty, the heading text is used instead."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HOOSH"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Redefine the ritual"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Explore the Collection"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Hero" }]
+}
+{% endschema %}

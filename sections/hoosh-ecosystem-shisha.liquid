@@ -1,0 +1,114 @@
+<section class="hoosh-eco-shisha h-section" data-hoosh>
+  <div class="hoosh-eco-shisha__wrap">
+    {%- if section.settings.image != blank -%}
+      <img
+        class="hoosh-eco-shisha__bg"
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        srcset="{{ section.settings.image | image_url: width: 1024 }} 1024w, {{ section.settings.image | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    <div class="hoosh-eco-shisha__overlay"></div>
+
+    <div class="hoosh-eco-shisha__content h-reveal">
+      <span class="h-label">{{ section.settings.label | default: 'The Shisha' }}</span>
+      <h2 class="h-display hoosh-eco-shisha__heading">{{ section.settings.heading | default: 'The Centrepiece' }}</h2>
+      <hr class="h-divider">
+      <p class="h-body hoosh-eco-shisha__desc">{{ section.settings.description | default: 'Premium build. Magnetic cup system. Engineered for ritual, designed for display.' }}</p>
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="h-btn h-btn--primary">
+          {{ section.settings.cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-eco-shisha__wrap {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hoosh-eco-shisha__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hoosh-eco-shisha__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 20%, rgba(0,0,0,0.75));
+  }
+  .hoosh-eco-shisha__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: clamp(3rem, 8vw, 6rem) var(--h-section-px);
+    max-width: 640px;
+  }
+  .hoosh-eco-shisha__heading {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .hoosh-eco-shisha__desc {
+    max-width: 500px;
+    margin: 0;
+    text-align: center;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Ecosystem — Shisha",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "The Shisha"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Centrepiece"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Premium build. Magnetic cup system. Engineered for ritual, designed for display."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Explore Shisha"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Ecosystem — Shisha" }]
+}
+{% endschema %}

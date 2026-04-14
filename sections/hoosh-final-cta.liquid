@@ -1,0 +1,89 @@
+<section class="hoosh-cta h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hoosh-cta__content h-reveal">
+      <span class="h-label">{{ section.settings.label | default: 'Get in Touch' }}</span>
+      <h2 class="h-display hoosh-cta__heading">{{ section.settings.heading | default: 'Ready to Elevate Your Ritual?' }}</h2>
+      <p class="h-body hoosh-cta__desc">{{ section.settings.description | default: 'Reach out on any channel — we're here to help you find the perfect setup.' }}</p>
+
+      <div class="hoosh-cta__buttons">
+        {% render 'hoosh-contact-buttons',
+          whatsapp: section.settings.whatsapp,
+          telegram: section.settings.telegram,
+          phone: section.settings.phone,
+          layout: 'row'
+        %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-cta__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .hoosh-cta__heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  .hoosh-cta__desc {
+    max-width: 500px;
+    margin: 0;
+    text-align: center;
+  }
+  .hoosh-cta__buttons {
+    margin-top: 16px;
+    width: 100%;
+    max-width: 500px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Final CTA",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready to Elevate Your Ritual?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Reach out on any channel — we're here to help you find the perfect setup."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number",
+      "info": "International format, no + sign (e.g. 359888123456)"
+    },
+    {
+      "type": "text",
+      "id": "telegram",
+      "label": "Telegram handle",
+      "info": "Without @ (e.g. hoosh_bg)"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "info": "With country code (e.g. +359888123456)"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Final CTA" }]
+}
+{% endschema %}

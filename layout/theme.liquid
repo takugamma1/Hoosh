@@ -29,6 +29,11 @@
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
+
+    {%- comment -%} HOOSH — Google Fonts (Bebas Neue + Outfit) {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 
@@ -134,5 +139,14 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    {%- comment -%} HOOSH — Product modal + JS {%- endcomment -%}
+    {% render 'hoosh-product-modal',
+      whatsapp: settings.hoosh_whatsapp,
+      telegram: settings.hoosh_telegram,
+      phone: settings.hoosh_phone
+    %}
+    {{ 'hoosh-modal.js' | asset_url | script_tag }}
+    {{ 'hoosh-animations.js' | asset_url | script_tag }}
   </body>
 </html>

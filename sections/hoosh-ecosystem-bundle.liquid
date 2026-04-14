@@ -1,0 +1,95 @@
+<section class="hoosh-eco hoosh-eco--bundle h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hoosh-eco__grid hoosh-eco__grid--img-right">
+      <div class="hoosh-eco__content h-reveal">
+        <span class="h-label">{{ section.settings.label | default: 'The Bundle' }}</span>
+        <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: '10 Pods. One Pack.' }}</h2>
+        <hr class="h-divider">
+        <p class="h-body">{{ section.settings.description | default: 'Stock up with a bundle of 10 pods in your favourite flavour. Less reordering, more enjoying.' }}</p>
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="h-btn h-btn--outline">
+            {{ section.settings.cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="hoosh-eco__media h-reveal">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 800 }} 800w"
+            sizes="(min-width: 1024px) 50vw, 90vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {%- else -%}
+          <div class="hoosh-eco__placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-eco__grid--img-right .hoosh-eco__content {
+    order: 1;
+  }
+  .hoosh-eco__grid--img-right .hoosh-eco__media {
+    order: 2;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hoosh-eco__grid--img-right .hoosh-eco__media {
+      order: 1;
+    }
+    .hoosh-eco__grid--img-right .hoosh-eco__content {
+      order: 2;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Ecosystem — Bundle",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "The Bundle"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "10 Pods. One Pack."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Stock up with a bundle of 10 pods in your favourite flavour. Less reordering, more enjoying."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "View Bundles"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Ecosystem — Bundle" }]
+}
+{% endschema %}

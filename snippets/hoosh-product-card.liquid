@@ -1,0 +1,102 @@
+{% doc %}
+  HOOSH product card for the grid section.
+  @param {object} product - Shopify product object.
+  @param {string} [fallback_name] - Name for placeholder.
+  @param {string} [fallback_desc] - Description for placeholder.
+{% enddoc %}
+
+{% liquid
+  assign p_name = product.title | default: fallback_name | default: 'Product Name'
+  assign p_desc = product.description | strip_html | truncate: 80 | default: fallback_desc | default: 'Premium electric shisha device'
+  assign p_img = product.featured_image
+  assign p_specs = product.metafields.hoosh.specs | default: ''
+%}
+
+<div class="hoosh-card h-reveal">
+  <div class="hoosh-card__image">
+    {%- if p_img != blank -%}
+      <img
+        src="{{ p_img | image_url: width: 600 }}"
+        srcset="{{ p_img | image_url: width: 400 }} 400w, {{ p_img | image_url: width: 600 }} 600w"
+        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 90vw"
+        alt="{{ p_img.alt | default: p_name | escape }}"
+        loading="lazy"
+        width="{{ p_img.width }}"
+        height="{{ p_img.height }}"
+      >
+    {%- else -%}
+      <div class="hoosh-card__placeholder">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hoosh-card__info">
+    <h3 class="hoosh-card__name">{{ p_name }}</h3>
+    <p class="hoosh-card__desc">{{ p_desc }}</p>
+    <button
+      class="h-btn h-btn--outline hoosh-card__cta"
+      data-modal-trigger
+      data-product-name="{{ p_name | escape }}"
+      data-product-desc="{{ product.description | strip_html | truncate: 300 | escape }}"
+      data-product-img="{{ p_img | image_url: width: 800 }}"
+      data-product-specs="{{ p_specs | escape }}"
+    >
+      Learn More
+    </button>
+  </div>
+</div>
+
+<style>
+  .hoosh-card {
+    background: var(--h-bg-card);
+    border: 1px solid var(--h-border);
+    border-radius: var(--h-card-radius);
+    overflow: hidden;
+    transition: transform 0.4s var(--h-ease), border-color 0.4s ease;
+  }
+  .hoosh-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 20, 147, 0.2);
+  }
+  .hoosh-card__image {
+    aspect-ratio: 4 / 5;
+    background: var(--h-bg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hoosh-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8%;
+  }
+  .hoosh-card__placeholder {
+    width: 60%;
+    opacity: 0.1;
+  }
+  .hoosh-card__info {
+    padding: 24px;
+  }
+  .hoosh-card__name {
+    font-family: var(--h-font-display);
+    font-size: var(--h-product-name);
+    color: var(--h-text);
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-tight);
+    margin: 0 0 8px;
+    line-height: 1.1;
+  }
+  .hoosh-card__desc {
+    font-family: var(--h-font-body);
+    font-size: var(--h-small);
+    color: var(--h-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+  .hoosh-card__cta {
+    width: 100%;
+  }
+</style>

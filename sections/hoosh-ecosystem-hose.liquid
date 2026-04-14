@@ -1,0 +1,77 @@
+<section class="hoosh-eco hoosh-eco--hose h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hoosh-eco__grid hoosh-eco__grid--img-left">
+      <div class="hoosh-eco__media h-reveal">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 800 }} 800w"
+            sizes="(min-width: 1024px) 50vw, 90vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {%- else -%}
+          <div class="hoosh-eco__placeholder">{{ 'product-3' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="hoosh-eco__content h-reveal">
+        <span class="h-label">{{ section.settings.label | default: 'The Hose' }}</span>
+        <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Complete the Setup' }}</h2>
+        <hr class="h-divider">
+        <p class="h-body">{{ section.settings.description | default: 'Premium silicone hose with an aluminium mouthpiece. The finishing touch for your HOOSH ritual.' }}</p>
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="h-btn h-btn--outline">
+            {{ section.settings.cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HOOSH Ecosystem — Hose",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "The Hose"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Complete the Setup"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Premium silicone hose with an aluminium mouthpiece. The finishing touch for your HOOSH ritual."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "View Hose"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Ecosystem — Hose" }]
+}
+{% endschema %}

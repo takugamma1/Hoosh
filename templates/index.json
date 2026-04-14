@@ -223,6 +223,84 @@
         "padding_top": 80,
         "padding_bottom": 80
       }
+    },
+    "hoosh_hero_1": {
+      "type": "hoosh-hero",
+      "settings": {
+        "heading": "HOOSH",
+        "tagline": "Redefine the ritual",
+        "cta_text": "Explore the Collection"
+      }
+    },
+    "hoosh_product_grid_1": {
+      "type": "hoosh-product-grid",
+      "settings": {
+        "label": "The Heads",
+        "heading": "Choose Your Head",
+        "max_products": 6
+      }
+    },
+    "hoosh_marquee_1": {
+      "type": "hoosh-marquee",
+      "settings": {
+        "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
+        "text_color": "#FF1493"
+      }
+    },
+    "hoosh_eco_pod_1": {
+      "type": "hoosh-ecosystem-pod",
+      "settings": {
+        "label": "The Pod",
+        "heading": "Refillable. Reusable. Ready.",
+        "description": "The refillable pod that slots into your shisha cup. Choose your flavour, click it in, and you're set.",
+        "cta_text": "View Pods"
+      }
+    },
+    "hoosh_eco_bundle_1": {
+      "type": "hoosh-ecosystem-bundle",
+      "settings": {
+        "label": "The Bundle",
+        "heading": "10 Pods. One Pack.",
+        "description": "Stock up with a bundle of 10 pods in your favourite flavour. Less reordering, more enjoying.",
+        "cta_text": "View Bundles"
+      }
+    },
+    "hoosh_eco_shisha_1": {
+      "type": "hoosh-ecosystem-shisha",
+      "settings": {
+        "label": "The Shisha",
+        "heading": "The Centrepiece",
+        "description": "Premium build. Magnetic cup system. Engineered for ritual, designed for display.",
+        "cta_text": "Explore Shisha"
+      }
+    },
+    "hoosh_eco_hose_1": {
+      "type": "hoosh-ecosystem-hose",
+      "settings": {
+        "label": "The Hose",
+        "heading": "Complete the Setup",
+        "description": "Premium silicone hose with an aluminium mouthpiece. The finishing touch for your HOOSH ritual.",
+        "cta_text": "View Hose"
+      }
+    },
+    "hoosh_trust_1": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "text": "Premium Quality" } },
+        "trust_2": { "type": "trust_item", "settings": { "text": "Fast Shipping" } },
+        "trust_3": { "type": "trust_item", "settings": { "text": "Satisfaction Guaranteed" } },
+        "trust_4": { "type": "trust_item", "settings": { "text": "Secure Payments" } }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "settings": {}
+    },
+    "hoosh_cta_1": {
+      "type": "hoosh-final-cta",
+      "settings": {
+        "label": "Get in Touch",
+        "heading": "Ready to Elevate Your Ritual?",
+        "description": "Reach out on any channel — we're here to help you find the perfect setup."
+      }
     }
   },
   "order": [
@@ -230,6 +308,17 @@
     "featured_collection_grid_1",
     "hero_tW4gan",
     "featured_collection_grid_xqxt3Y",
-    "featured_collection_grid_bgpFdP"
+    "featured_collection_grid_bgpFdP",
+    "hero_bnjA7C",
+    "product_pairing_1",
+    "hoosh_hero_1",
+    "hoosh_product_grid_1",
+    "hoosh_marquee_1",
+    "hoosh_eco_pod_1",
+    "hoosh_eco_bundle_1",
+    "hoosh_eco_shisha_1",
+    "hoosh_eco_hose_1",
+    "hoosh_trust_1",
+    "hoosh_cta_1"
   ]
 }

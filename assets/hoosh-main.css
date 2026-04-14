@@ -1,0 +1,224 @@
+/* ═══════════════════════════════════════
+   HOOSH — Design System
+   Luxury electric shisha catalog
+   Black-dominant, pink + green accents
+═══════════════════════════════════════ */
+
+/* ── Variables ── */
+:root {
+  /* Backgrounds */
+  --h-bg: #000000;
+  --h-bg-elevated: #0a0a0a;
+  --h-bg-card: #111111;
+  --h-bg-modal: #1a1a1a;
+
+  /* Typography */
+  --h-text: #FFFFFF;
+  --h-text-secondary: #888888;
+  --h-text-muted: #555555;
+
+  /* Accents */
+  --h-pink: #FF1493;
+  --h-pink-hover: #FF69B4;
+  --h-green: #00E676;
+  --h-green-dim: #00C853;
+
+  /* Contact */
+  --h-whatsapp: #25D366;
+  --h-telegram: #0088cc;
+
+  /* Utility */
+  --h-border: #1a1a1a;
+  --h-border-accent: #333333;
+  --h-overlay: rgba(0, 0, 0, 0.85);
+
+  /* Fonts */
+  --h-font-display: 'Bebas Neue', 'Anton', sans-serif;
+  --h-font-body: 'Outfit', 'DM Sans', sans-serif;
+
+  /* Sizes */
+  --h-hero: clamp(3rem, 8vw, 7rem);
+  --h-section-title: clamp(2rem, 5vw, 4rem);
+  --h-product-name: clamp(1.2rem, 3vw, 1.8rem);
+  --h-body: clamp(0.9rem, 1.5vw, 1.1rem);
+  --h-small: clamp(0.75rem, 1vw, 0.85rem);
+  --h-label: 0.75rem;
+
+  /* Spacing */
+  --h-tracking-tight: 0.02em;
+  --h-tracking-wide: 0.15em;
+  --h-section-py: clamp(4rem, 10vh, 8rem);
+  --h-section-px: clamp(1rem, 5vw, 4rem);
+  --h-card-gap: clamp(1rem, 2vw, 2rem);
+  --h-card-radius: 8px;
+  --h-btn-radius: 50px;
+  --h-modal-radius: 16px;
+  --h-max-width: 1200px;
+
+  /* Easing */
+  --h-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Reset for HOOSH sections ── */
+[data-hoosh] {
+  font-family: var(--h-font-body);
+  color: var(--h-text-secondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-hoosh] *,
+[data-hoosh] *::before,
+[data-hoosh] *::after {
+  box-sizing: border-box;
+}
+
+/* ── Typography ── */
+.h-display {
+  font-family: var(--h-font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--h-tracking-tight);
+  color: var(--h-text);
+  line-height: 1;
+  margin: 0;
+}
+
+.h-label {
+  font-family: var(--h-font-body);
+  font-size: var(--h-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--h-tracking-wide);
+  color: var(--h-green);
+  margin: 0 0 1em;
+  display: block;
+}
+
+.h-body {
+  font-family: var(--h-font-body);
+  font-size: var(--h-body);
+  color: var(--h-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.h-small {
+  font-family: var(--h-font-body);
+  font-size: var(--h-small);
+  color: var(--h-text-muted);
+  line-height: 1.6;
+}
+
+/* ── Buttons ── */
+.h-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--h-font-body);
+  font-size: var(--h-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--h-tracking-wide);
+  text-decoration: none;
+  border-radius: var(--h-btn-radius);
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: all 0.3s var(--h-ease);
+  border: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.h-btn--primary {
+  background: var(--h-pink);
+  color: #000;
+}
+
+.h-btn--primary:hover {
+  background: var(--h-pink-hover);
+  transform: scale(1.03);
+}
+
+.h-btn--outline {
+  background: transparent;
+  color: var(--h-pink);
+  border: 1.5px solid var(--h-pink);
+}
+
+.h-btn--outline:hover {
+  background: rgba(255, 20, 147, 0.1);
+  color: var(--h-pink-hover);
+  border-color: var(--h-pink-hover);
+}
+
+.h-btn--whatsapp {
+  background: var(--h-whatsapp);
+  color: #fff;
+}
+
+.h-btn--whatsapp:hover {
+  background: #2be670;
+}
+
+.h-btn--telegram {
+  background: var(--h-telegram);
+  color: #fff;
+}
+
+.h-btn--telegram:hover {
+  background: #0099e6;
+}
+
+.h-btn--phone {
+  background: var(--h-pink);
+  color: #fff;
+}
+
+.h-btn--phone:hover {
+  background: var(--h-pink-hover);
+}
+
+/* ── Layout helpers ── */
+.h-container {
+  max-width: var(--h-max-width);
+  margin: 0 auto;
+  padding-inline: var(--h-section-px);
+}
+
+.h-section {
+  background: var(--h-bg);
+  padding-block: var(--h-section-py);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Scroll animations ── */
+.h-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--h-ease), transform 0.8s var(--h-ease);
+}
+
+.h-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.h-reveal--delay-1 { transition-delay: 0.1s; }
+.h-reveal--delay-2 { transition-delay: 0.2s; }
+.h-reveal--delay-3 { transition-delay: 0.3s; }
+
+/* ── Divider ── */
+.h-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--h-pink);
+  margin: 1.5em 0;
+  border: none;
+}
+
+/* ── Body scroll lock ── */
+body.h-modal-open {
+  overflow: hidden;
+}

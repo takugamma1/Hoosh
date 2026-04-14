@@ -1,0 +1,141 @@
+<section class="hoosh-eco hoosh-eco--pod h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hoosh-eco__grid hoosh-eco__grid--img-left">
+      <div class="hoosh-eco__media h-reveal">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 800 }} 800w"
+            sizes="(min-width: 1024px) 50vw, 90vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {%- else -%}
+          <div class="hoosh-eco__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="hoosh-eco__content h-reveal">
+        <span class="h-label">{{ section.settings.label | default: 'The Pod' }}</span>
+        <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Refillable. Reusable. Ready.' }}</h2>
+        <hr class="h-divider">
+        <p class="h-body">{{ section.settings.description | default: 'The refillable pod that slots into your shisha cup. Choose your flavour, click it in, and you're set.' }}</p>
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="h-btn h-btn--outline">
+            {{ section.settings.cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-eco__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+  .hoosh-eco__grid--img-left .hoosh-eco__media {
+    order: 1;
+  }
+  .hoosh-eco__grid--img-left .hoosh-eco__content {
+    order: 2;
+  }
+  .hoosh-eco__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--h-bg-elevated);
+    border-radius: var(--h-card-radius);
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+  .hoosh-eco__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8%;
+  }
+  .hoosh-eco__placeholder {
+    width: 50%;
+    opacity: 0.1;
+  }
+  .hoosh-eco__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hoosh-eco__content .h-body {
+    max-width: 480px;
+    margin: 0;
+  }
+  .hoosh-eco__content .h-btn {
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hoosh-eco__grid {
+      grid-template-columns: 1fr;
+    }
+    .hoosh-eco__grid--img-left .hoosh-eco__media {
+      order: 1;
+    }
+    .hoosh-eco__grid--img-left .hoosh-eco__content {
+      order: 2;
+    }
+    .hoosh-eco__media {
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Ecosystem — Pod",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "The Pod"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Refillable. Reusable. Ready."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The refillable pod that slots into your shisha cup. Choose your flavour, click it in, and you're set."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "View Pods"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [{ "name": "HOOSH Ecosystem — Pod" }]
+}
+{% endschema %}

@@ -1,0 +1,168 @@
+{% doc %}
+  HOOSH Product Modal — single instance, populated via JS.
+  Include once in theme.liquid.
+  @param {string} whatsapp - WhatsApp number.
+  @param {string} telegram - Telegram handle.
+  @param {string} phone - Phone number.
+{% enddoc %}
+
+<div id="hoosh-modal" class="hoosh-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="hoosh-modal__overlay" data-modal-overlay></div>
+  <div class="hoosh-modal__panel">
+    <button class="hoosh-modal__close" data-modal-close aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="hoosh-modal__image">
+      <img data-modal-img src="" alt="" loading="lazy">
+    </div>
+
+    <div class="hoosh-modal__body">
+      <h2 class="h-display hoosh-modal__name" data-modal-name></h2>
+      <hr class="h-divider">
+      <p class="h-body hoosh-modal__desc" data-modal-desc></p>
+
+      <div class="hoosh-modal__specs" data-modal-specs></div>
+
+      <div class="hoosh-modal__contact">
+        <p class="hoosh-modal__contact-heading">Interested? Let's talk</p>
+        {% render 'hoosh-contact-buttons',
+          whatsapp: whatsapp,
+          telegram: telegram,
+          phone: phone,
+          layout: 'stack'
+        %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hoosh-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--h-ease), visibility 0.35s;
+  }
+  .hoosh-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hoosh-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--h-overlay);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .hoosh-modal__panel {
+    position: relative;
+    z-index: 1;
+    background: var(--h-bg-modal);
+    border-radius: var(--h-modal-radius);
+    max-width: 540px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.4s var(--h-ease);
+  }
+  .hoosh-modal.is-open .hoosh-modal__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .hoosh-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--h-text-muted);
+    cursor: pointer;
+    z-index: 2;
+    padding: 8px;
+    transition: color 0.2s;
+  }
+  .hoosh-modal__close:hover { color: var(--h-text); }
+
+  .hoosh-modal__image {
+    aspect-ratio: 1;
+    background: var(--h-bg);
+    border-radius: var(--h-modal-radius) var(--h-modal-radius) 0 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hoosh-modal__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 10%;
+  }
+
+  .hoosh-modal__body {
+    padding: 32px;
+  }
+
+  .hoosh-modal__name {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .hoosh-modal__desc {
+    margin-bottom: 24px;
+  }
+
+  .hoosh-modal__specs {
+    margin-bottom: 28px;
+    font-size: var(--h-small);
+    color: var(--h-text-secondary);
+    line-height: 1.8;
+  }
+
+  .hoosh-modal__contact {
+    background: #222;
+    margin: 0 -32px -32px;
+    padding: 28px 32px 32px;
+    border-radius: 0 0 var(--h-modal-radius) var(--h-modal-radius);
+  }
+
+  .hoosh-modal__contact-heading {
+    font-family: var(--h-font-display);
+    font-size: 1.3rem;
+    color: var(--h-text);
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-tight);
+    margin: 0 0 16px;
+  }
+
+  /* Mobile: bottom sheet */
+  @media screen and (max-width: 767px) {
+    .hoosh-modal {
+      align-items: flex-end;
+    }
+    .hoosh-modal__panel {
+      max-width: 100%;
+      width: 100%;
+      max-height: 92vh;
+      border-radius: var(--h-modal-radius) var(--h-modal-radius) 0 0;
+      transform: translateY(100%);
+    }
+    .hoosh-modal.is-open .hoosh-modal__panel {
+      transform: translateY(0);
+    }
+    .hoosh-modal__image {
+      border-radius: var(--h-modal-radius) var(--h-modal-radius) 0 0;
+    }
+    .hoosh-modal__contact {
+      border-radius: 0;
+    }
+  }
+</style>

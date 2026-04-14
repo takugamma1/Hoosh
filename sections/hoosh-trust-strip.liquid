@@ -1,0 +1,106 @@
+<section class="hoosh-trust h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hoosh-trust__row h-reveal">
+      {%- for block in section.blocks -%}
+        <div class="hoosh-trust__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <img
+              class="hoosh-trust__icon"
+              src="{{ block.settings.icon | image_url: width: 80 }}"
+              alt=""
+              width="40"
+              height="40"
+              loading="lazy"
+            >
+          {%- else -%}
+            <span class="hoosh-trust__icon-fallback">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--h-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </span>
+          {%- endif -%}
+          <span class="hoosh-trust__text">{{ block.settings.text | default: 'Trust point' }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-trust {
+    border-top: 1px solid var(--h-border);
+    border-bottom: 1px solid var(--h-border);
+  }
+  .hoosh-trust__row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    flex-wrap: wrap;
+  }
+  .hoosh-trust__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hoosh-trust__icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .hoosh-trust__icon-fallback {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hoosh-trust__text {
+    font-family: var(--h-font-body);
+    font-size: var(--h-small);
+    color: var(--h-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-wide);
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hoosh-trust__row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Trust Strip",
+  "class": "hoosh-section",
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon (optional)"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Premium Quality"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HOOSH Trust Strip",
+    "blocks": [
+      { "type": "trust_item", "settings": { "text": "Premium Quality" } },
+      { "type": "trust_item", "settings": { "text": "Fast Shipping" } },
+      { "type": "trust_item", "settings": { "text": "Satisfaction Guaranteed" } },
+      { "type": "trust_item", "settings": { "text": "Secure Payments" } }
+    ]
+  }]
+}
+{% endschema %}

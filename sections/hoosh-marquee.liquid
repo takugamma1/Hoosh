@@ -1,0 +1,143 @@
+<section class="hoosh-marquee" data-hoosh>
+  {%- comment -%} ── Text marquee (scrolls left) ── {%- endcomment -%}
+  <div class="hoosh-marquee__text" style="--marquee-color: {{ section.settings.text_color | default: '#FF1493' }};">
+    <div class="hoosh-marquee__text-track">
+      {%- assign text = section.settings.marquee_text | default: 'HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •' -%}
+      <span>{{ text }}&nbsp;</span><span>{{ text }}&nbsp;</span><span>{{ text }}&nbsp;</span><span>{{ text }}&nbsp;</span>
+    </div>
+  </div>
+
+  {%- comment -%} ── Image marquee (scrolls right) ── {%- endcomment -%}
+  <div class="hoosh-marquee__images">
+    <div class="hoosh-marquee__images-track">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="hoosh-marquee__img-item" {{ block.shopify_attributes }}>
+            <img
+              src="{{ block.settings.image | image_url: width: 500 }}"
+              alt="{{ block.settings.image.alt | default: 'HOOSH lifestyle' | escape }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="hoosh-marquee__img-item" aria-hidden="true">
+            <img
+              src="{{ block.settings.image | image_url: width: 500 }}"
+              alt=""
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hoosh-marquee {
+    background: var(--h-bg);
+    overflow: hidden;
+    padding: 0;
+  }
+
+  /* ── Text strip ── */
+  .hoosh-marquee__text {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid var(--h-border);
+    border-bottom: 1px solid var(--h-border);
+  }
+  .hoosh-marquee__text-track {
+    display: flex;
+    white-space: nowrap;
+    animation: hooshMarqueeLeft 20s linear infinite;
+  }
+  .hoosh-marquee__text-track span {
+    font-family: var(--h-font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--marquee-color, var(--h-pink));
+    text-transform: uppercase;
+    letter-spacing: var(--h-tracking-wide);
+    flex-shrink: 0;
+  }
+
+  /* ── Image strip ── */
+  .hoosh-marquee__images {
+    overflow: hidden;
+  }
+  .hoosh-marquee__images-track {
+    display: flex;
+    gap: 6px;
+    animation: hooshMarqueeRight 30s linear infinite;
+  }
+  .hoosh-marquee__img-item {
+    height: clamp(200px, 25vw, 300px);
+    flex-shrink: 0;
+  }
+  .hoosh-marquee__img-item img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  @keyframes hooshMarqueeLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes hooshMarqueeRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Marquee",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Scrolling text",
+      "default": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FF1493"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HOOSH Marquee",
+    "blocks": [
+      { "type": "image" },
+      { "type": "image" },
+      { "type": "image" },
+      { "type": "image" },
+      { "type": "image" },
+      { "type": "image" }
+    ]
+  }]
+}
+{% endschema %}

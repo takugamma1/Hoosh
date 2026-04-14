@@ -192,54 +192,20 @@
         "padding-block-end": 40
       }
     },
-    "hero_bnjA7C": {
-      "type": "hero",
-      "name": "t:names.hero",
+    "featured_collection_grid_xqxt3Y": {
+      "type": "featured-collection-grid",
+      "name": "Featured Collection Grid",
       "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/Untitled_design_-_2026-04-11T171118.942.png",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "custom",
-        "section_height_custom": 60,
-        "color_scheme": "scheme-5",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 40,
-        "padding-block-end": 40
-      }
-    },
-    "product_pairing_1": {
-      "type": "product-pairing",
-      "settings": {
-        "singles_collection": "e-pod-0",
-        "packages_collection": "e-pod-package-0",
-        "single_label": "Single",
-        "package_label": "Package of 10",
-        "overlay_text": "Also available as",
-        "connector_text": "Included in",
-        "prev_text": "Previous",
-        "next_text": "Next",
-        "bottom_note": "Each package contains 10 individually wrapped items of the selected flavour.",
-        "color_scheme": "scheme-1"
+        "collection": "e-pod-0",
+        "heading": "The Collection",
+        "description": "Meticulously crafted essentials for the modern individual.",
+        "cta_label": "View Collection",
+        "columns": 4,
+        "image_ratio": "3 / 4",
+        "grid_gap": 24,
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
@@ -247,7 +213,6 @@
     "hero_jVaWmY",
     "featured_collection_grid_1",
     "hero_tW4gan",
-    "hero_bnjA7C",
-    "product_pairing_1"
+    "featured_collection_grid_xqxt3Y"
   ]
 }

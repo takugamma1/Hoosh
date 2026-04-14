@@ -1,19 +1,31 @@
 /* ═══════════════════════════════════════
    HOOSH — Full-Screen Product View
-   Gallery + info + contact, no page nav.
+   Gallery + bundle toggle + contact.
 ═══════════════════════════════════════ */
 (function () {
-  const modal = document.getElementById('hoosh-modal');
+  var modal = document.getElementById('hoosh-modal');
   if (!modal) return;
 
-  const overlay = modal.querySelector('[data-modal-overlay]');
-  const closeBtn = modal.querySelector('[data-modal-close]');
-  const nameEl = modal.querySelector('[data-modal-name]');
-  const labelEl = modal.querySelector('[data-modal-label]');
-  const descEl = modal.querySelector('[data-modal-desc]');
-  const mainImg = modal.querySelector('[data-modal-img]');
-  const thumbsWrap = modal.querySelector('[data-modal-thumbs]');
-  const waBtn = modal.querySelector('[data-modal-wa]');
+  var overlay = modal.querySelector('[data-modal-overlay]');
+  var closeBtn = modal.querySelector('[data-modal-close]');
+  var nameEl = modal.querySelector('[data-modal-name]');
+  var labelEl = modal.querySelector('[data-modal-label]');
+  var descEl = modal.querySelector('[data-modal-desc]');
+  var mainImg = modal.querySelector('[data-modal-img]');
+  var thumbsWrap = modal.querySelector('[data-modal-thumbs]');
+  var waBtn = modal.querySelector('[data-modal-wa]');
+  var toggleWrap = modal.querySelector('[data-modal-toggle-wrap]');
+  var toggleSingle = modal.querySelector('[data-toggle="single"]');
+  var toggleBundle = modal.querySelector('[data-toggle="bundle"]');
+  var toggleBundleLabel = modal.querySelector('[data-toggle-bundle-label]');
+
+  /* State: holds both single & bundle data for the current product */
+  var state = {
+    mode: 'single', /* 'single' or 'bundle' */
+    single: { name: '', desc: '', images: [] },
+    bundle: { name: '', desc: '', images: [] },
+    hasBundle: false
+  };
 
   function setMainImage(src, alt) {
     if (!mainImg) return;
@@ -49,32 +61,68 @@
     });
   }
 
-  function open(trigger) {
-    var data = trigger.dataset;
-    var name = data.productName || '';
-    var label = data.productLabel || '';
-    var desc = data.productDesc || '';
-    var images = [];
-
+  function parseImages(data, fallback) {
     try {
-      images = JSON.parse(data.productImages || '[]');
+      var imgs = JSON.parse(data || '[]');
+      return imgs.length ? imgs : (fallback ? [fallback] : []);
     } catch (e) {
-      if (data.productImg) images = [data.productImg];
+      return fallback ? [fallback] : [];
     }
-    if (!images.length && data.productImg) images = [data.productImg];
+  }
 
-    if (nameEl) nameEl.textContent = name;
-    if (labelEl) labelEl.textContent = label;
-    if (descEl) descEl.innerHTML = desc;
-    if (images.length) setMainImage(images[0], name);
-    buildThumbs(images, name);
-
+  function updateWhatsApp(name) {
     if (waBtn && name) {
       var waBase = waBtn.dataset.waBase || '';
       if (waBase) {
         waBtn.href = waBase + '?text=' + encodeURIComponent("Hi, I'm interested in " + name);
       }
     }
+  }
+
+  function renderView() {
+    var d = state.mode === 'bundle' ? state.bundle : state.single;
+    if (nameEl) nameEl.textContent = d.name;
+    if (descEl) descEl.innerHTML = d.desc;
+    if (d.images.length) setMainImage(d.images[0], d.name);
+    buildThumbs(d.images, d.name);
+    updateWhatsApp(d.name);
+  }
+
+  function setToggle(mode) {
+    state.mode = mode;
+    if (toggleSingle && toggleBundle) {
+      toggleSingle.classList.toggle('is-active', mode === 'single');
+      toggleBundle.classList.toggle('is-active', mode === 'bundle');
+    }
+    renderView();
+  }
+
+  /* ── Open ── */
+  function open(trigger) {
+    var data = trigger.dataset;
+
+    state.mode = 'single';
+    state.single.name = data.productName || '';
+    state.single.desc = data.productDesc || '';
+    state.single.images = parseImages(data.productImages, data.productImg);
+
+    state.hasBundle = !!data.bundleName;
+    if (state.hasBundle) {
+      state.bundle.name = data.bundleName || '';
+      state.bundle.desc = data.bundleDesc || '';
+      state.bundle.images = parseImages(data.bundleImages, data.bundleImg);
+      if (toggleBundleLabel) toggleBundleLabel.textContent = data.bundleLabel || 'Pack of 10';
+    }
+
+    if (toggleWrap) {
+      toggleWrap.style.display = state.hasBundle ? 'flex' : 'none';
+    }
+    if (toggleSingle) toggleSingle.classList.add('is-active');
+    if (toggleBundle) toggleBundle.classList.remove('is-active');
+
+    if (labelEl) labelEl.textContent = data.productLabel || '';
+
+    renderView();
 
     modal.classList.add('is-open');
     document.body.classList.add('h-modal-open');
@@ -90,6 +138,7 @@
     modal.setAttribute('aria-hidden', 'true');
   }
 
+  /* ── Event Bindings ── */
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-modal-trigger]');
     if (trigger) {
@@ -97,6 +146,9 @@
       open(trigger);
     }
   });
+
+  if (toggleSingle) toggleSingle.addEventListener('click', function () { setToggle('single'); });
+  if (toggleBundle) toggleBundle.addEventListener('click', function () { setToggle('bundle'); });
 
   if (closeBtn) closeBtn.addEventListener('click', close);
   if (overlay) overlay.addEventListener('click', close);

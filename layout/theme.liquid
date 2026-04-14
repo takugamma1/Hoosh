@@ -148,5 +148,8 @@
     %}
     {{ 'hoosh-modal.js' | asset_url | script_tag }}
     {{ 'hoosh-animations.js' | asset_url | script_tag }}
+
+    {%- comment -%} HOOSH — Floating WhatsApp widget {%- endcomment -%}
+    {% render 'hoosh-wa-widget', whatsapp: settings.hoosh_whatsapp %}
   </body>
 </html>

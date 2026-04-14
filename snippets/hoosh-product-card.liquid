@@ -1,6 +1,8 @@
 {% doc %}
   HOOSH product card — opens full-screen product view.
   @param {object} product - Shopify product object.
+  @param {object} [bundle_product] - Optional paired bundle product.
+  @param {string} [bundle_label] - Label for the bundle toggle (e.g. "Pack of 10").
   @param {string} [fallback_name]
   @param {string} [fallback_desc]
 {% enddoc %}
@@ -13,12 +15,14 @@
 %}
 
 {%- capture p_images_json -%}
-[
-  {%- for image in product.images -%}
-    "{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}
-  {%- endfor -%}
-]
+[{%- for image in product.images -%}"{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}{%- endfor -%}]
 {%- endcapture -%}
+
+{%- if bundle_product != blank -%}
+  {%- capture b_images_json -%}
+  [{%- for image in bundle_product.images -%}"{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+  {%- endcapture -%}
+{%- endif -%}
 
 <div class="hoosh-card h-reveal">
   <button
@@ -29,6 +33,13 @@
     data-product-desc="{{ product.description | escape }}"
     data-product-img="{{ p_img | image_url: width: 800 }}"
     data-product-images='{{ p_images_json }}'
+    {%- if bundle_product != blank %}
+    data-bundle-name="{{ bundle_product.title | escape }}"
+    data-bundle-desc="{{ bundle_product.description | escape }}"
+    data-bundle-img="{{ bundle_product.featured_image | image_url: width: 800 }}"
+    data-bundle-images='{{ b_images_json }}'
+    data-bundle-label="{{ bundle_label | default: 'Pack of 10' | escape }}"
+    {%- endif %}
     aria-label="View {{ p_name }}"
   >
     <div class="hoosh-card__image">

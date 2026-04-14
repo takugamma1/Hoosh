@@ -245,7 +245,8 @@
           "type": "step",
           "settings": {
             "title": "Enjoy",
-            "description": "That's it. Premium shisha, zero hassle."
+            "description": "That's it. Premium shisha, zero hassle.",
+            "image": "shopify://shop_images/20240101-_DSC6939.jpg"
           }
         }
       },

@@ -144,6 +144,43 @@
         "cta_text": "Explore Shisha",
         "cta_link": "shopify://products/black-e-head"
       }
+    },
+    "hoosh_trust_strip_p6W4AH": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_item_inetXA": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Premium Quality"
+          }
+        },
+        "trust_item_ttaWdB": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Fast Shipping"
+          }
+        },
+        "trust_item_EVCHUg": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Satisfaction Guaranteed"
+          }
+        },
+        "trust_item_yPMdQC": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Secure Payments"
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_inetXA",
+        "trust_item_ttaWdB",
+        "trust_item_EVCHUg",
+        "trust_item_yPMdQC"
+      ],
+      "name": "HOOSH Trust Strip",
+      "settings": {}
     }
   },
   "order": [
@@ -153,6 +190,7 @@
     "hoosh_marquee_hWzb3M",
     "hoosh_ecosystem_bundle_kgw6x3",
     "hoosh_ecosystem_hose_aE4Ctx",
-    "hoosh_ecosystem_shisha_eWwVVM"
+    "hoosh_ecosystem_shisha_eWwVVM",
+    "hoosh_trust_strip_p6W4AH"
   ]
 }

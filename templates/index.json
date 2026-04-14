@@ -197,12 +197,12 @@
       "name": "Featured Collection Grid",
       "settings": {
         "collection": "e-pod-0",
-        "heading": "0% НИКОТИН",
-        "description": "Meticulously crafted essentials for the modern individual.",
+        "heading": "",
+        "description": "",
         "cta_label": "View Collection",
         "columns": 6,
         "image_ratio": "3 / 4",
-        "grid_gap": 24,
+        "grid_gap": 60,
         "color_scheme": "",
         "padding_top": 80,
         "padding_bottom": 80

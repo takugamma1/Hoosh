@@ -121,16 +121,14 @@
         "cta_link": "shopify://pages/contact"
       }
     },
-    "hoosh_ecosystem_hose_aE4Ctx": {
-      "type": "hoosh-ecosystem-hose",
-      "name": "HOOSH Ecosystem — Hose",
+    "hoosh_product_grid_n7b3q3": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
       "settings": {
-        "label": "The Hose",
-        "heading": "Complete the Setup",
-        "description": "Premium silicone hose with an aluminium mouthpiece. The finishing touch for your HOOSH ritual.",
-        "image": "shopify://shop_images/Untitleddesign-2026-04-11T172250.786.png",
-        "cta_text": "View Hose",
-        "cta_link": "shopify://pages/contact"
+        "label": "The Heads",
+        "heading": "Choose Your Head",
+        "collection": "",
+        "max_products": 6
       }
     },
     "hoosh_ecosystem_shisha_eWwVVM": {
@@ -189,7 +187,7 @@
     "hoosh_product_grid_LeP4c9",
     "hoosh_marquee_hWzb3M",
     "hoosh_ecosystem_bundle_kgw6x3",
-    "hoosh_ecosystem_hose_aE4Ctx",
+    "hoosh_product_grid_n7b3q3",
     "hoosh_ecosystem_shisha_eWwVVM",
     "hoosh_trust_strip_p6W4AH"
   ]

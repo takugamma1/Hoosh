@@ -229,7 +229,8 @@
           "type": "step",
           "settings": {
             "title": "Choose Your Flavour",
-            "description": "Pick from our range of premium pod flavours."
+            "description": "Pick from our range of premium pod flavours.",
+            "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg"
           }
         },
         "step_6QCe4Q": {

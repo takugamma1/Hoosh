@@ -237,7 +237,8 @@
           "type": "step",
           "settings": {
             "title": "Click It In",
-            "description": "The magnetic pod snaps into the cup in one motion."
+            "description": "The magnetic pod snaps into the cup in one motion.",
+            "image": "shopify://shop_images/Screenshot_2026-04-14_at_20.04.32.png"
           }
         },
         "step_NWXAta": {

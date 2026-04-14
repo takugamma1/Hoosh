@@ -56,10 +56,21 @@
         "tagline": "Redefine the ritual",
         "cta_text": "Explore the Collection"
       }
+    },
+    "hoosh_product_grid_LeP4c9": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "The Heads",
+        "heading": "Choose Your Head",
+        "collection": "e-heads",
+        "max_products": 6
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
-    "hoosh_hero_McYPBf"
+    "hoosh_hero_McYPBf",
+    "hoosh_product_grid_LeP4c9"
   ]
 }

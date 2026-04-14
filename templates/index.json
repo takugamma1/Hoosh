@@ -205,13 +205,6 @@
             "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg",
             "alt": ""
           }
-        },
-        "photo_HPmWy6": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/DSC8958-1_0fd5aa06-38c5-4c35-bd11-2b24f1ffbc07.jpg",
-            "alt": ""
-          }
         }
       },
       "block_order": [
@@ -219,8 +212,7 @@
         "photo_83XfxF",
         "photo_MPhqnU",
         "photo_RzpPCh",
-        "photo_UQ9aGd",
-        "photo_HPmWy6"
+        "photo_UQ9aGd"
       ],
       "name": "HOOSH Social Grid",
       "settings": {

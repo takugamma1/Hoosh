@@ -66,11 +66,67 @@
         "collection": "e-heads",
         "max_products": 6
       }
+    },
+    "hoosh_marquee_hWzb3M": {
+      "type": "hoosh-marquee",
+      "blocks": {
+        "image_E3TrDa": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_hYAj9x": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_TjnG7b": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_raWMUi": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_JpcPhj": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_M3QpQd": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_E3TrDa",
+        "image_hYAj9x",
+        "image_TjnG7b",
+        "image_raWMUi",
+        "image_JpcPhj",
+        "image_M3QpQd"
+      ],
+      "name": "HOOSH Marquee",
+      "settings": {
+        "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
+        "text_color": "#FF1493"
+      }
+    },
+    "hoosh_ecosystem_bundle_kgw6x3": {
+      "type": "hoosh-ecosystem-bundle",
+      "name": "HOOSH Ecosystem — Bundle",
+      "settings": {
+        "label": "The Bundle",
+        "heading": "10 Pods. One Pack.",
+        "description": "Stock up with a bundle of 10 pods in your favourite flavour. Less reordering, more enjoying.",
+        "image": "shopify://shop_images/Untitleddesign-2026-04-11T180128.449.png",
+        "cta_text": "View Bundles",
+        "cta_link": "shopify://pages/contact"
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "hoosh_hero_McYPBf",
-    "hoosh_product_grid_LeP4c9"
+    "hoosh_product_grid_LeP4c9",
+    "hoosh_marquee_hWzb3M",
+    "hoosh_ecosystem_bundle_kgw6x3"
   ]
 }

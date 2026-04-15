@@ -64,7 +64,9 @@
         "label": "The Heads",
         "heading": "Choose Your Head",
         "collection": "e-heads",
-        "max_products": 6
+        "max_products": 6,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
       }
     },
     "hoosh_marquee_hWzb3M": {
@@ -116,7 +118,9 @@
         "label": "0% НИКОТИН",
         "heading": "ИЗБЕРЕТЕ ВАШИЯ ВКУС",
         "collection": "e-pod-0",
-        "max_products": 6
+        "max_products": 6,
+        "bundle_collection": "e-pod-package-0",
+        "bundle_label": "Pack of 10"
       }
     },
     "hoosh_ecosystem_shisha_eWwVVM": {
@@ -130,43 +134,6 @@
         "cta_text": "Explore Shisha",
         "cta_link": "shopify://products/black-e-head"
       }
-    },
-    "hoosh_trust_strip_p6W4AH": {
-      "type": "hoosh-trust-strip",
-      "blocks": {
-        "trust_item_inetXA": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Premium Quality"
-          }
-        },
-        "trust_item_ttaWdB": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Fast Shipping"
-          }
-        },
-        "trust_item_EVCHUg": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Satisfaction Guaranteed"
-          }
-        },
-        "trust_item_yPMdQC": {
-          "type": "trust_item",
-          "settings": {
-            "text": "Secure Payments"
-          }
-        }
-      },
-      "block_order": [
-        "trust_item_inetXA",
-        "trust_item_ttaWdB",
-        "trust_item_EVCHUg",
-        "trust_item_yPMdQC"
-      ],
-      "name": "HOOSH Trust Strip",
-      "settings": {}
     },
     "hoosh_how_to_Y3waFW": {
       "type": "hoosh-how-to",
@@ -208,6 +175,43 @@
         "showcase_video": "shopify://files/videos/pr-guide-2.mp4",
         "showcase_caption": ""
       }
+    },
+    "hoosh_trust_strip_p6W4AH": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_item_inetXA": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Premium Quality"
+          }
+        },
+        "trust_item_ttaWdB": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Fast Shipping"
+          }
+        },
+        "trust_item_EVCHUg": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Satisfaction Guaranteed"
+          }
+        },
+        "trust_item_yPMdQC": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Secure Payments"
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_inetXA",
+        "trust_item_ttaWdB",
+        "trust_item_EVCHUg",
+        "trust_item_yPMdQC"
+      ],
+      "name": "HOOSH Trust Strip",
+      "settings": {}
     },
     "hoosh_social_grid_JA9H6K": {
       "type": "hoosh-social-grid",

@@ -25,8 +25,8 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "The Heads",
-        "heading": "Choose Your Head",
+        "label": "Нашите наргилета",
+        "heading": "Избери наргиле",
         "collection": "hookahs",
         "max_products": 6,
         "bundle_collection": "",

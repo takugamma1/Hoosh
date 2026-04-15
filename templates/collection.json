@@ -13,8 +13,8 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "Нашите глави",
-        "heading": "Избери си глава",
+        "label": "Електронни глави",
+        "heading": "Избери своята глава",
         "collection": "e-heads",
         "max_products": 6,
         "bundle_collection": "",

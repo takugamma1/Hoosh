@@ -25,7 +25,7 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "Нашите наргилета",
+        "label": "Премиум наргилета",
         "heading": "Избери си наргиле",
         "collection": "hookahs",
         "max_products": 6,

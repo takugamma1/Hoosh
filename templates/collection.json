@@ -14,7 +14,7 @@
       "name": "HOOSH Product Grid",
       "settings": {
         "label": "Нашите глави",
-        "heading": "Избери глава",
+        "heading": "Избери си глава",
         "collection": "e-heads",
         "max_products": 6,
         "bundle_collection": "",

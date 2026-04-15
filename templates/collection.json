@@ -37,8 +37,8 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "Нашите капсули",
-        "heading": "Избери си капсула",
+        "label": "0% никотин",
+        "heading": "Избери своя вкус",
         "collection": "e-pod-0",
         "max_products": 8,
         "bundle_collection": "e-pod-package-0",

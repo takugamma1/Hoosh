@@ -111,6 +111,18 @@
         "text_color": "#ff1493"
       }
     },
+    "hoosh_product_grid_pnRqWd": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "The Heads",
+        "heading": "Choose Your Head",
+        "collection": "hookahs",
+        "max_products": 6,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
+      }
+    },
     "hoosh_product_grid_n7b3q3": {
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
@@ -273,6 +285,7 @@
     "hoosh_hero_McYPBf",
     "hoosh_product_grid_LeP4c9",
     "hoosh_marquee_hWzb3M",
+    "hoosh_product_grid_pnRqWd",
     "hoosh_product_grid_n7b3q3",
     "hoosh_ecosystem_shisha_eWwVVM",
     "hoosh_how_to_Y3waFW",

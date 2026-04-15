@@ -98,6 +98,18 @@
         "padding-block-end": 48
       }
     },
+    "hoosh_product_grid_6QiWiX": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "",
+        "heading": "Choose Your Head",
+        "collection": "e-heads",
+        "max_products": 6,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
+      }
+    },
     "main": {
       "type": "main-collection",
       "blocks": {
@@ -232,6 +244,7 @@
   },
   "order": [
     "section",
+    "hoosh_product_grid_6QiWiX",
     "main"
   ]
 }

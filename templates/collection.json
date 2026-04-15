@@ -26,7 +26,7 @@
       "name": "HOOSH Product Grid",
       "settings": {
         "label": "Нашите наргилета",
-        "heading": "Избери наргиле",
+        "heading": "Избери си наргиле",
         "collection": "hookahs",
         "max_products": 6,
         "bundle_collection": "",
@@ -38,7 +38,7 @@
       "name": "HOOSH Product Grid",
       "settings": {
         "label": "Нашите капсули",
-        "heading": "Избери своята капсула",
+        "heading": "Избери си капсула",
         "collection": "e-pod-0",
         "max_products": 8,
         "bundle_collection": "e-pod-package-0",

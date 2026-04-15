@@ -41,7 +41,7 @@
         "heading": "Choose Your Head",
         "collection": "e-pod-0",
         "max_products": 8,
-        "bundle_collection": "",
+        "bundle_collection": "e-pod-package-0",
         "bundle_label": "Pack of 10"
       }
     },
@@ -175,25 +175,12 @@
         "padding-block-start": 0,
         "padding-block-end": 32
       }
-    },
-    "hoosh_product_grid_j9DJ3L": {
-      "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
-      "settings": {
-        "label": "The Heads",
-        "heading": "Choose Your Head",
-        "collection": "e-pod-package-0",
-        "max_products": 6,
-        "bundle_collection": "",
-        "bundle_label": "Pack of 10"
-      }
     }
   },
   "order": [
     "hoosh_product_grid_6QiWiX",
     "hoosh_product_grid_twCqDc",
     "hoosh_product_grid_pk7JCJ",
-    "main",
-    "hoosh_product_grid_j9DJ3L"
+    "main"
   ]
 }

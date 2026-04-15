@@ -102,7 +102,7 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "",
+        "label": "The heads",
         "heading": "Choose Your Head",
         "collection": "e-heads",
         "max_products": 6,

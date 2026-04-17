@@ -1,0 +1,209 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+<div id="hoosh-age-gate" class="hag" data-hoosh aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hag-title">
+  <div class="hag__backdrop"></div>
+  <div class="hag__card">
+    {%- if section.settings.logo != blank -%}
+      <img class="hag__logo" src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="60" loading="eager" />
+    {%- endif -%}
+
+    <h2 id="hag-title" class="hag__title">{{ section.settings.title | default: 'Над 18 ли си?' }}</h2>
+    <p class="hag__copy">
+      {{ section.settings.copy | default: 'Трябва да имаш навършени 18 години, за да продължиш към сайта. Моля, потвърди възрастта си.' }}
+    </p>
+
+    <div class="hag__actions">
+      <button type="button" class="hag__btn hag__btn--accept" data-hag-accept>
+        {{ section.settings.accept_label | default: 'Аз съм на 18 или повече' }}
+      </button>
+      <button type="button" class="hag__btn hag__btn--decline" data-hag-decline>
+        {{ section.settings.decline_label | default: 'Под 18 години съм' }}
+      </button>
+    </div>
+
+    {%- if section.settings.notice != blank -%}
+      <p class="hag__notice">{{ section.settings.notice }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .hag {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .hag.is-open {
+    display: flex;
+  }
+  .hag__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+  }
+  .hag__card {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+    width: 100%;
+    background: #ffffff;
+    color: #111;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    animation: hagIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes hagIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .hag__logo {
+    max-width: 120px;
+    height: auto;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+  .hag__title {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: #111;
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
+  }
+  .hag__copy {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.55;
+    margin: 0 0 1.5rem;
+  }
+  .hag__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .hag__btn {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+    color: #fff;
+  }
+  .hag__btn--accept {
+    background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
+  }
+  .hag__btn--decline {
+    background: linear-gradient(90deg, #6e7480 0%, #4a4f59 100%);
+  }
+  .hag__btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+  }
+  .hag__notice {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: #888;
+  }
+</style>
+
+<script>
+  (function () {
+    var KEY = 'hoosh_age_ok';
+    var el = document.getElementById('hoosh-age-gate');
+    if (!el) return;
+
+    function open() {
+      el.classList.add('is-open');
+      el.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      el.classList.remove('is-open');
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    var ok = null;
+    try { ok = localStorage.getItem(KEY); } catch (e) {}
+
+    if (ok !== '1') {
+      open();
+    }
+
+    el.addEventListener('click', function (evt) {
+      var target = evt.target;
+      if (target.closest('[data-hag-accept]')) {
+        try { localStorage.setItem(KEY, '1'); } catch (e) {}
+        close();
+      } else if (target.closest('[data-hag-decline]')) {
+        var redirect = {{ section.settings.decline_redirect | default: 'https://www.google.com' | json }};
+        window.location.href = redirect;
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HOOSH Age Gate",
+  "class": "hoosh-age-gate-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (optional)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Над 18 ли си?"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Message",
+      "default": "Трябва да имаш навършени 18 години, за да продължиш към сайта. Моля, потвърди възрастта си."
+    },
+    {
+      "type": "text",
+      "id": "accept_label",
+      "label": "Accept button label",
+      "default": "Аз съм на 18 или повече"
+    },
+    {
+      "type": "text",
+      "id": "decline_label",
+      "label": "Decline button label",
+      "default": "Под 18 години съм"
+    },
+    {
+      "type": "url",
+      "id": "decline_redirect",
+      "label": "Decline redirect URL",
+      "info": "Where under-18 visitors are sent. Defaults to google.com."
+    },
+    {
+      "type": "text",
+      "id": "notice",
+      "label": "Small print",
+      "default": ""
+    }
+  ],
+  "presets": [{ "name": "HOOSH Age Gate" }]
+}
+{% endschema %}

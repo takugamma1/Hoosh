@@ -39,8 +39,11 @@
     {%- endif -%}
 
     {%- if section.settings.cta_text != blank -%}
-      <a href="#hoosh-products" class="h-btn h-btn--primary hoosh-hero__cta">
-        {{ section.settings.cta_text }}
+      <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="hoosh-hero__play">
+        <span class="hoosh-hero__play-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="hoosh-hero__play-label">{{ section.settings.cta_text }}</span>
       </a>
     {%- endif -%}
   </div>
@@ -98,6 +101,33 @@
   .hoosh-hero__cta {
     margin-top: 12px;
   }
+  .hoosh-hero__play {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    text-decoration: none;
+    color: var(--h-text, #fff);
+    transition: transform 0.2s ease;
+  }
+  .hoosh-hero__play:hover { transform: translateY(-1px); }
+  .hoosh-hero__play-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(232, 74, 122, 0.35);
+  }
+  .hoosh-hero__play-icon svg { margin-left: 2px; }
+  .hoosh-hero__play-label {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
 </style>
 
 {% schema %}
@@ -138,7 +168,12 @@
       "type": "text",
       "id": "cta_text",
       "label": "CTA button text",
-      "default": "Explore the Collection"
+      "default": "Виж Видеото"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link (video popup or page)"
     }
   ],
   "presets": [{ "name": "HOOSH Hero" }]

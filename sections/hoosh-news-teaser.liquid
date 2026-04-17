@@ -1,0 +1,191 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+<section class="hnt h-section" data-hoosh>
+  <div class="h-container">
+    <div class="hnt__header h-reveal">
+      {%- if section.settings.label != blank -%}
+        <span class="hnt__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="hnt__heading">{{ section.settings.heading | default: 'Очаквай скоро' }}</h2>
+    </div>
+
+    <div class="hnt__grid">
+      {%- for block in section.blocks -%}
+        <article class="hnt__card h-reveal" {{ block.shopify_attributes }}>
+          <div class="hnt__media">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 900 }}"
+                srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 900 }} 900w"
+                sizes="(min-width: 768px) 45vw, 90vw"
+                alt="{{ block.settings.heading | escape }}"
+                width="900"
+                height="675"
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if block.settings.show_badge -%}
+              <span class="hnt__badge">{{ block.settings.badge_text | default: 'Очаквай Скоро' }}</span>
+            {%- endif -%}
+          </div>
+          <div class="hnt__body">
+            <h3 class="hnt__title">{{ block.settings.heading }}</h3>
+            {%- if block.settings.copy != blank -%}
+              <p class="hnt__copy">{{ block.settings.copy }}</p>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hnt__header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+  }
+  .hnt__label {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: var(--h-small, 0.85rem);
+    color: var(--h-text-secondary, #888);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .hnt__heading {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--h-text, #fff);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 0;
+  }
+  .hnt__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--h-card-gap, 2rem);
+    align-items: center;
+  }
+  .hnt__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .hnt__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--h-bg-card, #111);
+  }
+  .hnt__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hnt__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: var(--h-text, #fff);
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .hnt__title {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--h-text, #fff);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  .hnt__copy {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: var(--h-small, 0.9rem);
+    color: var(--h-text-secondary, #888);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hnt__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH News Teaser",
+  "class": "hoosh-news-teaser-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Новини"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Очаквай скоро"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "teaser",
+      "name": "Teaser card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Вейп & Снус"
+        },
+        {
+          "type": "textarea",
+          "id": "copy",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_badge",
+          "label": "Show 'Coming Soon' badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "Очаквай Скоро"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HOOSH News Teaser",
+      "blocks": [
+        { "type": "teaser", "settings": { "heading": "Вейп" } },
+        { "type": "teaser", "settings": { "heading": "Снус" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

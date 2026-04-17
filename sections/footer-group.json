@@ -17,33 +17,33 @@
         "nav_shop": {
           "type": "nav_column",
           "settings": {
-            "title": "Каталог",
+            "title": "Продукти онлайн магазин",
             "menu": "main-menu"
           }
         },
         "nav_info": {
           "type": "nav_column",
           "settings": {
-            "title": "Информация",
+            "title": "Политики",
             "menu": "footer"
           }
         },
         "contact_1": {
           "type": "contact",
           "settings": {
-            "title": "Свържи се с нас",
+            "title": "Контакти",
             "email": ""
           }
         },
         "social_1": {
           "type": "social",
           "settings": {
-            "title": "Последвай ни",
-            "instagram": "https://www.instagram.com/hoosh.bulgaria/",
-            "tiktok": "shopify://products/black-e-head",
-            "facebook": "shopify://products/e-pod-0-никотин-amalfi-breeze-пакет-от-10-e-pods",
-            "youtube": "shopify://pages/contact",
-            "twitter": "shopify://pages/contact"
+            "title": "Социални мрежи",
+            "instagram": "https://www.instagram.com/hooshwave/",
+            "tiktok": "",
+            "facebook": "",
+            "youtube": "https://www.youtube.com/",
+            "twitter": "https://twitter.com/"
           }
         }
       },
@@ -57,7 +57,7 @@
         "logo_text": "HOOSH",
         "whatsapp": "",
         "telegram": "",
-        "phone": ""
+        "phone": "+359886969757"
       }
     }
   },

@@ -275,6 +275,17 @@
         "label": "Новини",
         "heading": "Очаквай скоро"
       }
+    },
+    "hoosh_newsletter_PJfJVq": {
+      "type": "hoosh-newsletter",
+      "name": "HOOSH Newsletter",
+      "settings": {
+        "label": "Абонирай се за нашия бюлетин",
+        "heading": "Не пропускай последните ни новини",
+        "placeholder": "Email",
+        "button_label": "Абониране",
+        "success_message": "Благодарим ти, абонаментът е активиран!"
+      }
     }
   },
   "order": [
@@ -287,6 +298,7 @@
     "hoosh_how_to_Y3waFW",
     "hoosh_trust_strip_p6W4AH",
     "hoosh_social_grid_JA9H6K",
-    "hoosh_news_teaser_AFEeh7"
+    "hoosh_news_teaser_AFEeh7",
+    "hoosh_newsletter_PJfJVq"
   ]
 }

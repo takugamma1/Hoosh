@@ -36,54 +36,12 @@
         "bundle_label": "Pack of 10"
       }
     },
-    "hoosh_marquee_hWzb3M": {
-      "type": "hoosh-marquee",
-      "blocks": {
-        "image_E3TrDa": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_hYAj9x": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_TjnG7b": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_raWMUi": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_JpcPhj": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_M3QpQd": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "image_E3TrDa",
-        "image_hYAj9x",
-        "image_TjnG7b",
-        "image_raWMUi",
-        "image_JpcPhj",
-        "image_M3QpQd"
-      ],
-      "name": "HOOSH Marquee",
-      "settings": {
-        "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
-        "text_color": "#ff1493"
-      }
-    },
     "hoosh_product_grid_pnRqWd": {
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "label": "Премиум наргилета",
-        "heading": "Избери своето наргиле",
+        "label": "",
+        "heading": "",
         "collection": "hookahs",
         "max_products": 5,
         "bundle_collection": "",
@@ -295,7 +253,6 @@
   "order": [
     "hoosh_hero_McYPBf",
     "hoosh_product_grid_LeP4c9",
-    "hoosh_marquee_hWzb3M",
     "hoosh_product_grid_pnRqWd",
     "hoosh_product_grid_n7b3q3",
     "hoosh_ecosystem_shisha_eWwVVM",

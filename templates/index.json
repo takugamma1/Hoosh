@@ -9,196 +9,251 @@
  */
 {
   "sections": {
-    "age_gate": {
-      "type": "hoosh-age-gate",
-      "name": "Age Gate",
-      "settings": {
-        "title": "Над 18 ли си?",
-        "copy": "Трябва да имаш навършени 18 години, за да продължиш към сайта. Моля, потвърди възрастта си.",
-        "accept_label": "Аз съм на 18 или повече",
-        "decline_label": "Под 18 години съм"
-      }
-    },
-    "hero": {
+    "hoosh_hero_McYPBf": {
       "type": "hoosh-hero",
-      "name": "Hero",
+      "name": "HOOSH Hero",
       "settings": {
         "bg_image": "shopify://shop_images/Untitled_design_-_2026-04-10T195131.322.png",
         "bg_video": "",
-        "logo_image": "",
+        "logo_image": "shopify://shop_images/cabd1164-490f-405f-afc0-ecaf2e41e602.png",
         "heading": "HOOSH",
-        "tagline": "Новата ера на наргилетата е тук",
-        "cta_text": "Виж Видеото"
+        "tagline": "Преоткрий ритуала",
+        "cta_text": "Разгледай колекцията",
+        "cta_link": ""
       }
     },
-    "bestsellers_eheads": {
+    "hoosh_product_grid_LeP4c9": {
       "type": "hoosh-product-grid",
-      "name": "Best-sellers: E-Heads",
+      "name": "HOOSH Product Grid",
       "settings": {
-        "label": "Каталог HOOSH",
-        "heading": "Най-продаваните продукти",
+        "label": "Електронни глави",
+        "heading": "Избери своята глава",
         "collection": "e-heads",
-        "max_products": 4
+        "max_products": 6,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
       }
     },
-    "hookahs_grid": {
-      "type": "hoosh-product-grid",
-      "name": "Hookahs grid",
-      "settings": {
-        "label": "Наргилета",
-        "heading": "Нашите наргилета",
-        "collection": "hookahs",
-        "max_products": 6
-      }
-    },
-    "marquee": {
+    "hoosh_marquee_hWzb3M": {
       "type": "hoosh-marquee",
       "blocks": {
-        "image_1": { "type": "image", "settings": {} },
-        "image_2": { "type": "image", "settings": {} },
-        "image_3": { "type": "image", "settings": {} },
-        "image_4": { "type": "image", "settings": {} },
-        "image_5": { "type": "image", "settings": {} },
-        "image_6": { "type": "image", "settings": {} }
-      },
-      "block_order": [
-        "image_1",
-        "image_2",
-        "image_3",
-        "image_4",
-        "image_5",
-        "image_6"
-      ],
-      "name": "Marquee",
-      "settings": {
-        "marquee_text": "HOOSH • НОВАТА ЕРА НА НАРГИЛЕТАТА • HOOSH • PREMIUM SHISHA •",
-        "text_color": "#ff4e7e"
-      }
-    },
-    "epods_carousel": {
-      "type": "hoosh-product-grid",
-      "name": "E-Pods carousel",
-      "settings": {
-        "label": "E-PODS Вкусове",
-        "heading": "Плъзни за да разгледаш",
-        "collection": "e-pods",
-        "max_products": 8
-      }
-    },
-    "feature_cards": {
-      "type": "hoosh-feature-cards",
-      "blocks": {
-        "card_hose": {
-          "type": "card",
-          "settings": {
-            "label": "Аксесоар",
-            "heading": "HOSE — Маркуч за наргиле"
-          }
+        "image_E3TrDa": {
+          "type": "image",
+          "settings": {}
         },
-        "card_flavors": {
-          "type": "card",
-          "settings": {
-            "label": "E-PODS",
-            "heading": "Вкусове"
-          }
+        "image_hYAj9x": {
+          "type": "image",
+          "settings": {}
         },
-        "card_hookahs": {
-          "type": "card",
-          "settings": {
-            "label": "Устройства",
-            "heading": "Наргилета"
-          }
+        "image_TjnG7b": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_raWMUi": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_JpcPhj": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_M3QpQd": {
+          "type": "image",
+          "settings": {}
         }
       },
       "block_order": [
-        "card_hose",
-        "card_flavors",
-        "card_hookahs"
+        "image_E3TrDa",
+        "image_hYAj9x",
+        "image_TjnG7b",
+        "image_raWMUi",
+        "image_JpcPhj",
+        "image_M3QpQd"
       ],
-      "name": "Feature cards",
-      "settings": {}
-    },
-    "eglava_section": {
-      "type": "hoosh-ecosystem-shisha",
-      "name": "E-Глава",
+      "name": "HOOSH Marquee",
       "settings": {
-        "label": "Персонализация",
-        "heading": "Е-Глава",
-        "description": "Персонализирай наргилето си, като избереш любимата си E-Глава.",
-        "cta_text": "Към всички E-Глави",
+        "marquee_text": "HOOSH • PREMIUM SHISHA • HOOSH • PREMIUM SHISHA •",
+        "text_color": "#ff1493"
+      }
+    },
+    "hoosh_product_grid_pnRqWd": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "Премиум наргилета",
+        "heading": "Избери своето наргиле",
+        "collection": "hookahs",
+        "max_products": 5,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
+      }
+    },
+    "hoosh_product_grid_n7b3q3": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "0% НИКОТИН",
+        "heading": "Избери своя вкус",
+        "collection": "e-pod-0",
+        "max_products": 8,
+        "bundle_collection": "e-pod-package-0",
+        "bundle_label": "Пакет от 10"
+      }
+    },
+    "hoosh_ecosystem_shisha_eWwVVM": {
+      "type": "hoosh-ecosystem-shisha",
+      "name": "HOOSH Ecosystem — Shisha",
+      "settings": {
+        "label": "Наргилето",
+        "heading": "Акцентът",
+        "description": "Премиум изработка. Елегантни и компактни.",
+        "image": "shopify://shop_images/20240920-_DSC8467_e64185f5-aeb1-494e-ae3a-d239987b51bf.jpg",
+        "cta_text": "Разгледай колекцията",
         "cta_link": "shopify://collections/e-heads"
       }
     },
-    "social_grid": {
-      "type": "hoosh-social-grid",
+    "hoosh_how_to_Y3waFW": {
+      "type": "hoosh-how-to",
       "blocks": {
-        "photo_1": { "type": "photo", "settings": { "alt": "" } },
-        "photo_2": { "type": "photo", "settings": { "alt": "" } },
-        "photo_3": { "type": "photo", "settings": { "alt": "" } },
-        "photo_4": { "type": "photo", "settings": { "alt": "" } },
-        "photo_5": { "type": "photo", "settings": { "alt": "" } }
-      },
-      "block_order": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5"],
-      "name": "Social grid",
-      "settings": {
-        "label": "Присъедини се към революцията на наргилетата",
-        "heading": "Последвай ни в социалните мрежи",
-        "handle": "hooshwave",
-        "profile_url": "https://www.instagram.com/hooshwave/"
-      }
-    },
-    "news_teaser": {
-      "type": "hoosh-news-teaser",
-      "blocks": {
-        "teaser_vape": {
-          "type": "teaser",
+        "step_DarQhb": {
+          "type": "step",
           "settings": {
-            "heading": "Вейп",
-            "copy": "Абонирай се за нашия бюлетин и не пропускай новостите.",
-            "show_badge": true,
-            "badge_text": "Очаквай Скоро"
+            "title": "Избери своя вкус",
+            "description": "Избери от широка селекция премиум вкусове.",
+            "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg"
           }
         },
-        "teaser_snus": {
-          "type": "teaser",
+        "step_6QCe4Q": {
+          "type": "step",
           "settings": {
-            "heading": "Снус",
-            "copy": "Абонирай се за нашия бюлетин и не пропускай новостите.",
-            "show_badge": true,
-            "badge_text": "Очаквай Скоро"
+            "title": "Постави капсулата",
+            "description": "Капсулата се захваща за главата с едно движение.",
+            "image": "shopify://shop_images/Screenshot_2026-04-14_at_20.04.32.png"
+          }
+        },
+        "step_NWXAta": {
+          "type": "step",
+          "settings": {
+            "title": "Наслаждавай се",
+            "description": "Това е. Премиум наргиле и никакви усилия.",
+            "image": "shopify://shop_images/20240101-_DSC6939.jpg"
           }
         }
       },
-      "block_order": ["teaser_vape", "teaser_snus"],
-      "name": "News teaser",
+      "block_order": [
+        "step_DarQhb",
+        "step_6QCe4Q",
+        "step_NWXAta"
+      ],
+      "name": "HOOSH How-To",
       "settings": {
-        "label": "Новини",
-        "heading": "Очаквай скоро"
+        "label": "Как работи",
+        "heading": "Готово за секунди",
+        "showcase_video": "shopify://files/videos/pr-guide-2.mp4",
+        "showcase_caption": ""
       }
     },
-    "newsletter": {
-      "type": "hoosh-newsletter",
-      "name": "Newsletter",
+    "hoosh_trust_strip_p6W4AH": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_item_inetXA": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Премиум качество"
+          }
+        },
+        "trust_item_ttaWdB": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Бърза доставка"
+          }
+        },
+        "trust_item_EVCHUg": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Гарантирано удоволствие"
+          }
+        },
+        "trust_item_yPMdQC": {
+          "type": "trust_item",
+          "settings": {
+            "text": "защитено плащане"
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_inetXA",
+        "trust_item_ttaWdB",
+        "trust_item_EVCHUg",
+        "trust_item_yPMdQC"
+      ],
+      "name": "HOOSH Trust Strip",
+      "settings": {}
+    },
+    "hoosh_social_grid_JA9H6K": {
+      "type": "hoosh-social-grid",
+      "blocks": {
+        "photo_aNQdTm": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/20240805-_DSC8169_2e1aadcf-3d6f-42ac-b663-843dfe12359f.jpg",
+            "alt": ""
+          }
+        },
+        "photo_83XfxF": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/DSC8958-1_0fd5aa06-38c5-4c35-bd11-2b24f1ffbc07.jpg",
+            "alt": ""
+          }
+        },
+        "photo_MPhqnU": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/DSC9528-1_cd8933ab-a7c5-44cb-8ea4-67ab5bd84d98.jpg",
+            "alt": ""
+          }
+        },
+        "photo_RzpPCh": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/20240210-_DSC8045_bd35af59-06b0-4e7a-8df6-4ba56c779334.jpg",
+            "alt": ""
+          }
+        },
+        "photo_UQ9aGd": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_aNQdTm",
+        "photo_83XfxF",
+        "photo_MPhqnU",
+        "photo_RzpPCh",
+        "photo_UQ9aGd"
+      ],
+      "name": "HOOSH Social Grid",
       "settings": {
-        "label": "Абонирай се за нашия бюлетин",
-        "heading": "Не пропускай последните ни новини",
-        "placeholder": "Email",
-        "button_label": "Абониране",
-        "success_message": "Благодарим ти, абонаментът е активиран!"
+        "label": "присъедини се",
+        "heading": "Последвайте ни",
+        "handle": "hoosh_bg",
+        "profile_url": ""
       }
     }
   },
   "order": [
-    "age_gate",
-    "hero",
-    "bestsellers_eheads",
-    "hookahs_grid",
-    "marquee",
-    "epods_carousel",
-    "feature_cards",
-    "eglava_section",
-    "social_grid",
-    "news_teaser",
-    "newsletter"
+    "hoosh_hero_McYPBf",
+    "hoosh_product_grid_LeP4c9",
+    "hoosh_marquee_hWzb3M",
+    "hoosh_product_grid_pnRqWd",
+    "hoosh_product_grid_n7b3q3",
+    "hoosh_ecosystem_shisha_eWwVVM",
+    "hoosh_how_to_Y3waFW",
+    "hoosh_trust_strip_p6W4AH",
+    "hoosh_social_grid_JA9H6K"
   ]
 }

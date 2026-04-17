@@ -1,0 +1,205 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cols = section.settings.columns | default: 4
+  assign per_page = section.settings.per_page | default: 16
+-%}
+
+{%- paginate collection.products by per_page -%}
+<section class="hcp h-section" data-hoosh style="--hoosh-grid-cols: {{ cols }};">
+  <div class="h-container">
+    {%- if section.settings.show_breadcrumbs -%}
+      <nav class="hcp__crumbs" aria-label="breadcrumb">
+        <a href="{{ routes.root_url }}">Начало</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ collection.title }}</span>
+      </nav>
+    {%- endif -%}
+
+    <header class="hcp__header h-reveal">
+      {%- if section.settings.label != blank -%}
+        <span class="hcp__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h1 class="hcp__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank and section.settings.show_description -%}
+        <div class="hcp__desc">{{ collection.description }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if collection.products.size > 0 -%}
+      <div class="hoosh-grid">
+        {%- for product in collection.products -%}
+          {% render 'hoosh-product-card', product: product %}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="hcp__pagination" aria-label="pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="hcp__page hcp__page--arrow">‹</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="hcp__page">{{ part.title }}</a>
+            {%- else -%}
+              <span class="hcp__page{% if part.title == paginate.current_page %} is-active{% endif %}">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="hcp__page hcp__page--arrow">›</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <p class="hcp__empty">Няма продукти в тази колекция.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+<style>
+  .hcp { padding-block: clamp(2rem, 5vw, 4rem); }
+  .hcp__crumbs {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    letter-spacing: 0.04em;
+  }
+  .hcp__crumbs a { color: rgba(255, 255, 255, 0.8); text-decoration: none; }
+  .hcp__crumbs a:hover { color: #fff; }
+  .hcp__crumbs span[aria-hidden] { margin: 0 8px; opacity: 0.45; }
+
+  .hcp__header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  .hcp__label {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 6px 16px;
+    display: inline-block;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 1.2em;
+  }
+  .hcp__title {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .hcp__desc {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .hoosh-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--hoosh-grid-cols, 4), 1fr);
+    gap: var(--h-card-gap, 1.5rem);
+  }
+  @media screen and (max-width: 1023px) {
+    .hoosh-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media screen and (max-width: 767px) {
+    .hoosh-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  }
+
+  .hcp__pagination {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    flex-wrap: wrap;
+  }
+  .hcp__page {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.9rem;
+  }
+  .hcp__page:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
+  .hcp__page.is-active {
+    background: linear-gradient(90deg, #ff4e7e 0%, #8a5bff 100%);
+    color: #fff;
+    border-color: transparent;
+  }
+
+  .hcp__empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    padding: 3rem 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Collection Page",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Small label above title",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "default": 16
+    }
+  ],
+  "presets": [{ "name": "HOOSH Collection Page" }],
+  "enabled_on": {
+    "templates": ["collection"]
+  }
+}
+{% endschema %}

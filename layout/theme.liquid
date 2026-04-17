@@ -140,14 +140,8 @@
       {% render 'quick-add-modal' %}
     {% endif %}
 
-    {%- comment -%} HOOSH — Product modal + JS {%- endcomment -%}
-    {% render 'hoosh-product-modal',
-      whatsapp: settings.hoosh_whatsapp,
-      telegram: settings.hoosh_telegram,
-      phone: settings.hoosh_phone
-    %}
-    {{ 'hoosh-modal.js' | asset_url | script_tag }}
-    {{ 'hoosh-animations.js' | asset_url | script_tag }}
+    {%- comment -%} HOOSH — Animations {%- endcomment -%}
+    <script src="{{ 'hoosh-animations.js' | asset_url }}" defer></script>
 
     {%- comment -%} HOOSH — Floating WhatsApp widget {%- endcomment -%}
     {% render 'hoosh-wa-widget', whatsapp: settings.hoosh_whatsapp %}

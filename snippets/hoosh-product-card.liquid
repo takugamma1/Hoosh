@@ -1,17 +1,13 @@
 {% doc %}
-  HOOSH product card — matches hooshwave.com style.
-  Dark card, centered product on violet mist, name, red price, gradient Add-to-Cart pill.
+  HOOSH product card — simple link-to-product card.
+  Dark media tile with violet mist, title, red price, gradient Add-to-Cart pill.
   @param {object} product - Shopify product object.
-  @param {object} [bundle_product] - Optional paired bundle product (opens via modal trigger).
-  @param {string} [bundle_label] - Label for the bundle toggle (e.g. "Pack of 10").
   @param {string} [fallback_name]
-  @param {string} [fallback_desc]
 {% enddoc %}
 
 {% liquid
   assign p_name = product.title | default: fallback_name | default: 'Product Name'
   assign p_img = product.featured_image
-  assign p_type = product.type | default: ''
   assign p_available = product.available
   assign coming_soon = false
   if product.tags contains 'coming-soon' or product.tags contains 'ochakvai-skoro'
@@ -21,35 +17,8 @@
   assign p_url = product.url | default: '#'
 %}
 
-{%- capture p_images_json -%}
-[{%- for image in product.images -%}"{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}{%- endfor -%}]
-{%- endcapture -%}
-
-{%- if bundle_product != blank -%}
-  {%- capture b_images_json -%}
-  [{%- for image in bundle_product.images -%}"{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}{%- endfor -%}]
-  {%- endcapture -%}
-{%- endif -%}
-
 <article class="hp-card h-reveal">
-  <button
-    type="button"
-    class="hp-card__media"
-    data-modal-trigger
-    data-product-name="{{ p_name | escape }}"
-    data-product-label="{{ p_type | escape }}"
-    data-product-desc="{{ product.description | escape }}"
-    data-product-img="{{ p_img | image_url: width: 800 }}"
-    data-product-images='{{ p_images_json }}'
-    {%- if bundle_product != blank %}
-    data-bundle-name="{{ bundle_product.title | escape }}"
-    data-bundle-desc="{{ bundle_product.description | escape }}"
-    data-bundle-img="{{ bundle_product.featured_image | image_url: width: 800 }}"
-    data-bundle-images='{{ b_images_json }}'
-    data-bundle-label="{{ bundle_label | default: 'Pack of 10' | escape }}"
-    {%- endif %}
-    aria-label="Виж {{ p_name | escape }}"
-  >
+  <a class="hp-card__media" href="{{ p_url }}" aria-label="{{ p_name | escape }}">
     {%- if p_img != blank -%}
       <img
         src="{{ p_img | image_url: width: 600 }}"
@@ -69,9 +38,11 @@
     {%- if coming_soon -%}
       <span class="hp-card__soon" aria-hidden="true">Очаквай Скоро</span>
     {%- endif -%}
-  </button>
+  </a>
 
-  <h3 class="hp-card__name">{{ p_name }}</h3>
+  <a class="hp-card__name-link" href="{{ p_url }}">
+    <h3 class="hp-card__name">{{ p_name }}</h3>
+  </a>
 
   {%- if product.price and coming_soon == false -%}
     <div class="hp-card__price">{{ product.price | money }}</div>
@@ -112,7 +83,7 @@
     aspect-ratio: 3 / 4;
     border-radius: 18px;
     overflow: hidden;
-    cursor: pointer;
+    text-decoration: none;
     background:
       radial-gradient(ellipse at 50% 75%, rgba(165, 75, 200, 0.45), transparent 65%),
       radial-gradient(ellipse at 50% 30%, rgba(60, 30, 100, 0.4), transparent 70%),
@@ -151,6 +122,11 @@
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
 
+  .hp-card__name-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
   .hp-card__name {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
     font-size: clamp(0.95rem, 1.3vw, 1.1rem);

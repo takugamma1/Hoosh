@@ -1,0 +1,414 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign p = product
+  assign current_variant = p.selected_or_first_available_variant
+  assign coming_soon = false
+  if p.tags contains 'coming-soon' or p.tags contains 'ochakvai-skoro'
+    assign coming_soon = true
+  endif
+-%}
+
+<section class="hpp h-section" data-hoosh>
+  <div class="h-container">
+    {%- if section.settings.show_breadcrumbs -%}
+      <nav class="hpp__crumbs" aria-label="breadcrumb">
+        <a href="{{ routes.root_url }}">Начало</a>
+        <span aria-hidden="true">/</span>
+        {%- if collection -%}
+          <a href="{{ collection.url }}">{{ collection.title }}</a>
+          <span aria-hidden="true">/</span>
+        {%- endif -%}
+        <span aria-current="page">{{ p.title }}</span>
+      </nav>
+    {%- endif -%}
+
+    <div class="hpp__grid">
+      <div class="hpp__gallery">
+        {%- assign featured = p.featured_image -%}
+        <div class="hpp__media hpp__media--main" data-main>
+          {%- if featured != blank -%}
+            <img
+              src="{{ featured | image_url: width: 1200 }}"
+              srcset="{{ featured | image_url: width: 600 }} 600w, {{ featured | image_url: width: 1200 }} 1200w"
+              sizes="(min-width: 768px) 50vw, 90vw"
+              alt="{{ featured.alt | default: p.title | escape }}"
+              width="{{ featured.width }}"
+              height="{{ featured.height }}"
+              loading="eager"
+            >
+          {%- else -%}
+            <div class="hpp__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endif -%}
+          {%- if coming_soon -%}
+            <span class="hpp__soon">Очаквай Скоро</span>
+          {%- endif -%}
+        </div>
+
+        {%- if p.images.size > 1 -%}
+          <div class="hpp__thumbs">
+            {%- for img in p.images -%}
+              <button
+                type="button"
+                class="hpp__thumb{% if forloop.first %} is-active{% endif %}"
+                data-thumb
+                data-src="{{ img | image_url: width: 1200 }}"
+                aria-label="Image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ img | image_url: width: 200 }}"
+                  alt=""
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="hpp__details">
+        <h1 class="hpp__title">{{ p.title }}</h1>
+
+        {%- if coming_soon -%}
+          <div class="hpp__price hpp__price--soon">Очаквай Скоро</div>
+        {%- else -%}
+          <div class="hpp__price">{{ current_variant.price | money }}</div>
+        {%- endif -%}
+
+        {%- if p.description != blank -%}
+          <div class="hpp__desc">{{ p.description }}</div>
+        {%- endif -%}
+
+        {%- unless coming_soon -%}
+          {%- form 'product', p, class: 'hpp__form' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+            {%- if p.has_only_default_variant == false -%}
+              {%- for option in p.options_with_values -%}
+                <fieldset class="hpp__option">
+                  <legend class="hpp__option-label">{{ option.name }}</legend>
+                  <div class="hpp__swatches">
+                    {%- for value in option.values -%}
+                      <label class="hpp__swatch{% if option.selected_value == value %} is-active{% endif %}">
+                        <input
+                          type="radio"
+                          name="options[{{ option.name | escape }}]"
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}checked{% endif %}
+                        >
+                        <span>{{ value }}</span>
+                      </label>
+                    {%- endfor -%}
+                  </div>
+                </fieldset>
+              {%- endfor -%}
+            {%- endif -%}
+
+            <div class="hpp__actions">
+              <div class="hpp__qty">
+                <button type="button" class="hpp__qty-btn" data-qty="-" aria-label="Намали">−</button>
+                <input type="number" name="quantity" value="1" min="1" class="hpp__qty-input">
+                <button type="button" class="hpp__qty-btn" data-qty="+" aria-label="Увеличи">+</button>
+              </div>
+              <button
+                type="submit"
+                name="add"
+                class="hpp__cta"
+                {% unless current_variant.available %}disabled{% endunless %}
+              >
+                {% if current_variant.available %}ADD TO CART{% else %}Sold out{% endif %}
+              </button>
+            </div>
+          {%- endform -%}
+        {%- endunless -%}
+
+        {%- if section.settings.show_meta -%}
+          <div class="hpp__meta">
+            {%- if p.type != blank -%}
+              <div><strong>Категория:</strong> {{ p.type }}</div>
+            {%- endif -%}
+            {%- if p.vendor != blank -%}
+              <div><strong>Марка:</strong> {{ p.vendor }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hpp {
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+  .hpp__crumbs {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    letter-spacing: 0.04em;
+  }
+  .hpp__crumbs a { color: rgba(255, 255, 255, 0.8); text-decoration: none; }
+  .hpp__crumbs a:hover { color: #fff; }
+  .hpp__crumbs span[aria-hidden] { margin: 0 8px; opacity: 0.45; }
+
+  .hpp__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  @media screen and (max-width: 767px) {
+    .hpp__grid { grid-template-columns: 1fr; }
+  }
+
+  .hpp__gallery { position: sticky; top: 80px; }
+  @media screen and (max-width: 767px) { .hpp__gallery { position: static; } }
+
+  .hpp__media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background:
+      radial-gradient(ellipse at 50% 75%, rgba(165, 75, 200, 0.4), transparent 65%),
+      radial-gradient(ellipse at 50% 30%, rgba(60, 30, 100, 0.4), transparent 70%),
+      #14121a;
+  }
+  .hpp__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6% 6% 4%;
+  }
+  .hpp__placeholder { width: 40%; margin: 30% auto; opacity: 0.2; }
+  .hpp__soon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: rotate(-20deg);
+    pointer-events: none;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.7);
+  }
+
+  .hpp__thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .hpp__thumbs::-webkit-scrollbar { display: none; }
+  .hpp__thumb {
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1b1820;
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+  .hpp__thumb.is-active { border-color: #ff4e7e; }
+  .hpp__thumb img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+
+  .hpp__title {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .hpp__price {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: #ff2e4a;
+    margin: 0 0 20px;
+    letter-spacing: 0.01em;
+  }
+  .hpp__price--soon { color: rgba(255, 255, 255, 0.75); }
+
+  .hpp__desc {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 24px;
+  }
+  .hpp__desc p { margin: 0 0 0.6em; }
+
+  .hpp__option { border: 0; padding: 0; margin: 0 0 18px; }
+  .hpp__option-label {
+    display: block;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+  }
+  .hpp__swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hpp__swatch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .hpp__swatch input { position: absolute; opacity: 0; pointer-events: none; }
+  .hpp__swatch.is-active {
+    border-color: #ff4e7e;
+    background: rgba(255, 78, 126, 0.12);
+    color: #fff;
+  }
+
+  .hpp__actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .hpp__qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    overflow: hidden;
+    min-height: 48px;
+  }
+  .hpp__qty-btn {
+    width: 40px;
+    height: 48px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  .hpp__qty-btn:hover { background: rgba(255, 255, 255, 0.08); }
+  .hpp__qty-input {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+  .hpp__qty-input::-webkit-outer-spin-button,
+  .hpp__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .hpp__cta {
+    flex: 1 1 220px;
+    min-height: 48px;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #fff;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
+    transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+  }
+  .hpp__cta:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.07); }
+  .hpp__cta:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .hpp__meta {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hpp__meta strong { color: rgba(255, 255, 255, 0.9); font-weight: 500; }
+</style>
+
+<script>
+  (function () {
+    document.querySelectorAll('.hpp').forEach(function (root) {
+      // Thumbnail swap
+      var main = root.querySelector('[data-main] img');
+      root.querySelectorAll('[data-thumb]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var src = btn.getAttribute('data-src');
+          if (main && src) main.src = src;
+          root.querySelectorAll('[data-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+        });
+      });
+
+      // Quantity controls
+      root.querySelectorAll('[data-qty]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var input = root.querySelector('.hpp__qty-input');
+          if (!input) return;
+          var v = parseInt(input.value, 10) || 1;
+          v = btn.getAttribute('data-qty') === '+' ? v + 1 : Math.max(1, v - 1);
+          input.value = v;
+        });
+      });
+
+      // Swatch visual toggle (form still submits the radio value)
+      root.querySelectorAll('.hpp__swatch input').forEach(function (input) {
+        input.addEventListener('change', function () {
+          var name = input.name;
+          root.querySelectorAll('.hpp__swatch input[name="' + name + '"]').forEach(function (sib) {
+            sib.closest('.hpp__swatch').classList.toggle('is-active', sib.checked);
+          });
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HOOSH Product Page",
+  "class": "hoosh-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_meta",
+      "label": "Show product meta (type, vendor)",
+      "default": false
+    }
+  ],
+  "presets": [{ "name": "HOOSH Product Page" }],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

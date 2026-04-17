@@ -1,132 +1,213 @@
 {{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
 
-<section class="hoosh-hero" data-hoosh>
+<section class="hhero" data-hoosh>
   {%- if section.settings.bg_image != blank -%}
     <img
-      class="hoosh-hero__bg"
+      class="hhero__bg"
       src="{{ section.settings.bg_image | image_url: width: 1920 }}"
       srcset="{{ section.settings.bg_image | image_url: width: 1024 }} 1024w, {{ section.settings.bg_image | image_url: width: 1920 }} 1920w"
       sizes="100vw"
       alt=""
+      width="1920"
+      height="1080"
       loading="eager"
       fetchpriority="high"
     >
   {%- endif -%}
 
   {%- if section.settings.bg_video != blank -%}
-    <video class="hoosh-hero__bg" autoplay muted loop playsinline>
+    <video class="hhero__bg" autoplay muted loop playsinline>
       <source src="{{ section.settings.bg_video }}" type="video/mp4">
     </video>
   {%- endif -%}
 
-  <div class="hoosh-hero__overlay"></div>
+  <div class="hhero__overlay"></div>
 
-  <div class="hoosh-hero__content">
-    {%- if section.settings.logo_image != blank -%}
+  <div class="hhero__stage">
+    {%- if section.settings.left_image != blank -%}
       <img
-        class="hoosh-hero__logo"
-        src="{{ section.settings.logo_image | image_url: width: 400 }}"
-        alt="{{ shop.name }}"
-        width="200"
+        class="hhero__product hhero__product--left"
+        src="{{ section.settings.left_image | image_url: width: 900 }}"
+        srcset="{{ section.settings.left_image | image_url: width: 500 }} 500w, {{ section.settings.left_image | image_url: width: 900 }} 900w"
+        sizes="(min-width: 768px) 40vw, 50vw"
+        alt=""
+        width="900"
+        height="1200"
         loading="eager"
       >
-    {%- else -%}
-      <h1 class="hoosh-hero__title h-display">{{ section.settings.heading | default: shop.name }}</h1>
     {%- endif -%}
 
-    {%- if section.settings.tagline != blank -%}
-      <p class="hoosh-hero__tagline">{{ section.settings.tagline }}</p>
-    {%- endif -%}
+    <div class="hhero__content">
+      {%- if section.settings.logo_image != blank -%}
+        <img
+          class="hhero__logo"
+          src="{{ section.settings.logo_image | image_url: width: 400 }}"
+          alt="{{ shop.name }}"
+          width="200"
+          height="60"
+          loading="eager"
+        >
+      {%- else -%}
+        <h1 class="hhero__title h-display">{{ section.settings.heading | default: shop.name }}</h1>
+      {%- endif -%}
 
-    {%- if section.settings.cta_text != blank -%}
-      <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="hoosh-hero__play">
-        <span class="hoosh-hero__play-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </span>
-        <span class="hoosh-hero__play-label">{{ section.settings.cta_text }}</span>
-      </a>
+      {%- if section.settings.tagline != blank -%}
+        <p class="hhero__tagline">{{ section.settings.tagline }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="hhero__play">
+          <span class="hhero__play-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="hhero__play-label">{{ section.settings.cta_text }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.right_image != blank -%}
+      <img
+        class="hhero__product hhero__product--right"
+        src="{{ section.settings.right_image | image_url: width: 900 }}"
+        srcset="{{ section.settings.right_image | image_url: width: 500 }} 500w, {{ section.settings.right_image | image_url: width: 900 }} 900w"
+        sizes="(min-width: 768px) 40vw, 50vw"
+        alt=""
+        width="900"
+        height="1200"
+        loading="eager"
+      >
     {%- endif -%}
   </div>
 </section>
 
 <style>
-  .hoosh-hero {
+  .hhero {
     position: relative;
-    height: 100vh;
-    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--h-bg);
     overflow: hidden;
   }
-  .hoosh-hero__bg {
+  .hhero__bg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .hoosh-hero__overlay {
+  .hhero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(transparent 30%, rgba(0,0,0,0.7));
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(120, 50, 180, 0.35), transparent 60%),
+      linear-gradient(transparent 40%, rgba(0, 0, 0, 0.55));
   }
-  .hoosh-hero__content {
+  .hhero__stage {
     position: relative;
     z-index: 2;
-    text-align: center;
+    width: 100%;
+    max-width: 1500px;
+    padding: clamp(2rem, 6vw, 5rem) var(--h-section-px, clamp(1rem, 4vw, 3rem));
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3rem);
+  }
+  .hhero__product {
+    max-width: 100%;
+    height: auto;
+    max-height: 78vh;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.55));
+  }
+  .hhero__product--left {
+    justify-self: end;
+    transform: translateY(4%);
+  }
+  .hhero__product--right {
+    justify-self: start;
+    transform: translateY(-2%);
+  }
+  .hhero__content {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 0 var(--h-section-px);
+    text-align: center;
+    gap: 18px;
+    padding: 0 clamp(1rem, 2vw, 2rem);
   }
-  .hoosh-hero__logo {
-    width: clamp(160px, 20vw, 280px);
+  .hhero__logo {
+    width: clamp(160px, 18vw, 260px);
     height: auto;
   }
-  .hoosh-hero__title {
-    font-size: var(--h-hero);
-  }
-  .hoosh-hero__tagline {
-    font-family: var(--h-font-body);
-    font-size: var(--h-body);
-    color: var(--h-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: var(--h-tracking-wide);
+  .hhero__title {
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(5rem, 16vw, 16rem);
+    letter-spacing: 0.01em;
+    color: var(--h-text, #fff);
+    line-height: 0.9;
     margin: 0;
-    max-width: 500px;
+    text-transform: uppercase;
   }
-  .hoosh-hero__cta {
-    margin-top: 12px;
+  .hhero__tagline {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+    margin: 0;
+    max-width: 520px;
   }
-  .hoosh-hero__play {
+  .hhero__play {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-top: 12px;
+    margin-top: 6px;
     text-decoration: none;
     color: var(--h-text, #fff);
     transition: transform 0.2s ease;
   }
-  .hoosh-hero__play:hover { transform: translateY(-1px); }
-  .hoosh-hero__play-icon {
-    width: 46px;
-    height: 46px;
+  .hhero__play:hover { transform: translateY(-1px); }
+  .hhero__play-icon {
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
     color: #fff;
-    box-shadow: 0 8px 30px rgba(232, 74, 122, 0.35);
+    box-shadow: 0 10px 35px rgba(232, 74, 122, 0.4);
   }
-  .hoosh-hero__play-icon svg { margin-left: 2px; }
-  .hoosh-hero__play-label {
+  .hhero__play-icon svg { margin-left: 2px; }
+  .hhero__play-label {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
-    font-size: 0.95rem;
+    font-size: 1rem;
     letter-spacing: 0.02em;
+  }
+
+  /* Tablet: compress side images */
+  @media screen and (max-width: 1023px) {
+    .hhero__title { font-size: clamp(4.5rem, 18vw, 12rem); }
+    .hhero__product { max-height: 60vh; }
+  }
+
+  /* Mobile: stack — title on top, products below */
+  @media screen and (max-width: 767px) {
+    .hhero__stage {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "content content"
+        "left right";
+      gap: 1rem;
+    }
+    .hhero__content { grid-area: content; padding: 2rem 0 1rem; }
+    .hhero__product--left { grid-area: left; justify-self: center; transform: none; max-height: 38vh; }
+    .hhero__product--right { grid-area: right; justify-self: center; transform: none; max-height: 38vh; }
+    .hhero__title { font-size: clamp(4rem, 22vw, 7rem); }
   }
 </style>
 
@@ -135,6 +216,10 @@
   "name": "HOOSH Hero",
   "class": "hoosh-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
     {
       "type": "image_picker",
       "id": "bg_image",
@@ -147,10 +232,30 @@
       "info": "Overrides background image if set."
     },
     {
+      "type": "header",
+      "content": "Flanking products"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left product image",
+      "info": "Shown on the left of the title (e.g. E-Head)."
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right product image",
+      "info": "Shown on the right of the title (e.g. Hookah)."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
       "type": "image_picker",
       "id": "logo_image",
       "label": "Logo image",
-      "info": "If empty, the heading text is used instead."
+      "info": "If set, replaces the big heading text."
     },
     {
       "type": "text",
@@ -162,18 +267,22 @@
       "type": "text",
       "id": "tagline",
       "label": "Tagline",
-      "default": "Redefine the ritual"
+      "default": "Новата ера на наргилетата е тук"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
     },
     {
       "type": "text",
       "id": "cta_text",
-      "label": "CTA button text",
+      "label": "CTA label",
       "default": "Виж Видеото"
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "CTA link (video popup or page)"
+      "label": "CTA link (video URL or page)"
     }
   ],
   "presets": [{ "name": "HOOSH Hero" }]

@@ -1,9 +1,14 @@
 {{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
 
-<section id="hoosh-products" class="h-section" data-hoosh>
+<section id="hoosh-products" class="h-section" data-hoosh style="--hoosh-grid-cols: {{ section.settings.columns | default: 4 }};">
   <div class="h-container">
-    <div class="hoosh-grid__header h-reveal">
-      <span class="h-label">{{ section.settings.label | default: 'The Heads' }}</span>
+    <div class="hoosh-grid__header h-reveal" style="text-align:center;">
+      {%- if section.settings.label != blank -%}
+        <span class="h-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <span class="hoosh-grid__subheading">{{ section.settings.subheading }}</span>
+      {%- endif -%}
       <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Choose Your Head' }}</h2>
     </div>
 
@@ -37,20 +42,47 @@
   }
   .hoosh-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--hoosh-grid-cols, 4), 1fr);
     gap: var(--h-card-gap);
   }
   @media screen and (max-width: 1023px) {
     .hoosh-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   @media screen and (max-width: 767px) {
     .hoosh-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .hoosh-grid {
       grid-template-columns: 1fr;
-      max-width: 400px;
+      max-width: 360px;
       margin: 0 auto;
     }
+  }
+  .hoosh-grid__header .h-label {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 6px 16px;
+    display: inline-block;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 1.5em;
+  }
+  .hoosh-grid__subheading {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin: 0 0 1em;
+    display: block;
   }
 </style>
 
@@ -64,6 +96,12 @@
       "id": "label",
       "label": "Category label",
       "default": "The Heads"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Small caption (above heading)",
+      "default": ""
     },
     {
       "type": "text",
@@ -83,7 +121,16 @@
       "min": 2,
       "max": 12,
       "step": 1,
-      "default": 6
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
     },
     {
       "type": "header",

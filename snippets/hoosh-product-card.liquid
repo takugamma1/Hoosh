@@ -1,7 +1,8 @@
 {% doc %}
-  HOOSH product card — opens full-screen product view.
+  HOOSH product card — matches hooshwave.com style.
+  Dark card, centered product on violet mist, name, red price, gradient Add-to-Cart pill.
   @param {object} product - Shopify product object.
-  @param {object} [bundle_product] - Optional paired bundle product.
+  @param {object} [bundle_product] - Optional paired bundle product (opens via modal trigger).
   @param {string} [bundle_label] - Label for the bundle toggle (e.g. "Pack of 10").
   @param {string} [fallback_name]
   @param {string} [fallback_desc]
@@ -9,9 +10,15 @@
 
 {% liquid
   assign p_name = product.title | default: fallback_name | default: 'Product Name'
-  assign p_desc = product.description | default: fallback_desc | default: 'Premium electric shisha device'
   assign p_img = product.featured_image
   assign p_type = product.type | default: ''
+  assign p_available = product.available
+  assign coming_soon = false
+  if product.tags contains 'coming-soon' or product.tags contains 'ochakvai-skoro'
+    assign coming_soon = true
+  endif
+  assign variant = product.selected_or_first_available_variant
+  assign p_url = product.url | default: '#'
 %}
 
 {%- capture p_images_json -%}
@@ -24,9 +31,10 @@
   {%- endcapture -%}
 {%- endif -%}
 
-<div class="hoosh-card h-reveal">
+<article class="hp-card h-reveal">
   <button
-    class="hoosh-card__trigger"
+    type="button"
+    class="hp-card__media"
     data-modal-trigger
     data-product-name="{{ p_name | escape }}"
     data-product-label="{{ p_type | escape }}"
@@ -40,100 +48,164 @@
     data-bundle-images='{{ b_images_json }}'
     data-bundle-label="{{ bundle_label | default: 'Pack of 10' | escape }}"
     {%- endif %}
-    aria-label="View {{ p_name }}"
+    aria-label="Виж {{ p_name | escape }}"
   >
-    <div class="hoosh-card__image">
-      {%- if p_img != blank -%}
-        <img
-          src="{{ p_img | image_url: width: 600 }}"
-          srcset="{{ p_img | image_url: width: 400 }} 400w, {{ p_img | image_url: width: 600 }} 600w"
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 90vw"
-          alt="{{ p_img.alt | default: p_name | escape }}"
-          loading="lazy"
-          width="{{ p_img.width }}"
-          height="{{ p_img.height }}"
-        >
-      {%- else -%}
-        <div class="hoosh-card__placeholder">
-          {{ 'product-1' | placeholder_svg_tag }}
-        </div>
-      {%- endif -%}
-    </div>
-    <div class="hoosh-card__info">
-      <h3 class="hoosh-card__name">{{ p_name }}</h3>
-      <span class="hoosh-card__view">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </div>
+    {%- if p_img != blank -%}
+      <img
+        src="{{ p_img | image_url: width: 600 }}"
+        srcset="{{ p_img | image_url: width: 400 }} 400w, {{ p_img | image_url: width: 600 }} 600w"
+        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 90vw"
+        alt="{{ p_img.alt | default: p_name | escape }}"
+        loading="lazy"
+        width="{{ p_img.width }}"
+        height="{{ p_img.height }}"
+      >
+    {%- else -%}
+      <div class="hp-card__placeholder">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {%- endif -%}
+
+    {%- if coming_soon -%}
+      <span class="hp-card__soon" aria-hidden="true">Очаквай Скоро</span>
+    {%- endif -%}
   </button>
-</div>
+
+  <h3 class="hp-card__name">{{ p_name }}</h3>
+
+  {%- if product.price and coming_soon == false -%}
+    <div class="hp-card__price">{{ product.price | money }}</div>
+  {%- else -%}
+    <div class="hp-card__price hp-card__price--empty">&nbsp;</div>
+  {%- endif -%}
+
+  {%- if coming_soon -%}
+    <a href="{{ p_url }}" class="hp-card__cta hp-card__cta--muted">Read More</a>
+  {%- elsif p_available -%}
+    {%- form 'product', product, class: 'hp-card__form' -%}
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      <button type="submit" class="hp-card__cta" {% unless variant.available %}disabled{% endunless %}>
+        Add To Cart
+      </button>
+    {%- endform -%}
+  {%- else -%}
+    <a href="{{ p_url }}" class="hp-card__cta hp-card__cta--muted">Read More</a>
+  {%- endif -%}
+</article>
 
 <style>
-  .hoosh-card {
-    background: var(--h-bg-card);
-    border: 1px solid var(--h-border);
-    border-radius: var(--h-card-radius);
-    overflow: hidden;
-    transition: transform 0.4s var(--h-ease), border-color 0.4s ease;
+  .hp-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    padding: 0 8px;
   }
-  .hoosh-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 20, 147, 0.2);
-  }
-  .hoosh-card__trigger {
+
+  .hp-card__media {
+    position: relative;
     display: block;
     width: 100%;
-    background: none;
+    aspect-ratio: 3 / 4;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    background:
+      radial-gradient(ellipse at 50% 75%, rgba(165, 75, 200, 0.45), transparent 65%),
+      radial-gradient(ellipse at 50% 30%, rgba(60, 30, 100, 0.4), transparent 70%),
+      #14121a;
     border: none;
     padding: 0;
-    cursor: pointer;
-    text-align: left;
-    color: inherit;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .hoosh-card__image {
-    aspect-ratio: 4 / 5;
-    background: var(--h-bg);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hp-card__media:hover {
+    transform: translateY(-4px);
   }
-  .hoosh-card__image img {
+  .hp-card__media img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 8%;
+    padding: 10% 10% 8%;
   }
-  .hoosh-card__placeholder {
-    width: 60%;
-    opacity: 0.1;
+  .hp-card__placeholder {
+    width: 50%;
+    margin: 25% auto;
+    opacity: 0.15;
   }
-  .hoosh-card__info {
-    padding: 20px 24px;
+  .hp-card__soon {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .hoosh-card__name {
-    font-family: var(--h-font-display);
-    font-size: var(--h-product-name);
-    color: var(--h-text);
+    justify-content: center;
+    font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(1.2rem, 2.4vw, 2rem);
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: var(--h-tracking-tight);
-    margin: 0;
-    line-height: 1.1;
+    transform: rotate(-20deg);
+    pointer-events: none;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
-  .hoosh-card__view {
-    font-family: var(--h-font-body);
-    font-size: var(--h-small);
-    color: var(--h-text-muted);
+
+  .hp-card__name {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    font-weight: 500;
+    color: var(--h-text, #fff);
+    margin: 8px 0 0;
+    line-height: 1.3;
+    min-height: 2.6em;
     display: flex;
     align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    transition: color 0.2s;
-    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
   }
-  .hoosh-card:hover .hoosh-card__view {
-    color: var(--h-pink);
+
+  .hp-card__price {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    font-weight: 700;
+    color: #ff2e4a;
+    margin: 0 0 6px;
+    letter-spacing: 0.01em;
+  }
+  .hp-card__price--empty { visibility: hidden; }
+
+  .hp-card__form { width: 100%; }
+
+  .hp-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
+    transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+  }
+  .hp-card__cta:hover:not(:disabled) {
+    transform: translateY(-1px);
+    filter: brightness(1.07);
+  }
+  .hp-card__cta:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .hp-card__cta--muted {
+    background: linear-gradient(90deg, #5e6270 0%, #8a5bff 100%);
+    opacity: 0.85;
   }
 </style>

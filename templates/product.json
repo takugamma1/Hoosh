@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -11,12 +20,11 @@
       "type": "hoosh-product-grid",
       "settings": {
         "label": "",
-        "subheading": "",
         "heading": "Може да ви хареса",
-        "collection": "",
+        "collection": "e-pod-package-0",
         "max_products": 4,
-        "layout": "carousel",
-        "columns": 4
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
       }
     }
   },

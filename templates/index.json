@@ -250,6 +250,7 @@
         "teaser_PNgBDF": {
           "type": "teaser",
           "settings": {
+            "image": "shopify://shop_images/group-2.png",
             "heading": "Вейп",
             "copy": "",
             "show_badge": true,
@@ -259,9 +260,10 @@
         "teaser_BbE9hK": {
           "type": "teaser",
           "settings": {
+            "image": "shopify://shop_images/group-1.png",
             "heading": "Снус",
             "copy": "",
-            "show_badge": true,
+            "show_badge": false,
             "badge_text": "Очаквай Скоро"
           }
         }

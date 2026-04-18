@@ -1,19 +1,17 @@
 {% doc %}
   HOOSH product card — simple link-to-product card.
-  Dark media tile with violet mist, title, red price, gradient Add-to-Cart pill.
-  @param {object} product - Shopify product object.
+  Dark media tile with violet mist, title, and a "Свържете се с нас" CTA.
+  @param {object} [product] - Shopify product object.
   @param {string} [fallback_name]
 {% enddoc %}
 
 {% liquid
   assign p_name = product.title | default: fallback_name | default: 'Product Name'
   assign p_img = product.featured_image
-  assign p_available = product.available
   assign coming_soon = false
   if product.tags contains 'coming-soon' or product.tags contains 'ochakvai-skoro'
     assign coming_soon = true
   endif
-  assign variant = product.selected_or_first_available_variant
   assign p_url = product.url | default: '#'
 %}
 
@@ -44,24 +42,8 @@
     <h3 class="hp-card__name">{{ p_name }}</h3>
   </a>
 
-  {%- if product.price and coming_soon == false -%}
-    <div class="hp-card__price">{{ product.price | money }}</div>
-  {%- else -%}
-    <div class="hp-card__price hp-card__price--empty">&nbsp;</div>
-  {%- endif -%}
-
-  {%- if coming_soon -%}
-    <a href="{{ p_url }}" class="hp-card__cta hp-card__cta--muted">Read More</a>
-  {%- elsif p_available -%}
-    {%- form 'product', product, class: 'hp-card__form' -%}
-      <input type="hidden" name="id" value="{{ variant.id }}">
-      <button type="submit" class="hp-card__cta" {% unless variant.available %}disabled{% endunless %}>
-        Add To Cart
-      </button>
-    {%- endform -%}
-  {%- else -%}
-    <a href="{{ p_url }}" class="hp-card__cta hp-card__cta--muted">Read More</a>
-  {%- endif -%}
+  {%- assign contact_href = settings.hoosh_contact_url | default: '/pages/contact' -%}
+  <a href="{{ contact_href }}" class="hp-card__cta">Свържете се с нас</a>
 </article>
 
 <style>

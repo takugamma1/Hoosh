@@ -2284,5 +2284,34 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "HOOSH Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hoosh_phone",
+        "label": "Phone number (for tel: link)",
+        "info": "International format without spaces, e.g. +359886969757"
+      },
+      {
+        "type": "text",
+        "id": "hoosh_phone_display",
+        "label": "Phone number (display)",
+        "info": "How the phone number is shown, e.g. +359 88 696 9757"
+      },
+      {
+        "type": "text",
+        "id": "hoosh_whatsapp",
+        "label": "WhatsApp number",
+        "info": "International format, no + or spaces, e.g. 359886969757"
+      },
+      {
+        "type": "url",
+        "id": "hoosh_contact_url",
+        "label": "Contact page URL",
+        "info": "Link used by 'Свържете се с нас' buttons."
+      }
+    ]
   }
 ]

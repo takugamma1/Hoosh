@@ -2,7 +2,6 @@
 
 {%- liquid
   assign p = product
-  assign current_variant = p.selected_or_first_available_variant
   assign coming_soon = false
   if p.tags contains 'coming-soon' or p.tags contains 'ochakvai-skoro'
     assign coming_soon = true
@@ -73,56 +72,65 @@
 
         {%- if coming_soon -%}
           <div class="hpp__price hpp__price--soon">Очаквай Скоро</div>
-        {%- else -%}
-          <div class="hpp__price">{{ current_variant.price | money }}</div>
         {%- endif -%}
 
         {%- if p.description != blank -%}
           <div class="hpp__desc">{{ p.description }}</div>
         {%- endif -%}
 
-        {%- unless coming_soon -%}
-          {%- form 'product', p, class: 'hpp__form' -%}
-            <input type="hidden" name="id" value="{{ current_variant.id }}">
-
-            {%- if p.has_only_default_variant == false -%}
-              {%- for option in p.options_with_values -%}
-                <fieldset class="hpp__option">
-                  <legend class="hpp__option-label">{{ option.name }}</legend>
-                  <div class="hpp__swatches">
-                    {%- for value in option.values -%}
-                      <label class="hpp__swatch{% if option.selected_value == value %} is-active{% endif %}">
-                        <input
-                          type="radio"
-                          name="options[{{ option.name | escape }}]"
-                          value="{{ value | escape }}"
-                          {% if option.selected_value == value %}checked{% endif %}
-                        >
-                        <span>{{ value }}</span>
-                      </label>
-                    {%- endfor -%}
-                  </div>
-                </fieldset>
-              {%- endfor -%}
-            {%- endif -%}
-
-            <div class="hpp__actions">
-              <div class="hpp__qty">
-                <button type="button" class="hpp__qty-btn" data-qty="-" aria-label="Намали">−</button>
-                <input type="number" name="quantity" value="1" min="1" class="hpp__qty-input">
-                <button type="button" class="hpp__qty-btn" data-qty="+" aria-label="Увеличи">+</button>
+        {%- if p.has_only_default_variant == false and coming_soon == false -%}
+          {%- for option in p.options_with_values -%}
+            <div class="hpp__option">
+              <div class="hpp__option-label">{{ option.name }}</div>
+              <div class="hpp__swatches">
+                {%- for value in option.values -%}
+                  <span class="hpp__swatch{% if option.selected_value == value %} is-active{% endif %}">{{ value }}</span>
+                {%- endfor -%}
               </div>
-              <button
-                type="submit"
-                name="add"
-                class="hpp__cta"
-                {% unless current_variant.available %}disabled{% endunless %}
-              >
-                {% if current_variant.available %}ADD TO CART{% else %}Sold out{% endif %}
-              </button>
             </div>
-          {%- endform -%}
-        {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- liquid
+          assign phone_tel = settings.hoosh_phone
+          assign phone_display = settings.hoosh_phone_display | default: settings.hoosh_phone
+          assign wa = settings.hoosh_whatsapp
+          assign contact_href = settings.hoosh_contact_url | default: '/pages/contact'
+          assign wa_text = 'Здравейте, интересувам се от: ' | append: p.title
+        -%}
+
+        <div class="hpp__widgets">
+          {%- if phone_tel != blank -%}
+            <a href="tel:{{ phone_tel | replace: ' ', '' }}" class="hpp__widget hpp__widget--call">
+              <span class="hpp__widget-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="hpp__widget-text">
+                <span class="hpp__widget-title">Обади се</span>
+                <span class="hpp__widget-sub">{{ phone_display | default: phone_tel }}</span>
+              </span>
+            </a>
+          {%- endif -%}
+
+          {%- if wa != blank -%}
+            <a
+              href="https://wa.me/{{ wa }}?text={{ wa_text | url_encode }}"
+              target="_blank"
+              rel="noopener"
+              class="hpp__widget hpp__widget--wa"
+            >
+              <span class="hpp__widget-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <span class="hpp__widget-text">
+                <span class="hpp__widget-title">Поръчай през уатсапп</span>
+                <span class="hpp__widget-sub">WhatsApp</span>
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+
+        <a href="{{ contact_href }}" class="hpp__cta">Свържете се с нас</a>
 
         {%- if section.settings.show_meta -%}
           <div class="hpp__meta">
@@ -270,60 +278,82 @@
     font-size: 0.85rem;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
-  .hpp__swatch input { position: absolute; opacity: 0; pointer-events: none; }
   .hpp__swatch.is-active {
     border-color: #ff4e7e;
     background: rgba(255, 78, 126, 0.12);
     color: #fff;
   }
 
-  .hpp__actions {
-    display: flex;
+  .hpp__widgets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 8px;
+    margin: 4px 0 16px;
   }
-  .hpp__qty {
+  .hpp__widget {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    min-height: 64px;
+  }
+  .hpp__widget:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  .hpp__widget--call {
+    background: linear-gradient(135deg, #ff4e7e 0%, #8a5bff 100%);
+  }
+  .hpp__widget--wa {
+    background: #25D366;
+  }
+  .hpp__widget-icon {
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 999px;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    flex: none;
+  }
+  .hpp__widget-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    min-width: 0;
+  }
+  .hpp__widget-title {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     overflow: hidden;
-    min-height: 48px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .hpp__qty-btn {
-    width: 40px;
-    height: 48px;
-    background: transparent;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
+  .hpp__widget-sub {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.78rem;
+    opacity: 0.85;
+    letter-spacing: 0.02em;
   }
-  .hpp__qty-btn:hover { background: rgba(255, 255, 255, 0.08); }
-  .hpp__qty-input {
-    width: 48px;
-    height: 48px;
-    background: transparent;
-    color: #fff;
-    border: none;
-    text-align: center;
-    font-size: 1rem;
-    -moz-appearance: textfield;
+  @media screen and (max-width: 480px) {
+    .hpp__widgets { grid-template-columns: 1fr; }
   }
-  .hpp__qty-input::-webkit-outer-spin-button,
-  .hpp__qty-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+
   .hpp__cta {
-    flex: 1 1 220px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     min-height: 48px;
     padding: 10px 28px;
     border: none;
     border-radius: 999px;
     cursor: pointer;
+    text-decoration: none;
     color: #fff;
     font-family: var(--h-font-body, 'Outfit', sans-serif);
     font-size: 0.95rem;
@@ -333,8 +363,7 @@
     background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
     transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
   }
-  .hpp__cta:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.07); }
-  .hpp__cta:disabled { opacity: 0.5; cursor: not-allowed; }
+  .hpp__cta:hover { transform: translateY(-1px); filter: brightness(1.07); }
 
   .hpp__meta {
     margin-top: 24px;
@@ -361,27 +390,6 @@
           if (main && src) main.src = src;
           root.querySelectorAll('[data-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
           btn.classList.add('is-active');
-        });
-      });
-
-      // Quantity controls
-      root.querySelectorAll('[data-qty]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var input = root.querySelector('.hpp__qty-input');
-          if (!input) return;
-          var v = parseInt(input.value, 10) || 1;
-          v = btn.getAttribute('data-qty') === '+' ? v + 1 : Math.max(1, v - 1);
-          input.value = v;
-        });
-      });
-
-      // Swatch visual toggle (form still submits the radio value)
-      root.querySelectorAll('.hpp__swatch input').forEach(function (input) {
-        input.addEventListener('change', function () {
-          var name = input.name;
-          root.querySelectorAll('.hpp__swatch input[name="' + name + '"]').forEach(function (sib) {
-            sib.closest('.hpp__swatch').classList.toggle('is-active', sib.checked);
-          });
         });
       });
     });

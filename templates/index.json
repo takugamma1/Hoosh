@@ -18,6 +18,7 @@
         "heading": "HOOSH",
         "tagline": "Новата ера на наргилетата е тук",
         "cta_text": "Виж Видеото",
+        "video_url": "",
         "cta_link": ""
       }
     },
@@ -37,10 +38,8 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
-        "hide_header": true,
-        "label": "",
-        "subheading": "",
-        "heading": "",
+        "label": "Разгледай",
+        "heading": "Нашите Hoosh Наргилета",
         "collection": "hookahs",
         "max_products": 6,
         "bundle_collection": "",

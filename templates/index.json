@@ -14,12 +14,11 @@
       "name": "HOOSH Hero",
       "settings": {
         "bg_video": "https://hooshwave.com/wp-content/uploads/2024/05/hoosh-bg.mp4",
-        "left_image": "shopify://shop_images/hooka-portada-2.0-2048x1470.png",
         "right_image": "shopify://shop_images/hookah-hoohs.png",
         "logo_image": "shopify://shop_images/cabd1164-490f-405f-afc0-ecaf2e41e602.png",
         "heading": "",
         "tagline": "Новата ера на наргилетата е тук",
-        "cta_text": "Разгледай колекцията",
+        "cta_text": "ВИЖ ВИДЕОТО",
         "cta_link": "https://hooshwave.com/wp-content/uploads/2024/04/hoosh-intro-pop.mp4"
       }
     },

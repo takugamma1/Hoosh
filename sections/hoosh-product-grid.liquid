@@ -1,9 +1,30 @@
 {{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign label_v = section.settings.label | default: '' | strip
+  assign sub_v = section.settings.subheading | default: '' | strip
+  assign head_v = section.settings.heading | default: '' | strip
+  assign has_label = false
+  assign has_sub = false
+  assign has_head = false
+  if label_v != '' and label_v != blank
+    assign has_label = true
+  endif
+  if sub_v != '' and sub_v != blank
+    assign has_sub = true
+  endif
+  if head_v != '' and head_v != blank
+    assign has_head = true
+  endif
   assign has_header = false
-  if section.settings.label != blank or section.settings.subheading != blank or section.settings.heading != blank
+  if has_label or has_sub or has_head
     assign has_header = true
+  endif
+  if section.settings.hide_header
+    assign has_header = false
+    assign has_label = false
+    assign has_sub = false
+    assign has_head = false
   endif
   assign layout = section.settings.layout | default: 'grid'
   assign cols = section.settings.columns | default: 4
@@ -18,14 +39,14 @@
   <div class="h-container">
     {%- if has_header -%}
       <div class="hoosh-grid__header h-reveal" style="text-align:center;">
-        {%- if section.settings.label != blank -%}
-          <span class="h-label">{{ section.settings.label }}</span>
+        {%- if has_label -%}
+          <span class="h-label">{{ label_v }}</span>
         {%- endif -%}
-        {%- if section.settings.subheading != blank -%}
-          <span class="hoosh-grid__subheading">{{ section.settings.subheading }}</span>
+        {%- if has_sub -%}
+          <span class="hoosh-grid__subheading">{{ sub_v }}</span>
         {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading }}</h2>
+        {%- if has_head -%}
+          <h2 class="h-display" style="font-size: var(--h-section-title);">{{ head_v }}</h2>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -77,6 +98,7 @@
   }
   .hoosh-grid-section--no-header {
     padding-block-start: clamp(0.75rem, 2vw, 1.5rem);
+    padding-block-end: clamp(0.75rem, 2vw, 1.5rem);
   }
   .hoosh-grid__header {
     text-align: center;
@@ -199,6 +221,13 @@
   "name": "HOOSH Product Grid",
   "class": "hoosh-section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_header",
+      "label": "Hide header (hard-override)",
+      "default": false,
+      "info": "Force-hides label, caption and heading even if text is entered."
+    },
     {
       "type": "text",
       "id": "label",

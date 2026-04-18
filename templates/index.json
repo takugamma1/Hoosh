@@ -37,7 +37,9 @@
       "type": "hoosh-product-grid",
       "name": "HOOSH Product Grid",
       "settings": {
+        "hide_header": true,
         "label": "",
+        "subheading": "",
         "heading": "",
         "collection": "hookahs",
         "max_products": 6,

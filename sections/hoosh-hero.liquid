@@ -1,5 +1,33 @@
 {{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign video_src = section.settings.video_url | default: section.settings.cta_link
+  assign embed_src = ''
+  assign is_embed = false
+  assign is_mp4 = false
+  if video_src != blank
+    assign vs = video_src | downcase
+    if vs contains 'youtube.com/watch'
+      assign yt_id = video_src | split: 'v=' | last | split: '&' | first
+      assign embed_src = 'https://www.youtube.com/embed/' | append: yt_id | append: '?autoplay=1&rel=0'
+      assign is_embed = true
+    elsif vs contains 'youtu.be/'
+      assign yt_id = video_src | split: 'youtu.be/' | last | split: '?' | first
+      assign embed_src = 'https://www.youtube.com/embed/' | append: yt_id | append: '?autoplay=1&rel=0'
+      assign is_embed = true
+    elsif vs contains 'youtube.com/embed/'
+      assign embed_src = video_src
+      assign is_embed = true
+    elsif vs contains 'vimeo.com/'
+      assign vm_id = video_src | split: 'vimeo.com/' | last | split: '?' | first
+      assign embed_src = 'https://player.vimeo.com/video/' | append: vm_id | append: '?autoplay=1'
+      assign is_embed = true
+    elsif vs contains '.mp4'
+      assign is_mp4 = true
+    endif
+  endif
+-%}
+
 <section class="hhero" data-hoosh>
   {%- if section.settings.bg_image != blank -%}
     <img
@@ -27,12 +55,12 @@
     {%- if section.settings.left_image != blank -%}
       <img
         class="hhero__product hhero__product--left"
-        src="{{ section.settings.left_image | image_url: width: 1400 }}"
-        srcset="{{ section.settings.left_image | image_url: width: 600 }} 600w, {{ section.settings.left_image | image_url: width: 1000 }} 1000w, {{ section.settings.left_image | image_url: width: 1400 }} 1400w"
-        sizes="(min-width: 1024px) 45vw, (min-width: 768px) 42vw, 50vw"
+        src="{{ section.settings.left_image | image_url: width: 1800 }}"
+        srcset="{{ section.settings.left_image | image_url: width: 800 }} 800w, {{ section.settings.left_image | image_url: width: 1400 }} 1400w, {{ section.settings.left_image | image_url: width: 1800 }} 1800w"
+        sizes="(min-width: 1024px) 42vw, (min-width: 768px) 45vw, 60vw"
         alt=""
-        width="1400"
-        height="1867"
+        width="1800"
+        height="2400"
         loading="eager"
       >
     {%- endif -%}
@@ -41,10 +69,10 @@
       {%- if section.settings.logo_image != blank -%}
         <img
           class="hhero__logo"
-          src="{{ section.settings.logo_image | image_url: width: 400 }}"
+          src="{{ section.settings.logo_image | image_url: width: 600 }}"
           alt="{{ shop.name }}"
-          width="200"
-          height="60"
+          width="300"
+          height="90"
           loading="eager"
         >
       {%- else -%}
@@ -56,28 +84,82 @@
       {%- endif -%}
 
       {%- if section.settings.cta_text != blank -%}
-        <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="hhero__play">
-          <span class="hhero__play-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </span>
-          <span class="hhero__play-label">{{ section.settings.cta_text }}</span>
-        </a>
+        {%- if is_embed or is_mp4 -%}
+          <button
+            type="button"
+            class="hhero__play"
+            data-hoosh-video-open
+            aria-haspopup="dialog"
+            aria-controls="hhero-video-modal-{{ section.id }}"
+          >
+            <span class="hhero__play-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="hhero__play-label">{{ section.settings.cta_text }}</span>
+          </button>
+        {%- else -%}
+          <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="hhero__play">
+            <span class="hhero__play-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="hhero__play-label">{{ section.settings.cta_text }}</span>
+          </a>
+        {%- endif -%}
       {%- endif -%}
     </div>
 
     {%- if section.settings.right_image != blank -%}
       <img
         class="hhero__product hhero__product--right"
-        src="{{ section.settings.right_image | image_url: width: 1400 }}"
-        srcset="{{ section.settings.right_image | image_url: width: 600 }} 600w, {{ section.settings.right_image | image_url: width: 1000 }} 1000w, {{ section.settings.right_image | image_url: width: 1400 }} 1400w"
-        sizes="(min-width: 1024px) 45vw, (min-width: 768px) 42vw, 50vw"
+        src="{{ section.settings.right_image | image_url: width: 1800 }}"
+        srcset="{{ section.settings.right_image | image_url: width: 800 }} 800w, {{ section.settings.right_image | image_url: width: 1400 }} 1400w, {{ section.settings.right_image | image_url: width: 1800 }} 1800w"
+        sizes="(min-width: 1024px) 42vw, (min-width: 768px) 45vw, 60vw"
         alt=""
-        width="1400"
-        height="1867"
+        width="1800"
+        height="2400"
         loading="eager"
       >
     {%- endif -%}
   </div>
+
+  {%- if is_embed or is_mp4 -%}
+    <div
+      class="hhero-video-modal"
+      id="hhero-video-modal-{{ section.id }}"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ section.settings.cta_text | default: 'Video' | escape }}"
+      hidden
+    >
+      <button type="button" class="hhero-video-modal__backdrop" data-hoosh-video-close aria-label="Close"></button>
+      <div class="hhero-video-modal__frame">
+        <button type="button" class="hhero-video-modal__close" data-hoosh-video-close aria-label="Close">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        {%- if is_embed -%}
+          <div class="hhero-video-modal__ratio">
+            <iframe
+              class="hhero-video-modal__iframe"
+              data-embed-src="{{ embed_src }}"
+              src=""
+              frameborder="0"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen
+              title="{{ section.settings.cta_text | default: 'Video' | escape }}"
+            ></iframe>
+          </div>
+        {%- else -%}
+          <video
+            class="hhero-video-modal__video"
+            data-mp4-src="{{ video_src }}"
+            controls
+            playsinline
+            preload="none"
+          ></video>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
@@ -109,74 +191,86 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1800px;
-    padding: clamp(2rem, 6vw, 5rem) var(--h-section-px, clamp(1rem, 3vw, 2rem));
+    max-width: 100%;
+    padding: 0;
     display: grid;
-    grid-template-columns: 1.25fr auto 1.25fr;
+    grid-template-columns: 1fr minmax(auto, 46vw) 1fr;
     align-items: center;
-    gap: clamp(0.5rem, 1.5vw, 2rem);
+    gap: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
   .hhero__product {
     width: 100%;
-    max-width: 720px;
+    max-width: none;
     height: auto;
-    max-height: 95vh;
+    max-height: 100vh;
+    max-height: 100dvh;
     object-fit: contain;
     filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.55));
   }
   .hhero__product--left {
-    justify-self: end;
-    transform: translateY(4%) scale(1.1);
+    justify-self: stretch;
+    transform: translate(-8%, 3%) scale(1.35);
     transform-origin: right center;
   }
   .hhero__product--right {
-    justify-self: start;
-    transform: translateY(-2%) scale(1.1);
+    justify-self: stretch;
+    transform: translate(8%, -2%) scale(1.35);
     transform-origin: left center;
   }
   .hhero__content {
     position: relative;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 18px;
-    padding: 0 clamp(1rem, 2vw, 2rem);
+    gap: clamp(16px, 1.5vw, 24px);
+    padding: 0 clamp(0.5rem, 1.5vw, 1.5rem);
   }
   .hhero__logo {
-    width: clamp(160px, 18vw, 260px);
+    width: clamp(220px, 28vw, 420px);
     height: auto;
   }
   .hhero__title {
     font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
-    font-size: clamp(5rem, 16vw, 16rem);
+    font-size: clamp(6rem, 18vw, 22rem);
     letter-spacing: 0.01em;
     color: var(--h-text, #fff);
-    line-height: 0.9;
+    line-height: 0.85;
     margin: 0;
     text-transform: uppercase;
+    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.45);
   }
   .hhero__tagline {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
-    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.02em;
+    font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.22em;
     margin: 0;
     max-width: 520px;
+    text-transform: uppercase;
+    font-weight: 500;
   }
   .hhero__play {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     margin-top: 6px;
     text-decoration: none;
     color: var(--h-text, #fff);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     transition: transform 0.2s ease;
+    font: inherit;
   }
   .hhero__play:hover { transform: translateY(-1px); }
   .hhero__play-icon {
-    width: 52px;
-    height: 52px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -184,59 +278,184 @@
     background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
     color: #fff;
     box-shadow: 0 10px 35px rgba(232, 74, 122, 0.4);
+    flex-shrink: 0;
   }
   .hhero__play-icon svg { margin-left: 2px; }
   .hhero__play-label {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
     font-size: 1rem;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
+
+  /* Video modal */
+  .hhero-video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  .hhero-video-modal[hidden] { display: none; }
+  .hhero-video-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 4, 12, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .hhero-video-modal__frame {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    z-index: 1;
+  }
+  .hhero-video-modal__close {
+    position: absolute;
+    top: -52px;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+  .hhero-video-modal__close:hover { background: rgba(255, 255, 255, 0.22); }
+  .hhero-video-modal__ratio {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
+  .hhero-video-modal__iframe,
+  .hhero-video-modal__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+  }
+  .hhero-video-modal__video {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    background: #000;
+  }
+  body.hhero-video-open { overflow: hidden; }
 
   /* Tablet */
   @media screen and (max-width: 1023px) {
-    .hhero__title { font-size: clamp(4.5rem, 18vw, 12rem); }
-    .hhero__product { max-height: 72vh; }
-    .hhero__product--left { transform: translateY(4%) scale(1.05); }
-    .hhero__product--right { transform: translateY(-2%) scale(1.05); }
+    .hhero__stage { grid-template-columns: 1fr minmax(auto, 50vw) 1fr; }
+    .hhero__title { font-size: clamp(5rem, 19vw, 14rem); }
+    .hhero__product--left { transform: translate(-6%, 3%) scale(1.25); }
+    .hhero__product--right { transform: translate(6%, -2%) scale(1.25); }
   }
 
   /* Mobile: stack — title on top, products below as a filling duo */
   @media screen and (max-width: 767px) {
-    .hhero {
-      min-height: auto;
-    }
+    .hhero { min-height: auto; }
     .hhero__stage {
       grid-template-columns: 1fr 1fr;
       grid-template-areas:
         "content content"
         "left right";
       gap: 0;
-      padding: clamp(1.5rem, 5vw, 3rem) 0 0;
+      padding: clamp(1rem, 4vw, 2rem) 0 0;
       max-width: 100%;
+      min-height: auto;
     }
     .hhero__content {
       grid-area: content;
-      padding: 1.5rem clamp(1rem, 4vw, 2rem) 1rem;
+      padding: 1rem clamp(1rem, 4vw, 2rem) 0.5rem;
     }
     .hhero__product {
-      max-width: 100%;
-      max-height: 52vh;
+      max-width: none;
+      width: 100%;
+      max-height: 70vh;
     }
     .hhero__product--left {
       grid-area: left;
       justify-self: stretch;
-      transform: translateY(0) scale(1.05);
+      transform: translate(-6%, 0) scale(1.2);
       transform-origin: bottom right;
     }
     .hhero__product--right {
       grid-area: right;
       justify-self: stretch;
-      transform: translateY(0) scale(1.05);
+      transform: translate(6%, 0) scale(1.2);
       transform-origin: bottom left;
     }
     .hhero__title { font-size: clamp(4rem, 22vw, 7rem); }
+    .hhero-video-modal__close { top: -48px; }
   }
 </style>
+
+<script>
+  (function () {
+    var modal = document.getElementById('hhero-video-modal-{{ section.id }}');
+    if (!modal) return;
+    var section = modal.closest('.hhero') || document;
+    var openBtns = section.querySelectorAll('[data-hoosh-video-open]');
+    var closeBtns = modal.querySelectorAll('[data-hoosh-video-close]');
+    var iframe = modal.querySelector('.hhero-video-modal__iframe');
+    var video = modal.querySelector('.hhero-video-modal__video');
+
+    function openModal() {
+      if (iframe) {
+        var src = iframe.getAttribute('data-embed-src');
+        if (src) iframe.src = src;
+      }
+      if (video) {
+        var mp4 = video.getAttribute('data-mp4-src');
+        if (mp4 && !video.querySelector('source')) {
+          var s = document.createElement('source');
+          s.src = mp4;
+          s.type = 'video/mp4';
+          video.appendChild(s);
+          video.load();
+        }
+        try { video.play(); } catch (e) {}
+      }
+      modal.hidden = false;
+      document.body.classList.add('hhero-video-open');
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('hhero-video-open');
+      if (iframe) iframe.src = '';
+      if (video) {
+        try { video.pause(); } catch (e) {}
+      }
+    }
+
+    openBtns.forEach(function (b) { b.addEventListener('click', openModal); });
+    closeBtns.forEach(function (b) { b.addEventListener('click', closeModal); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -298,7 +517,7 @@
     },
     {
       "type": "header",
-      "content": "CTA"
+      "content": "CTA + Video modal"
     },
     {
       "type": "text",
@@ -308,8 +527,15 @@
     },
     {
       "type": "url",
+      "id": "video_url",
+      "label": "Video URL (opens in modal)",
+      "info": "YouTube, Vimeo, or direct .mp4 URL. Opens in a popup instead of navigating away. If empty, falls back to CTA link."
+    },
+    {
+      "type": "url",
       "id": "cta_link",
-      "label": "CTA link (video URL or page)"
+      "label": "CTA fallback link",
+      "info": "Used only if no video URL is set (normal navigation)."
     }
   ],
   "presets": [{ "name": "HOOSH Hero" }]

@@ -78,6 +78,10 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "hoosh_phone": "+359886969757",
+    "hoosh_phone_display": "",
+    "hoosh_whatsapp": "+359886969757",
+    "hoosh_contact_url": "shopify://pages/contact",
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {

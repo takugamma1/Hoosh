@@ -69,7 +69,7 @@
             "image": "shopify://shop_images/group-2.png",
             "heading": "Вейп",
             "copy": "",
-            "show_badge": true,
+            "show_badge": false,
             "badge_text": "Очаквай Скоро"
           }
         },

@@ -42,8 +42,7 @@
     <h3 class="hp-card__name">{{ p_name }}</h3>
   </a>
 
-  {%- assign contact_href = settings.hoosh_contact_url | default: '/pages/contact' -%}
-  <a href="{{ contact_href }}" class="hp-card__cta">Свържете се с нас</a>
+  <a href="{{ p_url }}" class="hp-card__cta">Свържете се с нас</a>
 </article>
 
 <style>

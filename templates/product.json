@@ -13,7 +13,12 @@
       "type": "hoosh-product-page",
       "settings": {
         "show_breadcrumbs": true,
-        "show_meta": false
+        "show_meta": false,
+        "phone": "",
+        "phone_display": "",
+        "call_label": "Обади се",
+        "whatsapp": "",
+        "wa_label": "Поръчай през уатсапп"
       }
     },
     "related": {
@@ -21,7 +26,7 @@
       "settings": {
         "label": "",
         "heading": "Може да ви хареса",
-        "collection": "e-pod-package-0",
+        "collection": "e-pod-0",
         "max_products": 12,
         "bundle_collection": "",
         "bundle_label": "Pack of 10"

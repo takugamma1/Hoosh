@@ -55,7 +55,7 @@
         "label": "E-PODS Вкусове",
         "heading": "Плъзни за да разгледаш",
         "collection": "e-pod-0",
-        "max_products": 8,
+        "max_products": 12,
         "bundle_collection": "e-pod-package-0",
         "bundle_label": "Пакет от 10"
       }

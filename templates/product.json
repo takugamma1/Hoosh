@@ -24,8 +24,8 @@
     "related": {
       "type": "hoosh-product-grid",
       "settings": {
-        "label": "",
-        "heading": "Може да ви хареса",
+        "label": "Често избирани",
+        "heading": "Може да ви харесат",
         "collection": "e-pod-0",
         "max_products": 12,
         "bundle_collection": "",

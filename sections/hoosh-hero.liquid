@@ -211,8 +211,9 @@
   }
   .hhero__product--left {
     justify-self: stretch;
-    transform: translate(-6%, 3%) scale(1.7);
+    transform: translate(4%, 3%) scale(1.7);
     transform-origin: right center;
+    padding-left: clamp(1rem, 4vw, 4rem);
   }
   .hhero__product--right {
     justify-self: stretch;
@@ -367,7 +368,7 @@
   @media screen and (max-width: 1023px) {
     .hhero__stage { grid-template-columns: 1fr minmax(auto, 50vw) 1fr; }
     .hhero__title { font-size: clamp(5rem, 19vw, 14rem); }
-    .hhero__product--left { transform: translate(-4%, 3%) scale(1.55); }
+    .hhero__product--left { transform: translate(3%, 3%) scale(1.55); }
     .hhero__product--right { transform: translate(6%, -2%) scale(1.25); }
   }
 

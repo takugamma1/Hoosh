@@ -23,51 +23,6 @@
         "cta_link": ""
       }
     },
-    "hoosh_news_teaser_AFEeh7": {
-      "type": "hoosh-news-teaser",
-      "blocks": {
-        "teaser_PNgBDF": {
-          "type": "teaser",
-          "settings": {
-            "image": "shopify://shop_images/group-2.png",
-            "heading": "Вейп",
-            "copy": "",
-            "show_badge": false,
-            "badge_text": "Очаквай Скоро"
-          }
-        },
-        "teaser_BbE9hK": {
-          "type": "teaser",
-          "settings": {
-            "image": "shopify://shop_images/group-1.png",
-            "heading": "Снус",
-            "copy": "",
-            "show_badge": false,
-            "badge_text": "Очаквай Скоро"
-          }
-        }
-      },
-      "block_order": [
-        "teaser_PNgBDF",
-        "teaser_BbE9hK"
-      ],
-      "name": "HOOSH News Teaser",
-      "settings": {
-        "label": "Новини",
-        "heading": "Очаквай скоро"
-      }
-    },
-    "hoosh_newsletter_PJfJVq": {
-      "type": "hoosh-newsletter",
-      "name": "HOOSH Newsletter",
-      "settings": {
-        "label": "Абонирай се за нашия бюлетин",
-        "heading": "Не пропускай последните ни новини",
-        "placeholder": "Email",
-        "button_label": "Абониране",
-        "success_message": "Благодарим ти, абонаментът е активиран!"
-      }
-    },
     "hoosh_product_slider_cDAddQ": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -122,7 +77,7 @@
         "heading": "Нашите Hoosh Наргилета",
         "collection": "hookahs",
         "max_products": 12,
-        "per_row_desktop": 3,
+        "per_row_desktop": 5,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -154,6 +109,51 @@
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#00e38a",
         "arrow_hover_icon": "#000000"
+      }
+    },
+    "hoosh_news_teaser_AFEeh7": {
+      "type": "hoosh-news-teaser",
+      "blocks": {
+        "teaser_PNgBDF": {
+          "type": "teaser",
+          "settings": {
+            "image": "shopify://shop_images/group-2.png",
+            "heading": "Вейп",
+            "copy": "",
+            "show_badge": false,
+            "badge_text": "Очаквай Скоро"
+          }
+        },
+        "teaser_BbE9hK": {
+          "type": "teaser",
+          "settings": {
+            "image": "shopify://shop_images/group-1.png",
+            "heading": "Снус",
+            "copy": "",
+            "show_badge": false,
+            "badge_text": "Очаквай Скоро"
+          }
+        }
+      },
+      "block_order": [
+        "teaser_PNgBDF",
+        "teaser_BbE9hK"
+      ],
+      "name": "HOOSH News Teaser",
+      "settings": {
+        "label": "Новини",
+        "heading": "Очаквай скоро"
+      }
+    },
+    "hoosh_newsletter_PJfJVq": {
+      "type": "hoosh-newsletter",
+      "name": "HOOSH Newsletter",
+      "settings": {
+        "label": "Абонирай се за нашия бюлетин",
+        "heading": "Не пропускай последните ни новини",
+        "placeholder": "Email",
+        "button_label": "Абониране",
+        "success_message": "Благодарим ти, абонаментът е активиран!"
       }
     }
   },

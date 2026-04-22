@@ -268,9 +268,9 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "label": "",
+        "label": "Премиум наргилета",
         "subheading": "",
-        "heading": "",
+        "heading": "Избери своето Hoosh наргиле",
         "collection": "hookahs",
         "max_products": 12,
         "per_row_desktop": 5,

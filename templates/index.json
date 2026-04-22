@@ -155,6 +155,31 @@
         "button_label": "Абониране",
         "success_message": "Благодарим ти, абонаментът е активиран!"
       }
+    },
+    "hoosh_feature_cards_MwrQCU": {
+      "type": "hoosh-feature-cards",
+      "blocks": {
+        "card_T9jPKd": {
+          "type": "card",
+          "settings": {
+            "label": "Legacy Compatible",
+            "heading": "Works Any Way"
+          }
+        },
+        "card_fcNLMj": {
+          "type": "card",
+          "settings": {
+            "label": "Change Flavours With Ease",
+            "heading": "Switch It Up!"
+          }
+        }
+      },
+      "block_order": [
+        "card_T9jPKd",
+        "card_fcNLMj"
+      ],
+      "name": "HOOSH Feature Cards",
+      "settings": {}
     }
   },
   "order": [
@@ -164,6 +189,7 @@
     "hoosh_product_slider_9Pjx8E",
     "hoosh_product_slider_cDAddQ",
     "hoosh_news_teaser_AFEeh7",
-    "hoosh_newsletter_PJfJVq"
+    "hoosh_newsletter_PJfJVq",
+    "hoosh_feature_cards_MwrQCU"
   ]
 }

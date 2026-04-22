@@ -51,7 +51,6 @@
                 {%- if block.settings.cta_label != blank -%}
                   <a class="hcg__cell-cta" {% if block.settings.cta_link != blank %}href="{{ block.settings.cta_link }}"{% else %}href="#"{% endif %}>
                     <span>{{ block.settings.cta_label }}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                   </a>
                 {%- endif -%}
               </div>
@@ -201,8 +200,6 @@
     border-color: #00e38a;
     transform: translateX(3px);
   }
-  #hcg-{{ uid }} .hcg__cell-cta svg { transition: transform 0.2s ease; }
-  #hcg-{{ uid }} .hcg__cell-cta:hover svg { transform: translateX(2px); }
 
   #hcg-{{ uid }} .hcg__cell--image {
     position: relative;

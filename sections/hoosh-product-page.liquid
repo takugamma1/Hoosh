@@ -395,12 +395,17 @@
 <script>
   (function () {
     document.querySelectorAll('.hpp').forEach(function (root) {
-      // Thumbnail swap
       var main = root.querySelector('[data-main] img');
+      if (!main) return;
+
       root.querySelectorAll('[data-thumb]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var src = btn.getAttribute('data-src');
-          if (main && src) main.src = src;
+          if (src) {
+            main.removeAttribute('srcset');
+            main.removeAttribute('sizes');
+            main.src = src;
+          }
           root.querySelectorAll('[data-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
           btn.classList.add('is-active');
         });

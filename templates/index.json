@@ -103,6 +103,19 @@
         "button_label": "Абониране",
         "success_message": "Благодарим ти, абонаментът е активиран!"
       }
+    },
+    "hoosh_product_slider_cDAddQ": {
+      "type": "hoosh-product-slider",
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "label": "",
+        "subheading": "",
+        "heading": "",
+        "collection": "e-heads",
+        "max_products": 12,
+        "per_row_desktop": 4
+      }
     }
   },
   "order": [
@@ -111,6 +124,7 @@
     "hoosh_product_grid_rh6L8y",
     "hoosh_product_grid_n7b3q3",
     "hoosh_news_teaser_AFEeh7",
-    "hoosh_newsletter_PJfJVq"
+    "hoosh_newsletter_PJfJVq",
+    "hoosh_product_slider_cDAddQ"
   ]
 }

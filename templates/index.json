@@ -156,30 +156,104 @@
         "success_message": "Благодарим ти, абонаментът е активиран!"
       }
     },
-    "hoosh_feature_cards_MwrQCU": {
-      "type": "hoosh-feature-cards",
+    "hoosh_catalog_grid_HrrH84": {
+      "type": "hoosh-catalog-grid",
       "blocks": {
-        "card_T9jPKd": {
-          "type": "card",
+        "image_9MyYyB": {
+          "type": "image",
           "settings": {
-            "label": "Legacy Compatible",
-            "heading": "Works Any Way"
+            "link": "",
+            "coming_soon": false,
+            "coming_soon_text": "PROXIMAMENTE"
           }
         },
-        "card_fcNLMj": {
-          "type": "card",
+        "category_GgpQhR": {
+          "type": "category",
           "settings": {
-            "label": "Change Flavours With Ease",
-            "heading": "Switch It Up!"
+            "heading": "HOSE - Маркуч за наргиле",
+            "description": "Последният, но не на последно място по-важност елемент наргиле сета ти.",
+            "cta_label": "Добави Маркуч Към Сета Си",
+            "cta_link": ""
+          }
+        },
+        "image_PpjXgb": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "coming_soon": false,
+            "coming_soon_text": "PROXIMAMENTE"
+          }
+        },
+        "category_E3priN": {
+          "type": "category",
+          "settings": {
+            "heading": "ВКУСОВЕ",
+            "description": "Открий интензивните и освежаващи вкусове за твоята премиум наргиле сесия.",
+            "cta_label": "Към Всички Вкусове",
+            "cta_link": ""
+          }
+        },
+        "image_6dxqKh": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "coming_soon": false,
+            "coming_soon_text": "PROXIMAMENTE"
+          }
+        },
+        "category_nM3JnT": {
+          "type": "category",
+          "settings": {
+            "heading": "НАРГИЛЕТА",
+            "description": "Открий нашата гама наргилета, които предлагат най-доброто изживяване при shisha сесия.",
+            "cta_label": "Към Всички Наргилета",
+            "cta_link": ""
+          }
+        },
+        "image_frcYna": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "coming_soon": false,
+            "coming_soon_text": "PROXIMAMENTE"
+          }
+        },
+        "category_J6FqkA": {
+          "type": "category",
+          "settings": {
+            "heading": "Е-ГЛАВА",
+            "description": "Персонализирай наргилето си, като избереш любимата си Е-Глава.",
+            "cta_label": "Към Всички Е-Глави",
+            "cta_link": ""
+          }
+        },
+        "image_YrfgAh": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "coming_soon": true,
+            "coming_soon_text": "PROXIMAMENTE"
           }
         }
       },
       "block_order": [
-        "card_T9jPKd",
-        "card_fcNLMj"
+        "image_9MyYyB",
+        "category_GgpQhR",
+        "image_PpjXgb",
+        "category_E3priN",
+        "image_6dxqKh",
+        "category_nM3JnT",
+        "image_frcYna",
+        "category_J6FqkA",
+        "image_YrfgAh"
       ],
-      "name": "HOOSH Feature Cards",
-      "settings": {}
+      "name": "HOOSH Catalog Grid",
+      "settings": {
+        "label": "РАЗГЛЕДАЙ",
+        "heading": "НАШИЯТ HOOSH КАТАЛОГ",
+        "video_text": "ПРОДУКТОВИ УКАЗАНИЯ",
+        "video_url": ""
+      }
     }
   },
   "order": [
@@ -190,6 +264,6 @@
     "hoosh_product_slider_cDAddQ",
     "hoosh_news_teaser_AFEeh7",
     "hoosh_newsletter_PJfJVq",
-    "hoosh_feature_cards_MwrQCU"
+    "hoosh_catalog_grid_HrrH84"
   ]
 }

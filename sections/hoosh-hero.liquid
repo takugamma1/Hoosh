@@ -372,42 +372,55 @@
     .hhero__product--right { transform: translate(6%, -2%) scale(1.25); }
   }
 
-  /* Mobile: stack — title on top, products below as a filling duo */
+  /* Mobile: keep desktop-style 3-column layout (products flanking title) */
   @media screen and (max-width: 767px) {
-    .hhero { min-height: auto; }
     .hhero__stage {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "content content"
-        "left right";
-      gap: 0;
-      padding: clamp(1rem, 4vw, 2rem) 0 0;
+      grid-template-columns: 1fr minmax(auto, 40vw) 1fr;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 0;
       max-width: 100%;
-      min-height: auto;
     }
     .hhero__content {
-      grid-area: content;
-      padding: 1rem clamp(1rem, 4vw, 2rem) 0.5rem;
+      padding: 0 clamp(0.25rem, 1vw, 0.75rem);
+      gap: clamp(10px, 2vw, 16px);
     }
     .hhero__product {
-      max-width: none;
-      width: 100%;
-      max-height: 70vh;
+      max-height: 100vh;
+      max-height: 100dvh;
     }
     .hhero__product--left {
-      grid-area: left;
-      justify-self: stretch;
-      transform: translate(-6%, 0) scale(1.2);
-      transform-origin: bottom right;
+      transform: translate(4%, 3%) scale(1.6);
+      transform-origin: right center;
+      padding-left: clamp(0.25rem, 2vw, 1rem);
     }
     .hhero__product--right {
-      grid-area: right;
-      justify-self: stretch;
-      transform: translate(6%, 0) scale(1.2);
-      transform-origin: bottom left;
+      transform: translate(6%, -2%) scale(1.3);
+      transform-origin: left center;
     }
-    .hhero__title { font-size: clamp(4rem, 22vw, 7rem); }
+    .hhero__title {
+      font-size: clamp(3.5rem, 20vw, 8rem);
+    }
+    .hhero__tagline {
+      font-size: clamp(0.65rem, 2.2vw, 0.9rem);
+      letter-spacing: 0.18em;
+    }
+    .hhero__play-icon {
+      width: 42px;
+      height: 42px;
+    }
+    .hhero__play-label {
+      font-size: 0.8rem;
+    }
     .hhero-video-modal__close { top: -48px; }
+  }
+
+  /* Extra-small phones: keep layout but tighten play button */
+  @media screen and (max-width: 400px) {
+    .hhero__content { gap: 8px; }
+    .hhero__play { gap: 8px; }
+    .hhero__play-icon { width: 36px; height: 36px; }
+    .hhero__play-label { font-size: 0.7rem; letter-spacing: 0.06em; }
   }
 </style>
 

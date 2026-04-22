@@ -162,6 +162,7 @@
         "image_9MyYyB": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/caja-tubo-hoosh-1.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -232,7 +233,7 @@
           "settings": {
             "link": "",
             "coming_soon": true,
-            "coming_soon_text": "PROXIMAMENTE"
+            "coming_soon_text": ""
           }
         }
       },

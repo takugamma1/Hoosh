@@ -103,6 +103,18 @@
         "button_label": "Абониране",
         "success_message": "Благодарим ти, абонаментът е активиран!"
       }
+    },
+    "hoosh_product_grid_4XNkgY": {
+      "type": "hoosh-product-grid",
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "label": "The Heads",
+        "heading": "Choose Your Head",
+        "collection": "",
+        "max_products": 6,
+        "bundle_collection": "",
+        "bundle_label": "Pack of 10"
+      }
     }
   },
   "order": [
@@ -111,6 +123,7 @@
     "hoosh_product_grid_rh6L8y",
     "hoosh_product_grid_n7b3q3",
     "hoosh_news_teaser_AFEeh7",
-    "hoosh_newsletter_PJfJVq"
+    "hoosh_newsletter_PJfJVq",
+    "hoosh_product_grid_4XNkgY"
   ]
 }

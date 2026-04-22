@@ -236,12 +236,35 @@
         "arrow_hover_bg": "#00e38a",
         "arrow_hover_icon": "#000000"
       }
+    },
+    "hoosh_product_slider_TN8XTH": {
+      "type": "hoosh-product-slider",
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "label": "",
+        "subheading": "",
+        "heading": "",
+        "collection": "e-pod-0",
+        "max_products": 12,
+        "per_row_desktop": 4,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
     }
   },
   "order": [
     "collection_list_Wfgh3m",
     "hoosh_product_slider_qHfhKx",
     "hoosh_product_slider_bFWWH3",
-    "hoosh_product_slider_DyYcad"
+    "hoosh_product_slider_DyYcad",
+    "hoosh_product_slider_TN8XTH"
   ]
 }

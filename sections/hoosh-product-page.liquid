@@ -171,6 +171,7 @@
     gap: clamp(2rem, 5vw, 5rem);
     align-items: start;
   }
+  .hpp__grid > * { min-width: 0; }
   @media screen and (max-width: 767px) {
     .hpp__grid { grid-template-columns: 1fr; }
   }
@@ -255,8 +256,19 @@
     font-size: 1rem;
     line-height: 1.6;
     margin: 0 0 24px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
   }
   .hpp__desc p { margin: 0 0 0.6em; }
+  .hpp__desc *,
+  .hpp__desc img,
+  .hpp__desc table,
+  .hpp__desc iframe {
+    max-width: 100%;
+  }
+  .hpp__desc img { height: auto; }
+  .hpp__desc table { display: block; overflow-x: auto; }
 
   .hpp__option { border: 0; padding: 0; margin: 0 0 18px; }
   .hpp__option-label {

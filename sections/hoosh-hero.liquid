@@ -375,37 +375,52 @@
     .hhero__product--right { width: 32vw; max-width: 520px; }
   }
 
-  /* Mobile: preserve the desktop layout — same absolute framing, just scaled */
+  /* Mobile: title stacked on top, products dominate the bottom half and
+     bleed off the left/right edges — matches the reference layout. */
   @media screen and (max-width: 767px) {
+    .hhero__stage {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: clamp(4rem, 12vh, 8rem) clamp(0.75rem, 4vw, 1.5rem) 0;
+    }
     .hhero__content {
-      padding: 0 clamp(0.25rem, 1vw, 0.75rem);
-      gap: clamp(10px, 2vw, 16px);
+      padding: 0;
+      gap: clamp(12px, 3vw, 20px);
+      width: 100%;
     }
     .hhero__product {
-      max-height: 85vh;
-      max-height: 85dvh;
+      top: auto;
+      bottom: 0;
+      transform: none;
+      max-height: 60vh;
+      max-height: 60dvh;
     }
     .hhero__product--left {
-      width: 58vw;
+      left: -12vw;
+      width: 78vw;
       max-width: none;
     }
     .hhero__product--right {
-      width: 42vw;
+      right: -10vw;
+      width: 72vw;
       max-width: none;
     }
     .hhero__title {
-      font-size: clamp(2.5rem, 13vw, 6rem);
+      font-size: clamp(4rem, 22vw, 9rem);
+      line-height: 0.9;
     }
     .hhero__tagline {
-      font-size: clamp(0.65rem, 2.2vw, 0.9rem);
+      font-size: clamp(0.7rem, 2.8vw, 1rem);
       letter-spacing: 0.18em;
+      max-width: 80vw;
     }
     .hhero__play-icon {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
     }
     .hhero__play-label {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
     .hhero-video-modal__close { top: -48px; }
   }

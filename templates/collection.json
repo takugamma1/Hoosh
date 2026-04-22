@@ -249,6 +249,28 @@
         "arrow_hover_icon": "#000000"
       }
     },
+    "hoosh_product_slider_3fGXLa": {
+      "type": "hoosh-product-slider",
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "label": "E-PODS  Вкусове",
+        "subheading": "",
+        "heading": "Избери си вкус",
+        "collection": "e-pod-package-0",
+        "max_products": 12,
+        "per_row_desktop": 3,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
+    },
     "hoosh_product_slider_X37e3k": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -270,28 +292,6 @@
         "arrow_hover_bg": "#00e38a",
         "arrow_hover_icon": "#000000"
       }
-    },
-    "hoosh_product_slider_3fGXLa": {
-      "type": "hoosh-product-slider",
-      "name": "HOOSH Product Slider",
-      "settings": {
-        "hide_header": false,
-        "label": "",
-        "subheading": "",
-        "heading": "",
-        "collection": "e-pod-package-0",
-        "max_products": 12,
-        "per_row_desktop": 3,
-        "bg_color": "#000000",
-        "heading_color": "#ffffff",
-        "sub_color": "#8a8a8a",
-        "label_bg": "#1a1a1a",
-        "label_text": "#00e38a",
-        "arrow_bg": "#ffffff",
-        "arrow_icon": "#111111",
-        "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000"
-      }
     }
   },
   "order": [
@@ -299,7 +299,7 @@
     "main",
     "hoosh_product_slider_iAT3xe",
     "hoosh_product_slider_NFLM7c",
-    "hoosh_product_slider_X37e3k",
-    "hoosh_product_slider_3fGXLa"
+    "hoosh_product_slider_3fGXLa",
+    "hoosh_product_slider_X37e3k"
   ]
 }

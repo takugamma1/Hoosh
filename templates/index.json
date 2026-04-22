@@ -23,42 +23,6 @@
         "cta_link": ""
       }
     },
-    "hoosh_product_grid_LeP4c9": {
-      "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
-      "settings": {
-        "label": "РАЗГЛЕДАЙ",
-        "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",
-        "collection": "e-heads",
-        "max_products": 6,
-        "bundle_collection": "",
-        "bundle_label": "Pack of 10"
-      }
-    },
-    "hoosh_product_grid_rh6L8y": {
-      "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
-      "settings": {
-        "label": "Разгледай",
-        "heading": "Нашите Hoosh Наргилета",
-        "collection": "hookahs",
-        "max_products": 6,
-        "bundle_collection": "",
-        "bundle_label": "Pack of 10"
-      }
-    },
-    "hoosh_product_grid_n7b3q3": {
-      "type": "hoosh-product-grid",
-      "name": "HOOSH Product Grid",
-      "settings": {
-        "label": "E-PODS Вкусове",
-        "heading": "Плъзни за да разгледаш",
-        "collection": "e-pod-0",
-        "max_products": 12,
-        "bundle_collection": "",
-        "bundle_label": "Пакет от 10"
-      }
-    },
     "hoosh_news_teaser_AFEeh7": {
       "type": "hoosh-news-teaser",
       "blocks": {
@@ -195,14 +159,11 @@
   },
   "order": [
     "hoosh_hero_HTFnpU",
-    "hoosh_product_grid_LeP4c9",
-    "hoosh_product_grid_rh6L8y",
-    "hoosh_product_grid_n7b3q3",
-    "hoosh_news_teaser_AFEeh7",
-    "hoosh_newsletter_PJfJVq",
     "hoosh_product_slider_cDAddQ",
     "hoosh_product_slider_U8B8qT",
     "hoosh_product_slider_h8nrzT",
-    "hoosh_product_slider_9Pjx8E"
+    "hoosh_product_slider_9Pjx8E",
+    "hoosh_news_teaser_AFEeh7",
+    "hoosh_newsletter_PJfJVq"
   ]
 }

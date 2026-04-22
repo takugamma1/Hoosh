@@ -145,24 +145,13 @@
         "heading": "Очаквайте скоро"
       }
     },
-    "hoosh_newsletter_PJfJVq": {
-      "type": "hoosh-newsletter",
-      "name": "HOOSH Newsletter",
-      "settings": {
-        "label": "Абонирай се за нашия бюлетин",
-        "heading": "Не пропускай последните ни новини",
-        "placeholder": "Email",
-        "button_label": "Абониране",
-        "success_message": "Благодарим ти, абонаментът е активиран!"
-      }
-    },
     "hoosh_catalog_grid_HrrH84": {
       "type": "hoosh-catalog-grid",
       "blocks": {
         "image_9MyYyB": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/caja-tubo-hoosh-1.png",
+            "image": "shopify://shop_images/Blu_Glacier.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -180,7 +169,7 @@
         "image_PpjXgb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Emerald_Dream.png",
+            "image": "shopify://shop_images/caja-tubo-hoosh-1.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -259,6 +248,17 @@
         "video_text": "ПРОДУКТОВИ УКАЗАНИЯ",
         "video_url": ""
       }
+    },
+    "hoosh_newsletter_PJfJVq": {
+      "type": "hoosh-newsletter",
+      "name": "HOOSH Newsletter",
+      "settings": {
+        "label": "Абонирай се за нашия бюлетин",
+        "heading": "Не пропускай последните ни новини",
+        "placeholder": "Email",
+        "button_label": "Абониране",
+        "success_message": "Благодарим ти, абонаментът е активиран!"
+      }
     }
   },
   "order": [
@@ -268,7 +268,7 @@
     "hoosh_product_slider_9Pjx8E",
     "hoosh_product_slider_cDAddQ",
     "hoosh_news_teaser_AFEeh7",
-    "hoosh_newsletter_PJfJVq",
-    "hoosh_catalog_grid_HrrH84"
+    "hoosh_catalog_grid_HrrH84",
+    "hoosh_newsletter_PJfJVq"
   ]
 }

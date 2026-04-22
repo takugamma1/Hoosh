@@ -77,7 +77,7 @@
         "heading": "Плъзни за да разгледаш",
         "collection": "e-pod-package-0",
         "max_products": 12,
-        "per_row_desktop": 3,
+        "per_row_desktop": 4,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -152,9 +152,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/Blu_Glacier.png",
-            "link": "",
-            "coming_soon": false,
-            "coming_soon_text": "PROXIMAMENTE"
+            "link": ""
           }
         },
         "category_GgpQhR": {
@@ -170,9 +168,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/caja-tubo-hoosh-1.png",
-            "link": "",
-            "coming_soon": false,
-            "coming_soon_text": "PROXIMAMENTE"
+            "link": ""
           }
         },
         "category_E3priN": {
@@ -188,9 +184,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/hooka_02.png",
-            "link": "",
-            "coming_soon": false,
-            "coming_soon_text": "PROXIMAMENTE"
+            "link": ""
           }
         },
         "category_nM3JnT": {
@@ -206,9 +200,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/01_E_Head_gold.png",
-            "link": "",
-            "coming_soon": false,
-            "coming_soon_text": "PROXIMAMENTE"
+            "link": ""
           }
         },
         "category_J6FqkA": {
@@ -224,9 +216,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/Emerald_Dream_0.png",
-            "link": "",
-            "coming_soon": true,
-            "coming_soon_text": ""
+            "link": ""
           }
         }
       },

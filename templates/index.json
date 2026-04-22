@@ -153,9 +153,9 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "label": "",
+        "label": "Разгледай",
         "subheading": "",
-        "heading": "",
+        "heading": "Нашите Hoosh Наргилета",
         "collection": "hookahs",
         "max_products": 12,
         "per_row_desktop": 3,

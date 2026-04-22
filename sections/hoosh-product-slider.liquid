@@ -106,6 +106,14 @@
     padding-block-start: clamp(3rem, 7vw, 6rem);
     padding-block-end: clamp(3rem, 7vw, 6rem);
   }
+  #hps-{{ uid }} .h-container {
+    max-width: min(1440px, 94vw);
+  }
+  @media screen and (max-width: 767px) {
+    #hps-{{ uid }} .h-container {
+      max-width: 100%;
+    }
+  }
   #hps-{{ uid }}.hps--no-header {
     padding-block-start: clamp(0.75rem, 2vw, 1.5rem);
     padding-block-end: clamp(0.75rem, 2vw, 1.5rem);
@@ -145,22 +153,20 @@
 
   #hps-{{ uid }} .hps__frame {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 14px;
   }
   #hps-{{ uid }} .hps__viewport {
-    flex: 1 1 auto;
-    min-width: 0;
+    width: 100%;
     overflow: hidden;
   }
   #hps-{{ uid }} .hps__rail {
     display: flex;
+    align-items: stretch;
     gap: var(--hps-gap-d);
     margin: 0;
-    padding: 4px 4px 24px;
+    padding: 4px 0;
     list-style: none;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -170,11 +176,19 @@
     flex: 0 0 calc((100% - (var(--hps-cols-d, 3) - 1) * var(--hps-gap-d)) / var(--hps-cols-d, 3));
     scroll-snap-align: start;
     min-width: 0;
+    display: flex;
   }
+  #hps-{{ uid }} .hps__item > .hp-card {
+    width: 100%;
+    height: 100%;
+  }
+
   #hps-{{ uid }} .hps__nav {
-    flex: 0 0 56px;
-    width: 56px;
-    height: 56px;
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: var(--hps-arrow-bg);
     color: var(--hps-arrow-icon);
@@ -183,14 +197,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    z-index: 2;
+    z-index: 3;
   }
+  #hps-{{ uid }} .hps__nav--prev { left: -10px; }
+  #hps-{{ uid }} .hps__nav--next { right: -10px; }
   #hps-{{ uid }} .hps__nav:hover {
     background: var(--hps-arrow-hover-bg);
     color: var(--hps-arrow-hover-icon);
-    transform: scale(1.08);
+    transform: translateY(-50%) scale(1.08);
   }
   #hps-{{ uid }} .hps__nav:focus-visible {
     outline: 2px solid var(--hps-arrow-hover-bg);
@@ -201,7 +217,8 @@
     #hps-{{ uid }} .hps__nav { display: none; }
     #hps-{{ uid }} .hps__rail {
       gap: var(--hps-gap-m);
-      padding-bottom: 16px;
+      padding: 0;
+      overflow-y: hidden;
     }
     #hps-{{ uid }} .hps__item {
       flex: 0 0 calc((100% - (var(--hps-cols-m, 2) - 1) * var(--hps-gap-m)) / var(--hps-cols-m, 2));

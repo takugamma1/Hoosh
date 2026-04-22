@@ -67,28 +67,6 @@
         "arrow_hover_icon": "#000000"
       }
     },
-    "hoosh_product_slider_cDAddQ": {
-      "type": "hoosh-product-slider",
-      "name": "HOOSH Product Slider",
-      "settings": {
-        "hide_header": false,
-        "label": "E-PODS 0% Вкусове",
-        "subheading": "",
-        "heading": "Очаквайте скоро",
-        "collection": "e-pod-0",
-        "max_products": 12,
-        "per_row_desktop": 4,
-        "bg_color": "#000000",
-        "heading_color": "#ffffff",
-        "sub_color": "#8a8a8a",
-        "label_bg": "#1a1a1a",
-        "label_text": "#00e38a",
-        "arrow_bg": "#ffffff",
-        "arrow_icon": "#111111",
-        "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000"
-      }
-    },
     "hoosh_product_slider_9Pjx8E": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -100,6 +78,28 @@
         "collection": "",
         "max_products": 12,
         "per_row_desktop": 3,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
+    },
+    "hoosh_product_slider_cDAddQ": {
+      "type": "hoosh-product-slider",
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "label": "E-PODS 0% Вкусове",
+        "subheading": "",
+        "heading": "Очаквайте скоро",
+        "collection": "e-pod-0",
+        "max_products": 12,
+        "per_row_desktop": 4,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -142,7 +142,7 @@
       "name": "HOOSH News Teaser",
       "settings": {
         "label": "Новини",
-        "heading": "Очаквай скоро"
+        "heading": "Очаквайте скоро"
       }
     },
     "hoosh_newsletter_PJfJVq": {
@@ -161,8 +161,8 @@
     "hoosh_hero_HTFnpU",
     "hoosh_product_slider_U8B8qT",
     "hoosh_product_slider_h8nrzT",
-    "hoosh_product_slider_cDAddQ",
     "hoosh_product_slider_9Pjx8E",
+    "hoosh_product_slider_cDAddQ",
     "hoosh_news_teaser_AFEeh7",
     "hoosh_newsletter_PJfJVq"
   ]

@@ -187,37 +187,42 @@
       radial-gradient(ellipse at 50% 40%, rgba(120, 50, 180, 0.35), transparent 60%),
       linear-gradient(transparent 40%, rgba(0, 0, 0, 0.55));
   }
+  /* Stage: absolute-positioned products (like the WordPress/Elementor source),
+     flex-centered content. Title, tagline, CTA stack naturally in the middle. */
   .hhero__stage {
     position: relative;
     z-index: 2;
     width: 100%;
     max-width: 100%;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 0;
     min-height: 100vh;
     min-height: 100dvh;
-    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
   .hhero__product {
-    height: 90vh;
-    height: 90dvh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    max-height: 95vh;
+    max-height: 95dvh;
     width: auto;
-    max-width: none;
+    height: auto;
     object-fit: contain;
-    object-position: center;
     filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.55));
     pointer-events: none;
   }
   .hhero__product--left {
-    justify-self: center;
-    transform: translateX(10%);
+    left: 0;
+    width: 35vw;
+    max-width: 720px;
   }
   .hhero__product--right {
-    justify-self: center;
-    transform: translateX(-10%);
+    right: 0;
+    width: 26vw;
+    max-width: 520px;
   }
   .hhero__content {
     position: relative;
@@ -235,7 +240,7 @@
   }
   .hhero__title {
     font-family: var(--h-font-display, 'Bebas Neue', sans-serif);
-    font-size: clamp(6rem, 18vw, 22rem);
+    font-size: clamp(5rem, 14vw, 18rem);
     letter-spacing: 0.01em;
     color: var(--h-text, #fff);
     line-height: 0.85;
@@ -365,39 +370,31 @@
 
   /* Tablet */
   @media screen and (max-width: 1023px) {
-    .hhero__title { font-size: clamp(5rem, 19vw, 14rem); }
-    .hhero__product { height: 88vh; height: 88dvh; }
+    .hhero__title { font-size: clamp(4rem, 13vw, 10rem); }
+    .hhero__product--left { width: 34vw; max-width: 520px; }
+    .hhero__product--right { width: 25vw; max-width: 380px; }
   }
 
-  /* Mobile: keep desktop 3-column layout with prominent products flanking the title */
+  /* Mobile: preserve the desktop layout — same absolute framing, just scaled */
   @media screen and (max-width: 767px) {
-    .hhero__stage {
-      grid-template-columns: 1fr auto 1fr;
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 0;
-      max-width: 100%;
-    }
     .hhero__content {
       padding: 0 clamp(0.25rem, 1vw, 0.75rem);
       gap: clamp(10px, 2vw, 16px);
     }
     .hhero__product {
-      height: 75vh;
-      height: 75dvh;
-      width: auto;
-      max-width: none;
+      max-height: 80vh;
+      max-height: 80dvh;
     }
     .hhero__product--left {
-      justify-self: center;
-      transform: translateX(22%);
+      width: 42vw;
+      max-width: none;
     }
     .hhero__product--right {
-      justify-self: center;
-      transform: translateX(-22%);
+      width: 32vw;
+      max-width: none;
     }
     .hhero__title {
-      font-size: clamp(3.5rem, 18vw, 8rem);
+      font-size: clamp(2.5rem, 13vw, 6rem);
     }
     .hhero__tagline {
       font-size: clamp(0.65rem, 2.2vw, 0.9rem);

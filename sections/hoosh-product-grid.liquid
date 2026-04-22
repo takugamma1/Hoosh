@@ -26,51 +26,49 @@
     assign has_sub = false
     assign has_head = false
   endif
-  assign cols = section.settings.columns | default: 4
-  assign mobile_cols = 2
+  assign cols_desktop = section.settings.columns | default: 4
+  assign cols_mobile = 2
 -%}
 
 <section
-  id="hoosh-products-{{ section.id }}"
-  class="h-section hoosh-grid-section{% unless has_header %} hoosh-grid-section--no-header{% endunless %}"
+  id="hpc-{{ section.id }}"
+  class="hpc-section{% unless has_header %} hpc-section--no-header{% endunless %}"
+  style="--hpc-cols-desktop: {{ cols_desktop }}; --hpc-cols-mobile: {{ cols_mobile }};"
   data-hoosh
-  style="--hoosh-grid-cols: {{ cols }}; --hoosh-grid-cols-mobile: {{ mobile_cols }};"
 >
   <div class="h-container">
     {%- if has_header -%}
-      <div class="hoosh-grid__header h-reveal" style="text-align:center;">
-        {%- if has_label -%}
-          <span class="h-label">{{ label_v }}</span>
-        {%- endif -%}
-        {%- if has_sub -%}
-          <span class="hoosh-grid__subheading">{{ sub_v }}</span>
-        {%- endif -%}
-        {%- if has_head -%}
-          <h2 class="h-display" style="font-size: var(--h-section-title);">{{ head_v }}</h2>
-        {%- endif -%}
+      <div class="hpc-header h-reveal">
+        {%- if has_label -%}<span class="hpc-header__label">{{ label_v }}</span>{%- endif -%}
+        {%- if has_sub -%}<span class="hpc-header__sub">{{ sub_v }}</span>{%- endif -%}
+        {%- if has_head -%}<h2 class="hpc-header__title h-display">{{ head_v }}</h2>{%- endif -%}
       </div>
     {%- endif -%}
 
-    <div class="hoosh-carousel" data-hoosh-carousel data-cols-desktop="{{ cols }}" data-cols-mobile="{{ mobile_cols }}">
-      <button type="button" class="hoosh-carousel__arrow hoosh-carousel__arrow--prev" data-dir="prev" aria-label="Previous">
+    <div class="hpc-carousel" data-hpc data-cols-desktop="{{ cols_desktop }}" data-cols-mobile="{{ cols_mobile }}">
+      <button type="button" class="hpc-arrow hpc-arrow--prev" data-dir="prev" aria-label="Previous products">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <div class="hoosh-carousel__track" data-track>
-        {%- if section.settings.collection != blank -%}
-          {%- for product in section.settings.collection.products limit: section.settings.max_products -%}
-            <div class="hoosh-carousel__slide">
-              {% render 'hoosh-product-card', product: product %}
-            </div>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for i in (1..4) -%}
-            <div class="hoosh-carousel__slide">
-              {% render 'hoosh-product-card' %}
-            </div>
-          {%- endfor -%}
-        {%- endif -%}
+
+      <div class="hpc-viewport">
+        <ul class="hpc-track" data-hpc-track>
+          {%- if section.settings.collection != blank -%}
+            {%- for product in section.settings.collection.products limit: section.settings.max_products -%}
+              <li class="hpc-slide">
+                {% render 'hoosh-product-card', product: product %}
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <li class="hpc-slide">
+                {% render 'hoosh-product-card' %}
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
       </div>
-      <button type="button" class="hoosh-carousel__arrow hoosh-carousel__arrow--next" data-dir="next" aria-label="Next">
+
+      <button type="button" class="hpc-arrow hpc-arrow--next" data-dir="next" aria-label="Next products">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
@@ -78,19 +76,20 @@
 </section>
 
 <style>
-  .hoosh-grid-section {
+  .hpc-section {
     padding-block-start: clamp(3rem, 7vw, 6rem);
     padding-block-end: clamp(3rem, 7vw, 6rem);
   }
-  .hoosh-grid-section--no-header {
+  .hpc-section--no-header {
     padding-block-start: clamp(0.75rem, 2vw, 1.5rem);
     padding-block-end: clamp(0.75rem, 2vw, 1.5rem);
   }
-  .hoosh-grid__header {
+
+  .hpc-header {
     text-align: center;
     margin-bottom: clamp(2rem, 5vw, 4rem);
   }
-  .hoosh-grid__header .h-label {
+  .hpc-header__label {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -103,7 +102,7 @@
     text-transform: uppercase;
     margin: 0 0 1.5em;
   }
-  .hoosh-grid__subheading {
+  .hpc-header__sub {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
     font-size: 0.75rem;
     letter-spacing: 0.22em;
@@ -112,83 +111,91 @@
     margin: 0 0 1em;
     display: block;
   }
+  .hpc-header__title {
+    font-size: var(--h-section-title);
+    margin: 0;
+  }
 
-  /* Carousel */
-  .hoosh-carousel {
+  .hpc-carousel {
     position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     align-items: center;
     gap: 8px;
   }
-  .hoosh-carousel__track {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% - (var(--hoosh-grid-cols, 4) - 1) * var(--h-card-gap, 1.5rem)) / var(--hoosh-grid-cols, 4));
-    gap: var(--h-card-gap, 1.5rem);
+  .hpc-viewport {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .hpc-track {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 4px 4px 24px;
+    list-style: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 4px 4px 24px;
   }
-  .hoosh-carousel__track::-webkit-scrollbar { display: none; }
-  .hoosh-carousel__slide {
+  .hpc-track::-webkit-scrollbar { display: none; }
+  .hpc-slide {
+    flex: 0 0 calc((100% - (var(--hpc-cols-desktop, 4) - 1) * 1.5rem) / var(--hpc-cols-desktop, 4));
     scroll-snap-align: start;
   }
-  .hoosh-carousel__arrow {
+  .hpc-arrow {
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s ease, transform 0.2s ease;
-    flex: none;
   }
-  .hoosh-carousel__arrow:hover { background: rgba(255, 255, 255, 0.12); transform: scale(1.05); }
+  .hpc-arrow:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: scale(1.05);
+  }
 
-  @media screen and (max-width: 1023px) {
-    .hoosh-carousel__track {
-      grid-auto-columns: calc((100% - 2 * var(--h-card-gap, 1.5rem)) / 3);
-    }
-  }
   @media screen and (max-width: 767px) {
-    .hoosh-carousel {
-      grid-template-columns: 1fr;
-    }
-    .hoosh-carousel__arrow { display: none; }
-    .hoosh-carousel__track {
-      grid-auto-columns: calc((100% - 1rem) / var(--hoosh-grid-cols-mobile, 2));
-      gap: 1rem;
+    .hpc-arrow { display: none; }
+    .hpc-track { gap: 1rem; padding-bottom: 16px; }
+    .hpc-slide {
+      flex: 0 0 calc((100% - (var(--hpc-cols-mobile, 2) - 1) * 1rem) / var(--hpc-cols-mobile, 2));
     }
   }
 </style>
 
 <script>
   (function () {
-    document.querySelectorAll('[data-hoosh-carousel]').forEach(function (root) {
-      var track = root.querySelector('[data-track]');
+    document.querySelectorAll('[data-hpc]').forEach(function (root) {
+      var track = root.querySelector('[data-hpc-track]');
       if (!track) return;
       var colsDesktop = parseInt(root.getAttribute('data-cols-desktop'), 10) || 4;
       var colsMobile = parseInt(root.getAttribute('data-cols-mobile'), 10) || 2;
+
       function visibleCols() {
-        if (window.matchMedia('(max-width: 767px)').matches) return colsMobile;
-        if (window.matchMedia('(max-width: 1023px)').matches) return Math.min(colsDesktop, 3);
-        return colsDesktop;
+        return window.matchMedia('(max-width: 767px)').matches ? colsMobile : colsDesktop;
       }
+
+      function stepDistance() {
+        var slide = track.querySelector('.hpc-slide');
+        if (!slide) return track.clientWidth;
+        var style = getComputedStyle(track);
+        var gap = parseFloat(style.columnGap || style.gap || 0) || 24;
+        var w = slide.getBoundingClientRect().width;
+        return (w + gap) * visibleCols();
+      }
+
       root.querySelectorAll('[data-dir]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var dir = btn.getAttribute('data-dir') === 'next' ? 1 : -1;
-          var slide = track.querySelector('.hoosh-carousel__slide');
-          var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
-          var slideW = slide ? slide.getBoundingClientRect().width : 300;
-          var n = visibleCols();
-          track.scrollBy({ left: dir * (slideW + gap) * n, behavior: 'smooth' });
+          track.scrollBy({ left: dir * stepDistance(), behavior: 'smooth' });
         });
       });
     });
@@ -238,7 +245,7 @@
       "max": 16,
       "step": 1,
       "default": 8,
-      "info": "Total products loaded into the carousel."
+      "info": "Total number of products loaded into the carousel."
     },
     {
       "type": "range",
@@ -248,7 +255,7 @@
       "max": 6,
       "step": 1,
       "default": 4,
-      "info": "How many products are visible at once on desktop. Mobile always shows 2."
+      "info": "How many products are visible at once on desktop. Mobile always shows 2 and advances 2 at a time."
     }
   ],
   "presets": [{ "name": "HOOSH Product Grid" }]

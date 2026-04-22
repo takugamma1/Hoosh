@@ -180,6 +180,7 @@
         "image_PpjXgb": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/Emerald_Dream.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -197,6 +198,7 @@
         "image_6dxqKh": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/hooka_02.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -214,6 +216,7 @@
         "image_frcYna": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/01_E_Head_gold.png",
             "link": "",
             "coming_soon": false,
             "coming_soon_text": "PROXIMAMENTE"
@@ -231,6 +234,7 @@
         "image_YrfgAh": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/Emerald_Dream_0.png",
             "link": "",
             "coming_soon": true,
             "coming_soon_text": ""

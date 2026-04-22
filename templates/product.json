@@ -21,17 +21,6 @@
         "wa_label": "Поръчай през уатсапп"
       }
     },
-    "related": {
-      "type": "hoosh-product-grid",
-      "settings": {
-        "label": "Често избирани",
-        "heading": "Може да ви харесат",
-        "collection": "e-pod-0",
-        "max_products": 12,
-        "bundle_collection": "",
-        "bundle_label": "Pack of 10"
-      }
-    },
     "hoosh_product_slider_4gnnFE": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -76,28 +65,6 @@
         "arrow_hover_icon": "#000000"
       }
     },
-    "hoosh_product_slider_bikwHQ": {
-      "type": "hoosh-product-slider",
-      "name": "HOOSH Product Slider",
-      "settings": {
-        "hide_header": false,
-        "label": "",
-        "subheading": "",
-        "heading": "",
-        "collection": "e-pod-package-0",
-        "max_products": 12,
-        "per_row_desktop": 4,
-        "bg_color": "#000000",
-        "heading_color": "#ffffff",
-        "sub_color": "#8a8a8a",
-        "label_bg": "#1a1a1a",
-        "label_text": "#00e38a",
-        "arrow_bg": "#ffffff",
-        "arrow_icon": "#111111",
-        "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000"
-      }
-    },
     "hoosh_product_slider_CbQjzt": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -123,10 +90,8 @@
   },
   "order": [
     "main",
-    "related",
     "hoosh_product_slider_4gnnFE",
     "hoosh_product_slider_xUb4n9",
-    "hoosh_product_slider_bikwHQ",
     "hoosh_product_slider_CbQjzt"
   ]
 }

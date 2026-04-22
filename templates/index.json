@@ -110,8 +110,8 @@
       "settings": {
         "hide_header": false,
         "label": "E-PODS Вкусове",
-        "subheading": "Плъзни за да разгледаш",
-        "heading": "rewfsdsdgfds",
+        "subheading": "",
+        "heading": "Плъзни за да разгледаш",
         "collection": "e-pod-0",
         "max_products": 12,
         "per_row_desktop": 4,

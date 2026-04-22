@@ -26,15 +26,37 @@
     assign has_header = false
   endif
 
-  assign cols_desktop = s.per_row_desktop | default: 4
+  assign cols_desktop = s.per_row_desktop | default: 3
   assign cols_mobile = 2
   assign uid = section.id
+
+  assign bg_color = s.bg_color | default: 'rgba(0,0,0,0)'
+  assign heading_color = s.heading_color | default: '#ffffff'
+  assign sub_color = s.sub_color | default: 'rgba(255,255,255,0.55)'
+  assign label_bg = s.label_bg | default: 'rgba(255,255,255,0.06)'
+  assign label_text = s.label_text | default: 'rgba(255,255,255,0.85)'
+  assign arrow_bg = s.arrow_bg | default: '#ffffff'
+  assign arrow_icon = s.arrow_icon | default: '#111111'
+  assign arrow_hover_bg = s.arrow_hover_bg | default: '#00e38a'
+  assign arrow_hover_icon = s.arrow_hover_icon | default: '#000000'
 -%}
 
 <section
   id="hps-{{ uid }}"
   class="hps{% unless has_header %} hps--no-header{% endunless %}"
-  style="--hps-cols-d: {{ cols_desktop }}; --hps-cols-m: {{ cols_mobile }};"
+  style="
+    --hps-cols-d: {{ cols_desktop }};
+    --hps-cols-m: {{ cols_mobile }};
+    --hps-bg: {{ bg_color }};
+    --hps-heading: {{ heading_color }};
+    --hps-sub: {{ sub_color }};
+    --hps-label-bg: {{ label_bg }};
+    --hps-label-text: {{ label_text }};
+    --hps-arrow-bg: {{ arrow_bg }};
+    --hps-arrow-icon: {{ arrow_icon }};
+    --hps-arrow-hover-bg: {{ arrow_hover_bg }};
+    --hps-arrow-hover-icon: {{ arrow_hover_icon }};
+  "
   data-hoosh
 >
   <div class="h-container">
@@ -48,7 +70,7 @@
 
     <div class="hps__frame" data-hps-root data-cols-d="{{ cols_desktop }}" data-cols-m="{{ cols_mobile }}">
       <button type="button" class="hps__nav hps__nav--prev" data-hps-dir="-1" aria-label="Previous">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
 
       <div class="hps__viewport">
@@ -70,7 +92,7 @@
       </div>
 
       <button type="button" class="hps__nav hps__nav--next" data-hps-dir="1" aria-label="Next">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
   </div>
@@ -78,8 +100,9 @@
 
 <style>
   #hps-{{ uid }}.hps {
-    --hps-gap-d: 1.5rem;
+    --hps-gap-d: 1.75rem;
     --hps-gap-m: 1rem;
+    background: var(--hps-bg);
     padding-block-start: clamp(3rem, 7vw, 6rem);
     padding-block-end: clamp(3rem, 7vw, 6rem);
   }
@@ -95,11 +118,11 @@
   #hps-{{ uid }} .hps__label {
     display: inline-block;
     font-family: var(--h-font-body, 'Outfit', sans-serif);
-    background: rgba(255,255,255,0.06);
+    background: var(--hps-label-bg);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 999px;
     padding: 6px 16px;
-    color: rgba(255,255,255,0.85);
+    color: var(--hps-label-text);
     font-size: 0.7rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -111,11 +134,12 @@
     font-size: 0.75rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--hps-sub);
     margin: 0 0 1em;
   }
   #hps-{{ uid }} .hps__title {
     font-size: var(--h-section-title);
+    color: var(--hps-heading);
     margin: 0;
   }
 
@@ -123,7 +147,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
   #hps-{{ uid }} .hps__viewport {
     flex: 1 1 auto;
@@ -143,32 +167,34 @@
   }
   #hps-{{ uid }} .hps__rail::-webkit-scrollbar { display: none; }
   #hps-{{ uid }} .hps__item {
-    flex: 0 0 calc((100% - (var(--hps-cols-d, 4) - 1) * var(--hps-gap-d)) / var(--hps-cols-d, 4));
+    flex: 0 0 calc((100% - (var(--hps-cols-d, 3) - 1) * var(--hps-gap-d)) / var(--hps-cols-d, 3));
     scroll-snap-align: start;
     min-width: 0;
   }
   #hps-{{ uid }} .hps__nav {
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: #fff;
+    background: var(--hps-arrow-bg);
+    color: var(--hps-arrow-icon);
+    border: none;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    z-index: 2;
   }
   #hps-{{ uid }} .hps__nav:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.35);
-    transform: scale(1.06);
+    background: var(--hps-arrow-hover-bg);
+    color: var(--hps-arrow-hover-icon);
+    transform: scale(1.08);
   }
   #hps-{{ uid }} .hps__nav:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
+    outline: 2px solid var(--hps-arrow-hover-bg);
+    outline-offset: 3px;
   }
 
   @media screen and (max-width: 767px) {
@@ -189,7 +215,7 @@
     roots.forEach(function (root) {
       var rail = root.querySelector('[data-hps-rail]');
       if (!rail) return;
-      var colsD = parseInt(root.getAttribute('data-cols-d'), 10) || 4;
+      var colsD = parseInt(root.getAttribute('data-cols-d'), 10) || 3;
       var colsM = parseInt(root.getAttribute('data-cols-m'), 10) || 2;
 
       function visibleCount() {
@@ -275,8 +301,66 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "default": 4,
-      "info": "Mobile is fixed at 2 per row and advances 2 at a time."
+      "default": 3,
+      "info": "Smaller number = bigger cards. Mobile is fixed at 2 per row and advances 2 at a time."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "sub_color",
+      "label": "Small caption color",
+      "default": "#8a8a8a"
+    },
+    {
+      "type": "color",
+      "id": "label_bg",
+      "label": "Category label background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "label_text",
+      "label": "Category label text",
+      "default": "#00e38a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Arrow button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon",
+      "label": "Arrow icon color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow hover background",
+      "default": "#00e38a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_icon",
+      "label": "Arrow hover icon color",
+      "default": "#000000"
     }
   ],
   "presets": [
@@ -284,7 +368,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "max_products": 12,
-        "per_row_desktop": 4
+        "per_row_desktop": 3
       }
     }
   ]

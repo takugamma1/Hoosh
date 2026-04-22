@@ -246,9 +246,9 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "label": "",
+        "label": "Електронни глави",
         "subheading": "",
-        "heading": "",
+        "heading": "Избери своята глава",
         "collection": "e-heads",
         "max_products": 12,
         "per_row_desktop": 4,

@@ -112,9 +112,9 @@
         "label": "",
         "subheading": "",
         "heading": "",
-        "collection": "e-heads",
+        "collection": "e-pod-0",
         "max_products": 12,
-        "per_row_desktop": 4
+        "per_row_desktop": 2
       }
     }
   },

@@ -113,8 +113,8 @@
         "label": "E-PODS  Вкусове",
         "subheading": "",
         "heading": "Плъзни за да разгледаш",
-        "video_text": "",
-        "video_url": "",
+        "video_text": "Продуктови Указания",
+        "video_url": "https://hooshwave.com/wp-content/uploads/2024/06/pr-guide-4.mp4",
         "collection": "e-pod-package-0",
         "max_products": 24,
         "per_row_desktop": 4,
@@ -125,7 +125,7 @@
         "label_text": "#ffffff",
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
-        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_bg": "#ffffff",
         "arrow_hover_icon": "#000000"
       }
     },

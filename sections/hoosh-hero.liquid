@@ -28,7 +28,16 @@
   endif
 -%}
 
-<section class="hhero" data-hoosh>
+<section
+  id="hhero-{{ section.id }}"
+  class="hhero"
+  style="
+    --hhero-tagline-size: {{ section.settings.tagline_size | default: 18 }}px;
+    --hhero-cta-icon-size: {{ section.settings.cta_icon_size | default: 54 }}px;
+    --hhero-cta-label-size: {{ section.settings.cta_label_size | default: 18 }}px;
+  "
+  data-hoosh
+>
   {%- if section.settings.bg_image != blank -%}
     <img
       class="hhero__bg"
@@ -250,7 +259,7 @@
   }
   .hhero__tagline {
     font-family: var(--h-font-display, 'Bebas Neue Cyrillic', 'Bebas Neue', sans-serif);
-    font-size: clamp(1.05rem, 1.4vw, 1.5rem);
+    font-size: var(--hhero-tagline-size, 18px);
     color: rgba(255, 255, 255, 0.95);
     letter-spacing: 0.16em;
     margin: 0;
@@ -274,8 +283,8 @@
   }
   .hhero__play:hover { transform: translateY(-1px); }
   .hhero__play-icon {
-    width: 54px;
-    height: 54px;
+    width: var(--hhero-cta-icon-size, 54px);
+    height: var(--hhero-cta-icon-size, 54px);
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -285,10 +294,14 @@
     box-shadow: 0 10px 35px rgba(232, 74, 122, 0.4);
     flex-shrink: 0;
   }
-  .hhero__play-icon svg { margin-left: 2px; }
+  .hhero__play-icon svg {
+    margin-left: 2px;
+    width: calc(var(--hhero-cta-icon-size, 54px) * 0.4);
+    height: calc(var(--hhero-cta-icon-size, 54px) * 0.4);
+  }
   .hhero__play-label {
     font-family: var(--h-font-display, 'Bebas Neue Cyrillic', 'Bebas Neue', sans-serif);
-    font-size: 1.15rem;
+    font-size: var(--hhero-cta-label-size, 18px);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 400;
@@ -410,26 +423,17 @@
       line-height: 0.9;
     }
     .hhero__tagline {
-      font-size: clamp(0.85rem, 3.4vw, 1.2rem);
       letter-spacing: 0.18em;
       max-width: 90vw;
-    }
-    .hhero__play-icon {
-      width: 44px;
-      height: 44px;
-    }
-    .hhero__play-label {
-      font-size: 0.85rem;
     }
     .hhero-video-modal__close { top: -48px; }
   }
 
-  /* Extra-small phones: tighten play button */
+  /* Extra-small phones: tighten gap */
   @media screen and (max-width: 400px) {
     .hhero__content { gap: 8px; }
     .hhero__play { gap: 8px; }
-    .hhero__play-icon { width: 36px; height: 36px; }
-    .hhero__play-label { font-size: 0.7rem; letter-spacing: 0.06em; }
+    .hhero__play-label { letter-spacing: 0.06em; }
   }
 </style>
 
@@ -559,6 +563,40 @@
       "id": "cta_link",
       "label": "CTA fallback link",
       "info": "Used only if no video URL is set (normal navigation)."
+    },
+    {
+      "type": "header",
+      "content": "Sizes"
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "label": "Tagline font size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "cta_icon_size",
+      "label": "Play icon size",
+      "min": 32,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "cta_label_size",
+      "label": "CTA label font size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 18
     }
   ],
   "presets": [{ "name": "HOOSH Hero" }]

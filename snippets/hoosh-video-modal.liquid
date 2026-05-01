@@ -1,0 +1,127 @@
+{% doc %}
+  HOOSH reusable video modal.
+  Triggered by any element with data-h-video-open="{unique_id}".
+
+  @param {string} unique_id - Required. Unique ID for this modal instance (use section.id).
+  @param {string} video_url - Required. mp4, YouTube, or Vimeo URL.
+  @param {string} [label] - Optional aria-label for the modal.
+{% enddoc %}
+
+{%- liquid
+  assign mid = unique_id
+  assign vu = video_url
+  assign lbl = label | default: 'Video'
+  assign vs = vu | downcase
+  assign embed_src = ''
+  assign is_embed = false
+  assign is_mp4 = false
+  if vs contains 'youtube.com/watch'
+    assign yt_id = vu | split: 'v=' | last | split: '&' | first
+    assign embed_src = 'https://www.youtube.com/embed/' | append: yt_id | append: '?autoplay=1&rel=0'
+    assign is_embed = true
+  elsif vs contains 'youtu.be/'
+    assign yt_id = vu | split: 'youtu.be/' | last | split: '?' | first
+    assign embed_src = 'https://www.youtube.com/embed/' | append: yt_id | append: '?autoplay=1&rel=0'
+    assign is_embed = true
+  elsif vs contains 'youtube.com/embed/'
+    assign embed_src = vu
+    assign is_embed = true
+  elsif vs contains 'vimeo.com/'
+    assign vm_id = vu | split: 'vimeo.com/' | last | split: '?' | first
+    assign embed_src = 'https://player.vimeo.com/video/' | append: vm_id | append: '?autoplay=1'
+    assign is_embed = true
+  elsif vs contains '.mp4'
+    assign is_mp4 = true
+  endif
+-%}
+
+{%- if is_embed or is_mp4 -%}
+  <div
+    class="h-video-modal"
+    id="h-video-modal-{{ mid }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ lbl | escape }}"
+    hidden
+  >
+    <button type="button" class="h-video-modal__backdrop" data-h-video-close="{{ mid }}" aria-label="Close"></button>
+    <div class="h-video-modal__frame">
+      <button type="button" class="h-video-modal__close" data-h-video-close="{{ mid }}" aria-label="Close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      {%- if is_embed -%}
+        <div class="h-video-modal__ratio">
+          <iframe
+            class="h-video-modal__iframe"
+            data-embed-src="{{ embed_src }}"
+            src=""
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen
+            title="{{ lbl | escape }}"
+          ></iframe>
+        </div>
+      {%- else -%}
+        <video
+          class="h-video-modal__video"
+          data-mp4-src="{{ vu }}"
+          controls
+          playsinline
+          preload="none"
+        ></video>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <style>
+    .h-video-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: clamp(1rem, 3vw, 2rem); }
+    .h-video-modal[hidden] { display: none; }
+    .h-video-modal__backdrop { position: absolute; inset: 0; background: rgba(5, 4, 12, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: none; padding: 0; cursor: pointer; }
+    .h-video-modal__frame { position: relative; width: 100%; max-width: 1100px; z-index: 1; }
+    .h-video-modal__close { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s ease; }
+    .h-video-modal__close:hover { background: rgba(255, 255, 255, 0.22); }
+    .h-video-modal__ratio { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+    .h-video-modal__iframe, .h-video-modal__video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+    .h-video-modal__video { position: relative; inset: auto; width: 100%; height: auto; max-height: 85vh; border-radius: 14px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); background: #000; }
+    body.h-video-open { overflow: hidden; }
+    @media screen and (max-width: 767px) { .h-video-modal__close { top: -48px; } }
+  </style>
+
+  <script>
+    (function () {
+      var mid = '{{ mid }}';
+      var modal = document.getElementById('h-video-modal-' + mid);
+      if (!modal || modal.dataset.hwired === '1') return;
+      modal.dataset.hwired = '1';
+      var iframe = modal.querySelector('.h-video-modal__iframe');
+      var video = modal.querySelector('.h-video-modal__video');
+      var openBtns = document.querySelectorAll('[data-h-video-open="' + mid + '"]');
+      var closeBtns = modal.querySelectorAll('[data-h-video-close="' + mid + '"]');
+      function openModal() {
+        if (iframe) {
+          var src = iframe.getAttribute('data-embed-src');
+          if (src && !iframe.src) iframe.src = src;
+        }
+        if (video) {
+          var mp4 = video.getAttribute('data-mp4-src');
+          if (mp4 && !video.querySelector('source')) {
+            var s = document.createElement('source'); s.src = mp4; s.type = 'video/mp4';
+            video.appendChild(s); video.load();
+          }
+          try { video.play(); } catch (e) {}
+        }
+        modal.hidden = false;
+        document.body.classList.add('h-video-open');
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.classList.remove('h-video-open');
+        if (iframe) iframe.src = '';
+        if (video) { try { video.pause(); } catch (e) {} }
+      }
+      openBtns.forEach(function (b) { b.addEventListener('click', openModal); });
+      closeBtns.forEach(function (b) { b.addEventListener('click', closeModal); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+    })();
+  </script>
+{%- endif -%}

@@ -48,7 +48,7 @@
 
 <section
   id="hps-{{ uid }}"
-  class="hps{% unless has_header %} hps--no-header{% endunless %}"
+  class="hps{% unless has_header %} hps--no-header{% endunless %}{% if s.hide_on_mobile %} hps--hide-mobile{% endif %}"
   style="
     --hps-cols-d: {{ cols_desktop }};
     --hps-cols-m: {{ cols_mobile }};
@@ -129,6 +129,9 @@
   #hps-{{ uid }}.hps--no-header {
     padding-block-start: clamp(0.75rem, 2vw, 1.5rem);
     padding-block-end: clamp(0.75rem, 2vw, 1.5rem);
+  }
+  @media screen and (max-width: 767px) {
+    #hps-{{ uid }}.hps--hide-mobile { display: none; }
   }
 
   #hps-{{ uid }} .hps__head {
@@ -320,6 +323,13 @@
       "type": "checkbox",
       "id": "hide_header",
       "label": "Hide header",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide entire slider on mobile",
+      "info": "Use together with the HOOSH Mobile Grid section to show a grid on phones instead of a slider.",
       "default": false
     },
     {

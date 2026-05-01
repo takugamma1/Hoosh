@@ -5,10 +5,12 @@
   assign label_v = s.label | default: '' | strip
   assign sub_v = s.subheading | default: '' | strip
   assign head_v = s.heading | default: '' | strip
+  assign pill_v = s.pill_text | default: '' | strip
 
   assign has_label = false
   assign has_sub = false
   assign has_head = false
+  assign has_pill = false
   if label_v != '' and label_v != blank
     assign has_label = true
   endif
@@ -18,8 +20,11 @@
   if head_v != '' and head_v != blank
     assign has_head = true
   endif
+  if pill_v != '' and pill_v != blank and s.hide_pill != true
+    assign has_pill = true
+  endif
   assign has_header = false
-  if has_label or has_sub or has_head
+  if has_label or has_sub or has_head or has_pill
     assign has_header = true
   endif
   if s.hide_header
@@ -62,6 +67,13 @@
   <div class="h-container">
     {%- if has_header -%}
       <div class="hps__head h-reveal">
+        {%- if has_pill -%}
+          {%- if s.pill_link != blank -%}
+            <a class="hps__pill" href="{{ s.pill_link }}"><span>{{ pill_v }}</span></a>
+          {%- else -%}
+            <span class="hps__pill"><span>{{ pill_v }}</span></span>
+          {%- endif -%}
+        {%- endif -%}
         {%- if has_label -%}<span class="hps__label">{{ label_v }}</span>{%- endif -%}
         {%- if has_sub -%}<span class="hps__sub">{{ sub_v }}</span>{%- endif -%}
         {%- if has_head -%}<h2 class="hps__title h-display">{{ head_v }}</h2>{%- endif -%}
@@ -120,21 +132,50 @@
   }
 
   #hps-{{ uid }} .hps__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  #hps-{{ uid }} .hps__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: linear-gradient(180deg, #f4f4f4 0%, #d6d6d6 50%, #b9b9b9 100%);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: 14px 36px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      inset 0 -1px 0 rgba(0,0,0,0.15),
+      0 6px 18px rgba(0,0,0,0.45);
+    margin: 0 0 1.8em;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  #hps-{{ uid }} a.hps__pill:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
   }
   #hps-{{ uid }} .hps__label {
     display: inline-block;
     font-family: var(--h-font-body, 'Outfit', sans-serif);
-    background: var(--hps-label-bg);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 999px;
-    padding: 6px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     color: var(--hps-label-text);
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin: 0 0 1.5em;
+    margin: 0 0 1.2em;
   }
   #hps-{{ uid }} .hps__sub {
     display: block;
@@ -280,6 +321,23 @@
       "id": "hide_header",
       "label": "Hide header",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_pill",
+      "label": "Hide silver pill button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "pill_text",
+      "label": "Silver pill text (above label)",
+      "info": "Leave empty to hide. Renders as a silver rounded button."
+    },
+    {
+      "type": "url",
+      "id": "pill_link",
+      "label": "Silver pill link (optional)"
     },
     {
       "type": "text",

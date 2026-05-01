@@ -28,6 +28,9 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
+        "hide_pill": false,
+        "pill_text": "КАТАЛОГ HOOSH",
+        "pill_link": "",
         "label": "Разгледай",
         "subheading": "",
         "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",

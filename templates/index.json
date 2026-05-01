@@ -147,40 +147,6 @@
         "arrow_hover_icon": "#000000"
       }
     },
-    "hoosh_news_teaser_AFEeh7": {
-      "type": "hoosh-news-teaser",
-      "blocks": {
-        "teaser_PNgBDF": {
-          "type": "teaser",
-          "settings": {
-            "image": "shopify://shop_images/group-2.png",
-            "heading": "Вейп",
-            "copy": "",
-            "show_badge": false,
-            "badge_text": "Очаквай Скоро"
-          }
-        },
-        "teaser_BbE9hK": {
-          "type": "teaser",
-          "settings": {
-            "image": "shopify://shop_images/group-1.png",
-            "heading": "Снус",
-            "copy": "",
-            "show_badge": false,
-            "badge_text": "Очаквай Скоро"
-          }
-        }
-      },
-      "block_order": [
-        "teaser_PNgBDF",
-        "teaser_BbE9hK"
-      ],
-      "name": "HOOSH News Teaser",
-      "settings": {
-        "label": "Новини",
-        "heading": "Очаквайте скоро"
-      }
-    },
     "hoosh_catalog_grid_HrrH84": {
       "type": "hoosh-catalog-grid",
       "blocks": {
@@ -275,6 +241,40 @@
         "video_url": "https://hooshwave.com/wp-content/uploads/2024/06/pr-guide-1.mp4"
       }
     },
+    "hoosh_news_teaser_AFEeh7": {
+      "type": "hoosh-news-teaser",
+      "blocks": {
+        "teaser_PNgBDF": {
+          "type": "teaser",
+          "settings": {
+            "image": "shopify://shop_images/group-2.png",
+            "heading": "Вейп",
+            "copy": "",
+            "show_badge": false,
+            "badge_text": "Очаквай Скоро"
+          }
+        },
+        "teaser_BbE9hK": {
+          "type": "teaser",
+          "settings": {
+            "image": "shopify://shop_images/group-1.png",
+            "heading": "Снус",
+            "copy": "",
+            "show_badge": false,
+            "badge_text": "Очаквай Скоро"
+          }
+        }
+      },
+      "block_order": [
+        "teaser_PNgBDF",
+        "teaser_BbE9hK"
+      ],
+      "name": "HOOSH News Teaser",
+      "settings": {
+        "label": "Новини",
+        "heading": "Очаквайте скоро"
+      }
+    },
     "hoosh_newsletter_PJfJVq": {
       "type": "hoosh-newsletter",
       "name": "HOOSH Newsletter",
@@ -294,8 +294,8 @@
     "hoosh_product_slider_h8nrzT",
     "hoosh_product_slider_9Pjx8E",
     "hoosh_product_slider_cDAddQ",
-    "hoosh_news_teaser_AFEeh7",
     "hoosh_catalog_grid_HrrH84",
+    "hoosh_news_teaser_AFEeh7",
     "hoosh_newsletter_PJfJVq"
   ]
 }

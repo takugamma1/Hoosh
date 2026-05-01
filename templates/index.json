@@ -292,28 +292,28 @@
           "type": "social_link",
           "settings": {
             "platform": "instagram",
-            "url": ""
+            "url": "https://hooshbg.myshopify.com/#MainContent"
           }
         },
         "social_yt": {
           "type": "social_link",
           "settings": {
             "platform": "youtube",
-            "url": ""
+            "url": "https://hooshbg.myshopify.com/#MainContent"
           }
         },
         "social_tt": {
           "type": "social_link",
           "settings": {
             "platform": "tiktok",
-            "url": ""
+            "url": "https://hooshbg.myshopify.com/#MainContent"
           }
         },
         "social_dc": {
           "type": "social_link",
           "settings": {
             "platform": "discord",
-            "url": ""
+            "url": "https://hooshbg.myshopify.com/#MainContent"
           }
         }
       },

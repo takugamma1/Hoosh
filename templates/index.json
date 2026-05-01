@@ -141,7 +141,7 @@
         "label": "E-PODS 0% Вкусове",
         "subheading": "",
         "heading": "Очаквайте скоро",
-        "video_text": "sadsa",
+        "video_text": "Продуктови Указания",
         "video_url": "https://hooshwave.com/wp-content/uploads/2024/06/pr-guide-4.mp4",
         "collection": "e-pod-0",
         "max_products": 24,
@@ -153,7 +153,7 @@
         "label_text": "#ffffff",
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
-        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_bg": "#ffffff",
         "arrow_hover_icon": "#000000"
       }
     },

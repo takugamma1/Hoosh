@@ -48,6 +48,26 @@
         "arrow_hover_icon": "#000000"
       }
     },
+    "hoosh_mobile_grid_bestsellers": {
+      "type": "hoosh-mobile-grid",
+      "name": "HOOSH Mobile Grid",
+      "settings": {
+        "hide_header": false,
+        "hide_pill": false,
+        "pill_text": "КАТАЛОГ HOOSH",
+        "pill_link": "",
+        "label": "Разгледай",
+        "subheading": "",
+        "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",
+        "collection": "e-heads",
+        "max_products": 12,
+        "per_row_mobile": 2,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_text": "#00e38a"
+      }
+    },
     "hoosh_product_slider_h8nrzT": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
@@ -257,6 +277,7 @@
   "order": [
     "hoosh_hero_HTFnpU",
     "hoosh_product_slider_U8B8qT",
+    "hoosh_mobile_grid_bestsellers",
     "hoosh_product_slider_h8nrzT",
     "hoosh_product_slider_9Pjx8E",
     "hoosh_product_slider_cDAddQ",

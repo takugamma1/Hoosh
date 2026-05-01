@@ -100,7 +100,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "hide_on_mobile": true,
+        "hide_on_mobile": false,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",
@@ -126,7 +126,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "hide_on_mobile": true,
+        "hide_on_mobile": false,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",

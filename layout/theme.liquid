@@ -48,6 +48,22 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 
+    {%- comment -%} HOOSH — Force Bebas Neue Cyrillic everywhere (overrides Shopify font picker) {%- endcomment -%}
+    <style>
+      :root {
+        --font-heading--family: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
+        --font-subheading--family: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
+        --font-accent--family: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
+        --h-font-display: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
+      }
+      h1, h2, h3, h4, h5, h6,
+      .h-display,
+      [class*="heading"],
+      [class*="title"] {
+        font-family: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
+      }
+    </style>
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}

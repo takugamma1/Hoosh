@@ -285,6 +285,28 @@
         "heading": "Очаквайте скоро"
       }
     },
+    "hoosh_social_cta_main": {
+      "type": "hoosh-social-cta",
+      "blocks": {
+        "social_ig": { "type": "social_link", "settings": { "platform": "instagram", "url": "" } },
+        "social_yt": { "type": "social_link", "settings": { "platform": "youtube", "url": "" } },
+        "social_tt": { "type": "social_link", "settings": { "platform": "tiktok", "url": "" } },
+        "social_dc": { "type": "social_link", "settings": { "platform": "discord", "url": "" } }
+      },
+      "block_order": ["social_ig", "social_yt", "social_tt", "social_dc"],
+      "name": "HOOSH Social CTA",
+      "settings": {
+        "label": "Присъедини се към революцията на наргилетата",
+        "heading": "Последвай ни в социалните мрежи",
+        "description": "Последвайте ни в социалните мрежи и се присъединете към HOOSH общността, марката за „Cool Generation\". Открийте най-новите тенденции, споделете опита си и бъдете част от нашата общност от любители на наргиле и вейп.",
+        "video_text": "Продуктови указания",
+        "video_url": "https://hooshwave.com/wp-content/uploads/2024/06/pr-guide-1.mp4",
+        "bg_color": "#000000",
+        "label_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "body_color": "#c8c8c8"
+      }
+    },
     "hoosh_newsletter_PJfJVq": {
       "type": "hoosh-newsletter",
       "name": "HOOSH Newsletter",
@@ -306,6 +328,7 @@
     "hoosh_product_slider_cDAddQ",
     "hoosh_catalog_grid_HrrH84",
     "hoosh_news_teaser_AFEeh7",
+    "hoosh_social_cta_main",
     "hoosh_newsletter_PJfJVq"
   ]
 }

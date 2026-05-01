@@ -28,6 +28,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
+        "hide_on_mobile": true,
         "hide_pill": false,
         "pill_text": "КАТАЛОГ HOOSH",
         "pill_link": "",
@@ -73,6 +74,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
+        "hide_on_mobile": true,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",
@@ -98,6 +100,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
+        "hide_on_mobile": true,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",
@@ -123,6 +126,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
+        "hide_on_mobile": true,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",

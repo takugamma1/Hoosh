@@ -30,10 +30,21 @@
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
 
-    {%- comment -%} HOOSH — Google Fonts (Bebas Neue + Outfit) {%- endcomment -%}
+    {%- comment -%} HOOSH — Custom Bebas Neue Cyrillic + Google Fonts fallback {%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'Bebas Neue Cyrillic';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('{{ "BebasNeueCyrillic.woff2" | asset_url }}') format('woff2'),
+             url('{{ "BebasNeueCyrillic.woff" | asset_url }}') format('woff'),
+             url('{{ "BebasNeueCyrillic.ttf" | asset_url }}') format('truetype');
+      }
+    </style>
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 

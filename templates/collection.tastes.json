@@ -207,6 +207,7 @@
     },
     "hoosh_product_slider_iAT3xe": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -235,6 +236,7 @@
     },
     "hoosh_product_slider_NFLM7c": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -276,7 +278,7 @@
         "video_text": "",
         "video_url": "",
         "collection": "e-pod-package-0",
-        "max_products": 12,
+        "max_products": 24,
         "per_row_desktop": 4,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
@@ -304,7 +306,7 @@
         "video_text": "",
         "video_url": "",
         "collection": "e-pod-0",
-        "max_products": 12,
+        "max_products": 24,
         "per_row_desktop": 4,
         "bg_color": "#000000",
         "heading_color": "#ffffff",

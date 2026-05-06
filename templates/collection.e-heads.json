@@ -74,6 +74,28 @@
         "padding-block-end": 40
       }
     },
+    "hoosh_mobile_grid_zirGjH": {
+      "type": "hoosh-mobile-grid",
+      "name": "HOOSH Mobile Grid",
+      "settings": {
+        "hide_header": false,
+        "hide_pill": false,
+        "pill_text": "КАТАЛОГ HOOSH",
+        "pill_link": "",
+        "label": "Разгледай",
+        "subheading": "",
+        "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",
+        "video_text": "",
+        "video_url": "",
+        "collection": "e-heads",
+        "max_products": 12,
+        "per_row_mobile": 2,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_text": "#00e38a"
+      }
+    },
     "main": {
       "type": "main-collection",
       "blocks": {
@@ -235,6 +257,7 @@
     },
     "hoosh_product_slider_NFLM7c": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -263,6 +286,7 @@
     },
     "hoosh_product_slider_3fGXLa": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -291,6 +315,7 @@
     },
     "hoosh_product_slider_X37e3k": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -320,6 +345,7 @@
   },
   "order": [
     "hero_bXftKa",
+    "hoosh_mobile_grid_zirGjH",
     "main",
     "hoosh_product_slider_iAT3xe",
     "hoosh_product_slider_NFLM7c",

@@ -207,6 +207,7 @@
     },
     "hoosh_product_slider_iAT3xe": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -285,6 +286,7 @@
     },
     "hoosh_product_slider_3fGXLa": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
@@ -313,6 +315,7 @@
     },
     "hoosh_product_slider_X37e3k": {
       "type": "hoosh-product-slider",
+      "disabled": true,
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,

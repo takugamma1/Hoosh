@@ -15,7 +15,7 @@
         "text_rXGrVJ": {
           "type": "text",
           "settings": {
-            "text": "<h2>Hoosh Каталог</h2>",
+            "text": "<h2>{{ closest.collection.title }}</h2>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",

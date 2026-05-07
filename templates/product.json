@@ -65,7 +65,7 @@
         "video_url": "",
         "collection": "hookahs",
         "max_products": 12,
-        "per_row_desktop": 5,
+        "per_row_desktop": 4,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",

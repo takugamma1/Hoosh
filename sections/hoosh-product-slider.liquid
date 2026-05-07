@@ -73,8 +73,17 @@
     {%- if has_header -%}
       <div class="hps__head h-reveal">
         {%- if has_pill -%}
-          {%- if s.pill_link != blank -%}
-            <a class="hps__pill" href="{{ s.pill_link }}"><span>{{ pill_v }}</span></a>
+          {%- liquid
+            assign pill_target = ''
+            if s.pill_anchor != blank
+              assign anchor_clean = s.pill_anchor | strip | remove_first: '#'
+              assign pill_target = '#' | append: anchor_clean
+            elsif s.pill_link != blank
+              assign pill_target = s.pill_link
+            endif
+          -%}
+          {%- if pill_target != '' -%}
+            <a class="hps__pill" href="{{ pill_target }}"><span>{{ pill_v }}</span></a>
           {%- else -%}
             <span class="hps__pill"><span>{{ pill_v }}</span></span>
           {%- endif -%}
@@ -395,6 +404,12 @@
       "type": "url",
       "id": "pill_link",
       "label": "Silver pill link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "pill_anchor",
+      "label": "Silver pill anchor target (optional)",
+      "info": "Section ID to scroll to on this page (e.g. 'hsc-hoosh_social_cta_main' or 'shopify-section-hoosh_social_cta_main'). The # is optional. Overrides the URL above."
     },
     {
       "type": "text",

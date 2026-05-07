@@ -32,7 +32,7 @@
       "settings": {
         "hide_header": false,
         "hide_on_mobile": true,
-        "hide_pill": false,
+        "hide_pill": true,
         "pill_text": "КАТАЛОГ HOOSH",
         "pill_link": "",
         "pill_anchor": "hcg-template--28415266226550__hoosh_catalog_grid_HrrH84",

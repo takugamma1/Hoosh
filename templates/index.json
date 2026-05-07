@@ -63,7 +63,7 @@
         "hide_pill": false,
         "pill_text": "КАТАЛОГ HOOSH",
         "pill_link": "",
-        "pill_anchor": "",
+        "pill_anchor": "hoosh-catalog-grid",
         "label": "Разгледай",
         "subheading": "",
         "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",

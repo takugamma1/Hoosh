@@ -63,6 +63,14 @@
       [class*="title"] {
         font-family: 'Bebas Neue Cyrillic', 'Bebas Neue', 'Anton', sans-serif !important;
       }
+
+      /* HOOSH — hide header logo + actions while menu drawer is open so they don't bleed through */
+      header-component:has(.menu-drawer-container[open]) .header-logo,
+      header-component:has(.menu-drawer-container[open]) .logo-block,
+      header-component:has(details.menu-open) .header-logo,
+      header-component:has(details.menu-open) .logo-block {
+        visibility: hidden;
+      }
     </style>
 
     {% if request.design_mode %}

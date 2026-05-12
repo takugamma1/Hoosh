@@ -173,5 +173,8 @@
 
     {%- comment -%} HOOSH — Floating WhatsApp widget {%- endcomment -%}
     {% render 'hoosh-wa-widget', whatsapp: settings.hoosh_whatsapp %}
+
+    {%- comment -%} HOOSH — Age gate (renders on every page; self-dismissing if accepted) {%- endcomment -%}
+    {% section 'hoosh-age-gate' %}
   </body>
 </html>

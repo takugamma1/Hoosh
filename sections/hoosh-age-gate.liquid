@@ -1,28 +1,59 @@
 {{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
 
-<div id="hoosh-age-gate" class="hag" data-hoosh aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hag-title">
+{%- liquid
+  assign s = section.settings
+  assign terms_url = s.terms_url | default: '/policies/terms-of-service'
+  assign privacy_url = s.privacy_url | default: '/policies/privacy-policy'
+  assign decline_redirect = s.decline_redirect | default: 'https://www.google.com'
+-%}
+
+<div
+  id="hoosh-age-gate"
+  class="hag"
+  data-hoosh
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="hag-title"
+>
   <div class="hag__backdrop"></div>
   <div class="hag__card">
-    {%- if section.settings.logo != blank -%}
-      <img class="hag__logo" src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="60" loading="eager" />
+    {%- if s.logo != blank -%}
+      <img class="hag__logo" src="{{ s.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="60" loading="eager" />
+    {%- else -%}
+      <div class="hag__logo-text">HOOSH</div>
     {%- endif -%}
 
-    <h2 id="hag-title" class="hag__title">{{ section.settings.title | default: 'Над 18 ли си?' }}</h2>
-    <p class="hag__copy">
-      {{ section.settings.copy | default: 'Трябва да имаш навършени 18 години, за да продължиш към сайта. Моля, потвърди възрастта си.' }}
+    <span class="hag__eyebrow">{{ s.eyebrow | default: 'Възрастово ограничение' }}</span>
+
+    <h2 id="hag-title" class="hag__title">
+      {{ s.title | default: 'Навършил ли си 18 години?' }}
+    </h2>
+
+    <div class="hag__copy">
+      {{ s.copy | default: 'Този уебсайт е дигитален каталог на марката HOOSH и е предназначен единствено за лица над 18 години. Сайтът НЕ извършва онлайн продажби на електронни наргилета, никотинови или тютюневи продукти — представянето е само информативно, в пълно съответствие с българското законодателство. Закупуването става след личен контакт с представител на марката.' }}
+    </div>
+
+    <p class="hag__terms-note">
+      {{ s.terms_note | default: 'С натискане на бутона „Аз съм на 18+", потвърждавате, че сте навършили 18 години и приемате нашите' }}
+      <a href="{{ terms_url }}" target="_blank" rel="noopener">{{ s.terms_label | default: 'Общи условия' }}</a>
+      {{ s.terms_and | default: 'и' }}
+      <a href="{{ privacy_url }}" target="_blank" rel="noopener">{{ s.privacy_label | default: 'Политика за поверителност' }}</a>.
     </p>
 
     <div class="hag__actions">
       <button type="button" class="hag__btn hag__btn--accept" data-hag-accept>
-        {{ section.settings.accept_label | default: 'Аз съм на 18 или повече' }}
+        {{ s.accept_label | default: 'ДА, НАВЪРШИЛ СЪМ 18 ГОДИНИ' }}
       </button>
       <button type="button" class="hag__btn hag__btn--decline" data-hag-decline>
-        {{ section.settings.decline_label | default: 'Под 18 години съм' }}
+        {{ s.decline_label | default: 'Не съм на 18 години' }}
       </button>
     </div>
 
-    {%- if section.settings.notice != blank -%}
-      <p class="hag__notice">{{ section.settings.notice }}</p>
+    {%- if s.notice != blank -%}
+      <p class="hag__notice">{{ s.notice }}</p>
+    {%- else -%}
+      <p class="hag__notice">HOOSH е марка за електронни наргилета и аксесоари. Употребата на никотин може да навреди на здравето. Продуктите не се продават онлайн.</p>
     {%- endif -%}
   </div>
 </div>
@@ -31,7 +62,7 @@
   .hag {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 99999;
     display: none;
     align-items: center;
     justify-content: center;
@@ -43,52 +74,90 @@
   .hag__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .hag__card {
     position: relative;
     z-index: 1;
-    max-width: 460px;
+    max-width: 520px;
     width: 100%;
     background: #ffffff;
     color: #111;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    border-radius: 16px;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border-radius: 18px;
     text-align: center;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
     animation: hagIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 92vh;
+    overflow-y: auto;
   }
   @keyframes hagIn {
     from { opacity: 0; transform: translateY(16px) scale(0.98); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   .hag__logo {
-    max-width: 120px;
+    max-width: 140px;
     height: auto;
     margin: 0 auto 1rem;
     display: block;
   }
+  .hag__logo-text {
+    font-family: var(--h-font-display, 'Bebas Neue Cyrillic', 'Bebas Neue', sans-serif);
+    font-size: 2.4rem;
+    letter-spacing: 0.08em;
+    color: #111;
+    margin: 0 0 0.75rem;
+    line-height: 1;
+  }
+  .hag__eyebrow {
+    display: inline-block;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c43960;
+    margin-bottom: 0.5rem;
+  }
   .hag__title {
     font-family: var(--h-font-display, 'Bebas Neue Cyrillic', 'Bebas Neue', sans-serif);
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
     letter-spacing: 0.02em;
     text-transform: none;
     color: #111;
-    margin: 0 0 0.75rem;
+    margin: 0 0 1rem;
     line-height: 1.15;
   }
   .hag__copy {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
+    text-align: left;
+  }
+  .hag__terms-note {
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.78rem;
     color: #555;
     line-height: 1.55;
     margin: 0 0 1.5rem;
+    padding: 0.85rem 1rem;
+    background: #f5f5f5;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
   }
+  .hag__terms-note a {
+    color: #111;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  .hag__terms-note a:hover { color: #c43960; }
   .hag__actions {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
   .hag__btn {
     font-family: var(--h-font-body, 'Outfit', sans-serif);
@@ -107,39 +176,60 @@
     background: linear-gradient(90deg, #ff4e7e 0%, #e84a7a 35%, #8a5bff 100%);
   }
   .hag__btn--decline {
-    background: linear-gradient(90deg, #6e7480 0%, #4a4f59 100%);
+    background: transparent;
+    color: #777;
+    text-decoration: underline;
+    text-transform: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    padding: 8px 24px;
   }
   .hag__btn:hover {
     transform: translateY(-1px);
     filter: brightness(1.05);
   }
+  .hag__btn--decline:hover {
+    color: #111;
+    background: transparent;
+  }
   .hag__notice {
     margin-top: 1rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #888;
+    line-height: 1.5;
   }
+
+  @media screen and (max-width: 480px) {
+    .hag__copy { font-size: 0.85rem; }
+    .hag__terms-note { font-size: 0.72rem; }
+    .hag__btn { font-size: 0.8rem; padding: 12px 18px; }
+  }
+
+  body.hag-open { overflow: hidden; }
 </style>
 
 <script>
   (function () {
     var KEY = 'hoosh_age_ok';
+    var KEY_TS = 'hoosh_terms_agreed_at';
     var el = document.getElementById('hoosh-age-gate');
     if (!el) return;
 
     function open() {
       el.classList.add('is-open');
       el.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('hag-open');
     }
     function close() {
       el.classList.remove('is-open');
       el.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      document.body.classList.remove('hag-open');
     }
 
     var ok = null;
     try { ok = localStorage.getItem(KEY); } catch (e) {}
 
+    // Show on first visit OR if previously declined (no record)
     if (ok !== '1') {
       open();
     }
@@ -147,13 +237,24 @@
     el.addEventListener('click', function (evt) {
       var target = evt.target;
       if (target.closest('[data-hag-accept]')) {
-        try { localStorage.setItem(KEY, '1'); } catch (e) {}
+        try {
+          localStorage.setItem(KEY, '1');
+          localStorage.setItem(KEY_TS, new Date().toISOString());
+        } catch (e) {}
         close();
       } else if (target.closest('[data-hag-decline]')) {
-        var redirect = {{ section.settings.decline_redirect | default: 'https://www.google.com' | json }};
+        var redirect = {{ decline_redirect | json }};
         window.location.href = redirect;
       }
     });
+
+    // Block keyboard escape — user must make a choice
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && el.classList.contains('is-open')) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   })();
 </script>
 
@@ -163,33 +264,88 @@
   "class": "hoosh-age-gate-section",
   "settings": [
     {
+      "type": "header",
+      "content": "Branding"
+    },
+    {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo (optional)"
+      "label": "Logo (optional)",
+      "info": "Falls back to HOOSH text if empty."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Възрастово ограничение"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Над 18 ли си?"
+      "default": "Навършил ли си 18 години?"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "copy",
-      "label": "Message",
-      "default": "Трябва да имаш навършени 18 години, за да продължиш към сайта. Моля, потвърди възрастта си."
+      "label": "Body copy",
+      "default": "<p>Този уебсайт е дигитален каталог на марката HOOSH и е предназначен единствено за лица над 18 години. Сайтът НЕ извършва онлайн продажби на електронни наргилета, никотинови или тютюневи продукти — представянето е само информативно, в пълно съответствие с българското законодателство. Закупуването става след личен контакт с представител на марката.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Terms & Privacy"
+    },
+    {
+      "type": "text",
+      "id": "terms_note",
+      "label": "Terms acknowledgement intro",
+      "default": "С натискане на бутона „Аз съм на 18+\", потвърждавате, че сте навършили 18 години и приемате нашите"
+    },
+    {
+      "type": "text",
+      "id": "terms_label",
+      "label": "Terms link label",
+      "default": "Общи условия"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Terms of service URL",
+      "info": "Default: /policies/terms-of-service"
+    },
+    {
+      "type": "text",
+      "id": "terms_and",
+      "label": "Conjunction",
+      "default": "и"
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Privacy link label",
+      "default": "Политика за поверителност"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Privacy policy URL",
+      "info": "Default: /policies/privacy-policy"
+    },
+    {
+      "type": "header",
+      "content": "Actions"
     },
     {
       "type": "text",
       "id": "accept_label",
       "label": "Accept button label",
-      "default": "Аз съм на 18 или повече"
+      "default": "ДА, НАВЪРШИЛ СЪМ 18 ГОДИНИ"
     },
     {
       "type": "text",
       "id": "decline_label",
       "label": "Decline button label",
-      "default": "Под 18 години съм"
+      "default": "Не съм на 18 години"
     },
     {
       "type": "url",
@@ -198,10 +354,14 @@
       "info": "Where under-18 visitors are sent. Defaults to google.com."
     },
     {
-      "type": "text",
+      "type": "header",
+      "content": "Footer notice"
+    },
+    {
+      "type": "textarea",
       "id": "notice",
       "label": "Small print",
-      "default": ""
+      "default": "HOOSH е марка за електронни наргилета и аксесоари. Употребата на никотин може да навреди на здравето. Продуктите не се продават онлайн."
     }
   ],
   "presets": [{ "name": "HOOSH Age Gate" }]

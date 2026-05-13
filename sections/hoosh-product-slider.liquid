@@ -96,7 +96,12 @@
             <span class="hps__video-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </span>
-            <span>{{ vid_v }}</span>
+            <span class="hps__video-text">
+              <span class="hps__video-label">{{ vid_v }}</span>
+              {%- if s.video_subtext != blank -%}
+                <span class="hps__video-sublabel">{{ s.video_subtext }}</span>
+              {%- endif -%}
+            </span>
           </button>
         {%- endif -%}
       </div>
@@ -238,6 +243,23 @@
     transition: transform 0.2s ease, color 0.2s ease;
   }
   #hps-{{ uid }} .hps__video:hover { transform: translateY(-1px); color: #00e38a; }
+  #hps-{{ uid }} .hps__video-text {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    line-height: 1.15;
+    gap: 2px;
+  }
+  #hps-{{ uid }} .hps__video-label { display: block; }
+  #hps-{{ uid }} .hps__video-sublabel {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+  }
   #hps-{{ uid }} .hps__video-icon {
     width: 44px;
     height: 44px;
@@ -431,6 +453,12 @@
       "id": "video_text",
       "label": "Video button text",
       "info": "Renders a play-icon button under the heading. Leave empty to hide."
+    },
+    {
+      "type": "text",
+      "id": "video_subtext",
+      "label": "Video button sub-text (optional)",
+      "info": "Small text below the main label, e.g. 'Виж видеото'."
     },
     {
       "type": "url",

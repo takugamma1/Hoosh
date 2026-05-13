@@ -40,6 +40,7 @@
         "subheading": "",
         "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",
         "video_text": "",
+        "video_subtext": "",
         "video_url": "",
         "collection": "e-heads",
         "max_products": 12,
@@ -68,6 +69,7 @@
         "subheading": "",
         "heading": "НАЙ-ПРОДАВАНИТЕ ПРОДУКТИ",
         "video_text": "",
+        "video_subtext": "",
         "video_url": "",
         "collection": "e-heads-hookah",
         "max_products": 12,
@@ -92,6 +94,7 @@
         "subheading": "",
         "heading": "Нашите Hoosh Наргилета",
         "video_text": "",
+        "video_subtext": "",
         "video_url": "",
         "collection": "hookahs",
         "max_products": 12,
@@ -121,6 +124,7 @@
         "subheading": "",
         "heading": "Плъзни за да разгледаш",
         "video_text": "Продуктови Указания Виж видеото",
+        "video_subtext": "",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d2919cb1d6f54386898ff27cd2e0ce8d.mp4",
         "collection": "e-pod-package-0",
         "max_products": 24,
@@ -150,6 +154,7 @@
         "subheading": "",
         "heading": "Очаквайте скоро",
         "video_text": "",
+        "video_subtext": "",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d2919cb1d6f54386898ff27cd2e0ce8d.mp4",
         "collection": "e-pod-0",
         "max_products": 24,
@@ -255,7 +260,7 @@
       "settings": {
         "label": "РАЗГЛЕДАЙ",
         "heading": "НАШИЯТ HOOSH КАТАЛОГ",
-        "video_text": "ПРОДУКТОВИ УКАЗАНИЯ",
+        "video_text": "ПРОДУКТОВИ УКАЗАНИЯ ВИЖ ВИДЕОТО",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/74f6afeee5414ec283bb4ebac94fdafa.mp4"
       }
     },

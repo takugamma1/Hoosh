@@ -13,6 +13,24 @@
     assign coming_soon = true
   endif
   assign p_url = product.url | default: '#'
+
+  # Detect e-pod products → HIDE their price. Everything else (hookahs, e-heads, hoses…) shows the price.
+  assign is_epod = false
+  if product.handle contains 'e-pod' or product.type contains 'pod' or product.type contains 'POD'
+    assign is_epod = true
+  else
+    for col in product.collections
+      if col.handle contains 'e-pod' or col.handle contains 'epod'
+        assign is_epod = true
+        break
+      endif
+    endfor
+  endif
+
+  assign show_price = false
+  if is_epod == false and product != blank and product.price > 0
+    assign show_price = true
+  endif
 %}
 
 <article class="hp-card h-reveal">
@@ -41,6 +59,16 @@
   <a class="hp-card__name-link" href="{{ p_url }}">
     <h3 class="hp-card__name">{{ p_name }}</h3>
   </a>
+
+  {%- if show_price -%}
+    <p class="hp-card__price">
+      {%- if product.price_min != product.price_max -%}
+        от {{ product.price_min | money }}
+      {%- else -%}
+        {{ product.price | money }}
+      {%- endif -%}
+    </p>
+  {%- endif -%}
 
   <a href="{{ p_url }}" class="hp-card__cta">Свържете се с нас</a>
 </article>

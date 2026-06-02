@@ -14,7 +14,7 @@
   endif
   assign p_url = product.url | default: '#'
 
-  # Detect e-pod products → show their price (catalog-only for hookahs/e-heads)
+  # Detect e-pod products → HIDE their price. Everything else (hookahs, e-heads, hoses…) shows the price.
   assign is_epod = false
   if product.handle contains 'e-pod' or product.type contains 'pod' or product.type contains 'POD'
     assign is_epod = true
@@ -28,7 +28,7 @@
   endif
 
   assign show_price = false
-  if is_epod and product != blank and product.price > 0
+  if is_epod == false and product != blank and product.price > 0
     assign show_price = true
   endif
 %}

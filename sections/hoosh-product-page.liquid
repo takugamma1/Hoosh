@@ -6,6 +6,24 @@
   if p.tags contains 'coming-soon' or p.tags contains 'ochakvai-skoro'
     assign coming_soon = true
   endif
+
+  # Detect e-pod products → HIDE price. Everything else shows the price.
+  assign is_epod = false
+  if p.handle contains 'e-pod' or p.type contains 'pod' or p.type contains 'POD'
+    assign is_epod = true
+  else
+    for col in p.collections
+      if col.handle contains 'e-pod' or col.handle contains 'epod'
+        assign is_epod = true
+        break
+      endif
+    endfor
+  endif
+
+  assign show_price = false
+  if is_epod == false and coming_soon == false and p != blank and p.price > 0
+    assign show_price = true
+  endif
 -%}
 
 <section class="hpp h-section" data-hoosh>
@@ -72,6 +90,14 @@
 
         {%- if coming_soon -%}
           <div class="hpp__price hpp__price--soon">Очаквай Скоро</div>
+        {%- elsif show_price -%}
+          <div class="hpp__price">
+            {%- if p.price_min != p.price_max -%}
+              от {{ p.price_min | money }}
+            {%- else -%}
+              {{ p.price | money }}
+            {%- endif -%}
+          </div>
         {%- endif -%}
 
         {%- if p.description != blank -%}

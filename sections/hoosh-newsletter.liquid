@@ -27,6 +27,11 @@
             </button>
           </div>
 
+          <label class="hns__consent">
+            <input type="checkbox" name="gdpr_consent" value="yes" class="hns__consent-check" required>
+            <div class="hns__consent-text">{{ section.settings.consent_text }}</div>
+          </label>
+
           {%- if form.posted_successfully? -%}
             <p class="hns__success">{{ section.settings.success_message | default: 'Благодарим ти, абонаментът е активиран!' }}</p>
           {%- endif -%}
@@ -110,6 +115,33 @@
     filter: brightness(1.08);
     transform: translateY(-1px);
   }
+  .hns__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    cursor: pointer;
+  }
+  .hns__consent-check {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: #ff4e7e;
+    cursor: pointer;
+  }
+  .hns__consent-text,
+  .hns__consent-text p {
+    margin: 0;
+    font-family: var(--h-font-body, 'Outfit', sans-serif);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--h-text-secondary, #888);
+  }
+  .hns__consent-text a {
+    color: var(--h-text, #fff);
+    text-decoration: underline;
+  }
   .hns__success {
     margin: 12px 0 0;
     color: var(--h-green, #00E676);
@@ -175,6 +207,13 @@
       "id": "success_message",
       "label": "Success message",
       "default": "Благодарим ти, абонаментът е активиран!"
+    },
+    {
+      "type": "richtext",
+      "id": "consent_text",
+      "label": "GDPR consent text",
+      "info": "Shown beside a required checkbox the visitor must tick before subscribing. You can include a link to your privacy policy.",
+      "default": "<p>Съгласявам се да получавам маркетингови имейли и приемам политиката за поверителност.</p>"
     }
   ],
   "presets": [{ "name": "HOOSH Newsletter" }]

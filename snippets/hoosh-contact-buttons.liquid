@@ -17,7 +17,7 @@
 <div class="hoosh-contact {{ layout_class }}">
   {%- if whatsapp != blank -%}
     <a
-      href="https://wa.me/{{ whatsapp }}{% if product_name != blank %}?text={{ 'Hi, I\'m interested in ' | append: product_name | url_encode }}{% endif %}"
+      href="https://wa.me/{{ whatsapp }}{% if product_name != blank %}?text={{ 'Здравейте, интересувам се от: ' | append: product_name | url_encode }}{% endif %}"
       target="_blank"
       rel="noopener"
       class="h-btn h-btn--whatsapp"

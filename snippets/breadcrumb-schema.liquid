@@ -1,0 +1,71 @@
+{% comment %}
+  Renders a schema.org BreadcrumbList (JSON-LD) for collection and product pages.
+  Mirrors the visible breadcrumb trail (Начало › [Collection] › Product) so the
+  structured data matches the on-page content (a Google Rich Results requirement).
+  Self-gates by request.page_type, so it is safe to render globally from theme.liquid.
+{% endcomment %}
+{%- liquid
+  assign pt = request.page_type
+-%}
+{%- capture breadcrumb_ld -%}
+{%- if pt == 'collection' and collection != blank and collection.title != blank -%}
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Начало",
+      "item": {{ request.origin | append: routes.root_url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": {{ request.origin | append: collection.url | json }}
+    }
+  ]
+}
+{%- elsif pt == 'product' and product != blank and product.title != blank -%}
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Начало",
+      "item": {{ request.origin | append: routes.root_url | json }}
+    },
+{%- if collection != blank and collection.title != blank and collection.url != blank -%}
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": {{ request.origin | append: collection.url | json }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }},
+      "item": {{ request.origin | append: product.url | json }}
+    }
+{%- else -%}
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.title | json }},
+      "item": {{ request.origin | append: product.url | json }}
+    }
+{%- endif -%}
+  ]
+}
+{%- endif -%}
+{%- endcapture -%}
+{%- assign breadcrumb_ld = breadcrumb_ld | strip -%}
+{%- if breadcrumb_ld != blank -%}
+<script type="application/ld+json">
+{{ breadcrumb_ld }}
+</script>
+{%- endif -%}

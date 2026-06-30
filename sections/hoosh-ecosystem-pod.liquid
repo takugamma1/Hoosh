@@ -21,7 +21,7 @@
         <span class="h-label">{{ section.settings.label | default: 'The Pod' }}</span>
         <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Refillable. Reusable. Ready.' }}</h2>
         <hr class="h-divider">
-        <p class="h-body">{{ section.settings.description | default: 'The refillable pod that slots into your shisha cup. Choose your flavour, click it in, and you're set.' }}</p>
+        <p class="h-body">{{ section.settings.description | default: "The refillable pod that slots into your shisha cup. Choose your flavour, click it in, and you're set." }}</p>
         {%- if section.settings.cta_text != blank -%}
           <a href="{{ section.settings.cta_link | default: '#hoosh-products' }}" class="h-btn h-btn--outline">
             {{ section.settings.cta_text }}

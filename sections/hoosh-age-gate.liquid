@@ -227,9 +227,9 @@
     }
 
     var ok = null;
-    try { ok = localStorage.getItem(KEY); } catch (e) {}
+    try { ok = sessionStorage.getItem(KEY); } catch (e) {}
 
-    // Show on first visit OR if previously declined (no record)
+    // Show once per browser session (sessionStorage): first load of a new session, or if declined / no record
     if (ok !== '1') {
       open();
     }
@@ -238,7 +238,7 @@
       var target = evt.target;
       if (target.closest('[data-hag-accept]')) {
         try {
-          localStorage.setItem(KEY, '1');
+          sessionStorage.setItem(KEY, '1');
           localStorage.setItem(KEY_TS, new Date().toISOString());
         } catch (e) {}
         close();

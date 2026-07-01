@@ -239,7 +239,7 @@
       if (target.closest('[data-hag-accept]')) {
         try {
           sessionStorage.setItem(KEY, '1');
-          localStorage.setItem(KEY_TS, new Date().toISOString());
+          sessionStorage.setItem(KEY_TS, new Date().toISOString());
         } catch (e) {}
         close();
       } else if (target.closest('[data-hag-decline]')) {

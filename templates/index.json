@@ -31,7 +31,7 @@
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "hide_on_mobile": true,
+        "hide_on_mobile": false,
         "hide_pill": true,
         "pill_text": "КАТАЛОГ HOOSH",
         "pill_link": "",
@@ -81,14 +81,15 @@
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
         "label_text": "#ffffff"
-      }
+      },
+      "disabled": true
     },
     "hoosh_product_slider_h8nrzT": {
       "type": "hoosh-product-slider",
       "name": "HOOSH Product Slider",
       "settings": {
         "hide_header": false,
-        "hide_on_mobile": true,
+        "hide_on_mobile": false,
         "hide_pill": false,
         "pill_text": "",
         "pill_link": "",

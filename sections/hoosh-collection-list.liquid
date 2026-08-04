@@ -1,0 +1,195 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<section class="hcl h-section" data-hoosh>
+  <div class="h-container">
+
+    <div class="hcl__header h-reveal">
+      {%- if s.label != blank -%}
+        <span class="h-label">{{ s.label }}</span>
+      {%- endif -%}
+      <h1 class="h-display hcl__heading">{{ s.heading | default: 'Каталог.' }}</h1>
+      {%- if s.lead != blank -%}
+        <p class="h-body hcl__lead">{{ s.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="hcl__grid">
+      {%- if s.show_all -%}
+        {%- for collection in collections limit: 50 -%}
+          {%- if collection.handle == 'frontpage' -%}{%- continue -%}{%- endif -%}
+
+          {%- assign custom_image = blank -%}
+          {%- assign custom_title = blank -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.collection.handle == collection.handle -%}
+              {%- assign custom_image = block.settings.image -%}
+              {%- assign custom_title = block.settings.title -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- render 'hoosh-collection-card', collection: collection, custom_image: custom_image, custom_title: custom_title, count_suffix: s.count_suffix -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.collection != blank -%}
+            {%- render 'hoosh-collection-card', collection: block.settings.collection, custom_image: block.settings.image, custom_title: block.settings.title, count_suffix: s.count_suffix, attrs: block.shopify_attributes -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hcl {
+    background: var(--h-bg);
+    padding: clamp(48px, 8vw, 96px) 0;
+  }
+  .hcl__header {
+    margin-bottom: clamp(28px, 5vw, 48px);
+  }
+  .hcl__heading {
+    font-size: clamp(44px, 6.5vw, 88px);
+    line-height: 0.95;
+    margin: 12px 0 0;
+  }
+  .hcl__lead {
+    margin: 16px 0 0;
+    max-width: 56ch;
+    font-size: 17px;
+  }
+
+  .hcl__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .hcl__card {
+    position: relative;
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--h-bg-card);
+    border: 1px solid var(--h-border);
+    text-decoration: none;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .hcl__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--h-pink);
+  }
+  .hcl__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .hcl__card:hover .hcl__img { transform: scale(1.05); }
+  .hcl__placeholder { fill: var(--h-text-muted); }
+  .hcl__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.88) 100%);
+  }
+  .hcl__body {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .hcl__title-wrap {
+    display: grid;
+    gap: 2px;
+  }
+  .hcl__title {
+    font-family: var(--h-font-display);
+    font-size: clamp(24px, 2.6vw, 34px);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--h-text);
+    text-transform: uppercase;
+  }
+  .hcl__count {
+    font-family: var(--h-font-body);
+    font-size: 13px;
+    color: var(--h-text-secondary);
+  }
+  .hcl__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    color: var(--h-text);
+    font-size: 18px;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+  .hcl__card:hover .hcl__arrow {
+    background: var(--h-pink);
+    border-color: var(--h-pink);
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .hcl__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .hcl__grid { grid-template-columns: 1fr; }
+    .hcl__card { aspect-ratio: 16 / 10; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Collection List",
+  "tag": "section",
+  "class": "hoosh-section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Продукти" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Каталог." },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Intro text",
+      "default": "Разгледай всички категории — електрически шиши, глави, вкусове и аксесоари."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all",
+      "label": "Show all collections automatically",
+      "info": "When on, every collection appears and blocks only override thumbnails. Turn off to show only the collections you add as blocks (custom order).",
+      "default": true
+    },
+    { "type": "text", "id": "count_suffix", "label": "Product count suffix", "default": "продукта" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection thumbnail",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Custom thumbnail", "info": "Overrides the collection image on this page." },
+        { "type": "text", "id": "title", "label": "Custom title (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [{ "name": "HOOSH Collection List" }]
+}
+{% endschema %}

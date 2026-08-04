@@ -1,0 +1,27 @@
+{%- liquid
+  assign card_image = custom_image
+  if card_image == blank
+    assign card_image = collection.featured_image
+  endif
+  assign card_title = custom_title
+  if card_title == blank
+    assign card_title = collection.title
+  endif
+-%}
+<a href="{{ collection.url }}" class="hcl__card h-reveal" {{ attrs }}>
+  {%- if card_image != blank -%}
+    {{ card_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', class: 'hcl__img', alt: card_image.alt | default: card_title }}
+  {%- else -%}
+    {{ 'collection-1' | placeholder_svg_tag: 'hcl__img hcl__placeholder' }}
+  {%- endif -%}
+  <span class="hcl__overlay" aria-hidden="true"></span>
+  <span class="hcl__body">
+    <span class="hcl__title-wrap">
+      <span class="hcl__title">{{ card_title }}</span>
+      {%- if count_suffix != blank -%}
+        <span class="hcl__count">{{ collection.products_count }} {{ count_suffix }}</span>
+      {%- endif -%}
+    </span>
+    <span class="hcl__arrow" aria-hidden="true">→</span>
+  </span>
+</a>

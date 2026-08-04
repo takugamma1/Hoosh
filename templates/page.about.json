@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about": {
+      "type": "hoosh-about",
+      "settings": {
+        "label": "За нас",
+        "heading": "Новата ера на наргилетата",
+        "lead": "HOOSH е повече от наргиле — това е нов ритуал. Електрическа шиша без въглени и без компромис, създадена за хора, които ценят стила, вкуса и свободата."
+      },
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "reverse": false,
+            "label": "Нашата история",
+            "heading": "Роден от страст",
+            "text": "<p>Създадохме HOOSH, за да преоткрием изживяването с наргиле — без дим, без въглени, без чакане. Само чист вкус и модерен дизайн, готови за секунди.</p><p>Всеки продукт е резултат от внимание към детайла — от премиум материалите до палитрата от вкусове, вдъхновени от целия свят.</p>"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "reverse": true,
+            "label": "Нашата мисия",
+            "heading": "Ритуалът, преоткрит",
+            "text": "<p>Вярваме, че традицията и технологията могат да вървят ръка за ръка. HOOSH запазва духа на споделения момент, но го прави по-чист, по-лесен и по-стилен от всякога.</p>"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": { "value": "10+", "text": "Уникални вкуса", "color": "#FF1493" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "value": "0", "text": "Въглени и дим", "color": "#00E676" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "value": "100%", "text": "Електрическо изживяване", "color": "#FF1493" }
+        },
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "heading": "Иновация",
+            "text": "Електрическа технология, която превръща всяка сесия в изживяване — без запалки, без пепел, без компромиси."
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "heading": "Качество",
+            "text": "Премиум материали и прецизен дизайн във всеки детайл — от устройството до последната капка вкус."
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "heading": "Общност",
+            "text": "HOOSH събира хората. Създаваме моменти за споделяне — модерният ритуал на новото поколение."
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "story_2",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "value_1",
+        "value_2",
+        "value_3"
+      ]
+    },
+    "trust": {
+      "type": "hoosh-trust-strip",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "text": "Премиум качество" } },
+        "trust_2": { "type": "trust_item", "settings": { "text": "Бърза доставка" } },
+        "trust_3": { "type": "trust_item", "settings": { "text": "Гарантирано удоволствие" } },
+        "trust_4": { "type": "trust_item", "settings": { "text": "Сигурни плащания" } }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "settings": {}
+    },
+    "cta": {
+      "type": "hoosh-final-cta",
+      "settings": {
+        "label": "Свържи се с нас",
+        "heading": "Готов ли си за новия ритуал?",
+        "description": "Пиши ни във всеки канал — насреща сме, за да ти помогнем да намериш перфектния сетъп."
+      }
+    },
+    "newsletter": {
+      "type": "hoosh-newsletter",
+      "settings": {
+        "label": "Абонирай се за нашия бюлетин",
+        "heading": "Не пропускай последните ни новини",
+        "placeholder": "Email",
+        "button_label": "Абониране",
+        "success_message": "Благодарим ти, абонаментът е активиран!"
+      }
+    }
+  },
+  "order": ["about", "trust", "cta", "newsletter"]
+}

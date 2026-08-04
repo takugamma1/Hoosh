@@ -2,9 +2,35 @@
 
 {%- liquid
   assign s = section.settings
+
+  assign card_count = 0
+  if s.show_all
+    for collection in collections limit: 50
+      unless collection.handle == 'frontpage'
+        assign card_count = card_count | plus: 1
+      endunless
+    endfor
+  else
+    for block in section.blocks
+      if block.type == 'collection' and block.settings.collection != blank
+        assign card_count = card_count | plus: 1
+      endif
+    endfor
+  endif
+
+  assign cols = s.columns
+  if cols == 0
+    assign cols = card_count
+  endif
+  if cols > 6
+    assign cols = 6
+  endif
+  if cols < 1
+    assign cols = 1
+  endif
 -%}
 
-<section class="hcl h-section" data-hoosh>
+<section class="hcl h-section" data-hoosh style="--hcl-cols: {{ cols }};">
   <div class="h-container">
 
     <div class="hcl__header h-reveal">
@@ -67,7 +93,7 @@
 
   .hcl__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--hcl-cols, 3), minmax(0, 1fr));
     gap: 20px;
   }
   .hcl__card {
@@ -146,8 +172,11 @@
     color: #fff;
   }
 
+  @media (max-width: 1100px) {
+    .hcl__grid { grid-template-columns: repeat(min(var(--hcl-cols, 3), 3), minmax(0, 1fr)); }
+  }
   @media (max-width: 900px) {
-    .hcl__grid { grid-template-columns: repeat(2, 1fr); }
+    .hcl__grid { grid-template-columns: repeat(min(var(--hcl-cols, 2), 2), minmax(0, 1fr)); }
   }
   @media (max-width: 560px) {
     .hcl__grid { grid-template-columns: 1fr; }
@@ -176,7 +205,17 @@
       "info": "When on, every collection appears and blocks only override thumbnails. Turn off to show only the collections you add as blocks (custom order).",
       "default": true
     },
-    { "type": "text", "id": "count_suffix", "label": "Product count suffix", "default": "продукта" }
+    { "type": "text", "id": "count_suffix", "label": "Product count suffix", "default": "продукта" },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 0,
+      "info": "0 = auto: fits all collections on a single row (max 6)."
+    }
   ],
   "blocks": [
     {

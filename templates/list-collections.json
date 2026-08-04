@@ -12,6 +12,22 @@
     "hoosh_collection_list": {
       "type": "hoosh-collection-list",
       "blocks": {
+        "collection_xUx6d3": {
+          "type": "collection",
+          "settings": {
+            "collection": "e-heads",
+            "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg",
+            "title": ""
+          }
+        },
+        "collection_8wmjDW": {
+          "type": "collection",
+          "settings": {
+            "collection": "hookahs",
+            "image": "shopify://shop_images/hooka-portada-2.0-2048x1470.png",
+            "title": ""
+          }
+        },
         "collection_wT4C47": {
           "type": "collection",
           "settings": {
@@ -27,29 +43,13 @@
             "image": "shopify://shop_images/e-pod-0-nicotina-love-dxb-1.png",
             "title": ""
           }
-        },
-        "collection_8wmjDW": {
-          "type": "collection",
-          "settings": {
-            "collection": "hookahs",
-            "image": "shopify://shop_images/hooka-portada-2.0-2048x1470.png",
-            "title": ""
-          }
-        },
-        "collection_xUx6d3": {
-          "type": "collection",
-          "settings": {
-            "collection": "e-heads",
-            "image": "shopify://shop_images/DSC8276-1_e41f085d-cb13-4e3d-91a1-36214ceee47a.jpg",
-            "title": ""
-          }
         }
       },
       "block_order": [
-        "collection_wT4C47",
-        "collection_QP8iVA",
+        "collection_xUx6d3",
         "collection_8wmjDW",
-        "collection_xUx6d3"
+        "collection_wT4C47",
+        "collection_QP8iVA"
       ],
       "settings": {
         "label": "Продукти",

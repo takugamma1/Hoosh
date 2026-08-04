@@ -44,7 +44,10 @@
         "video_url": "",
         "collection": "e-heads",
         "max_products": 12,
+        "layout": "grid",
         "per_row_desktop": 5,
+        "per_row_mobile": 2,
+        "grid_rows": 2,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -53,10 +56,7 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000",
-        "layout": "grid",
-        "per_row_mobile": 2,
-        "grid_rows": 2
+        "arrow_hover_icon": "#000000"
       }
     },
     "hoosh_mobile_grid_bestsellers": {
@@ -101,7 +101,10 @@
         "video_url": "",
         "collection": "hookahs",
         "max_products": 12,
+        "layout": "grid",
         "per_row_desktop": 4,
+        "per_row_mobile": 2,
+        "grid_rows": 2,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -110,10 +113,7 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000",
-        "layout": "grid",
-        "per_row_mobile": 2,
-        "grid_rows": 2
+        "arrow_hover_icon": "#000000"
       }
     },
     "hoosh_product_slider_9Pjx8E": {
@@ -134,7 +134,10 @@
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d2919cb1d6f54386898ff27cd2e0ce8d.mp4",
         "collection": "e-pod-package-0",
         "max_products": 24,
+        "layout": "grid",
         "per_row_desktop": 4,
+        "per_row_mobile": 2,
+        "grid_rows": 2,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -143,10 +146,7 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#ffffff",
-        "arrow_hover_icon": "#000000",
-        "layout": "grid",
-        "per_row_mobile": 2,
-        "grid_rows": 2
+        "arrow_hover_icon": "#000000"
       }
     },
     "hoosh_product_slider_cDAddQ": {
@@ -167,7 +167,10 @@
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d2919cb1d6f54386898ff27cd2e0ce8d.mp4",
         "collection": "e-pod-0",
         "max_products": 24,
+        "layout": "grid",
         "per_row_desktop": 4,
+        "per_row_mobile": 2,
+        "grid_rows": 2,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -176,10 +179,7 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#ffffff",
-        "arrow_hover_icon": "#000000",
-        "layout": "grid",
-        "per_row_mobile": 2,
-        "grid_rows": 2
+        "arrow_hover_icon": "#000000"
       }
     },
     "hoosh_catalog_grid_HrrH84": {
@@ -198,7 +198,7 @@
             "heading": "HOSE - Маркуч за наргиле",
             "description": "Последният, но не на последно място по-важност елемент наргиле сета ти.",
             "cta_label": "Добави Маркуч Към Сета Си",
-            "cta_link": "shopify://products/маркуч-за-hoosh-наргиле"
+            "cta_link": "shopify://products/markuch-za-nargile"
           }
         },
         "image_PpjXgb": {

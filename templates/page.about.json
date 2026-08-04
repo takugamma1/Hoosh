@@ -33,7 +33,7 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "value": "10+",
+            "value": ">10",
             "text": "Уникални вкуса",
             "color": "#ff1493"
           }

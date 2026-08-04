@@ -12,6 +12,14 @@
     "hoosh_collection_list": {
       "type": "hoosh-collection-list",
       "blocks": {
+        "collection_wT4C47": {
+          "type": "collection",
+          "settings": {
+            "collection": "e-pod-package-0",
+            "image": "shopify://shop_images/Amalfi_Breeze.png",
+            "title": ""
+          }
+        },
         "collection_QP8iVA": {
           "type": "collection",
           "settings": {
@@ -38,6 +46,7 @@
         }
       },
       "block_order": [
+        "collection_wT4C47",
         "collection_QP8iVA",
         "collection_8wmjDW",
         "collection_xUx6d3"

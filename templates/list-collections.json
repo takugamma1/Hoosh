@@ -9,18 +9,297 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hoosh-collection-list",
+    "collection_list_Wfgh3m": {
+      "type": "main-collection-list",
+      "blocks": {
+        "group_4FtiAg": {
+          "type": "group",
+          "name": "t:names.header",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 48,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_fRMQMR": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h1>Collections</h1>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 16,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_fRMQMR"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "t:names.collection_card",
+          "static": true,
+          "settings": {
+            "placement": "below_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "collection_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0
+          },
+          "blocks": {
+            "collection_title_7YgBPU": {
+              "type": "collection-title",
+              "name": "t:names.collection_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "name": "t:names.collection_card_image",
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "collection_title_7YgBPU"
+          ]
+        }
+      },
+      "block_order": [
+        "group_4FtiAg"
+      ],
+      "disabled": true,
+      "name": "Collection list",
       "settings": {
-        "label": "Продукти",
-        "heading": "Каталог.",
-        "lead": "Разгледай всички категории — електрически шиши, глави, вкусове и аксесоари.",
-        "show_all": true,
-        "count_suffix": "продукта"
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "columns": 3,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "bento_gap": 8,
+        "rows_gap": 24,
+        "max_collections": 4,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 12,
+        "color_scheme": "",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "hoosh_product_slider_qHfhKx": {
+      "type": "hoosh-product-slider",
+      "disabled": true,
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "hide_on_mobile": false,
+        "hide_pill": false,
+        "pill_text": "",
+        "pill_link": "",
+        "pill_anchor": "",
+        "label": "Нашите колекции",
+        "subheading": "",
+        "heading": "Разгледай колекциите",
+        "video_text": "",
+        "video_subtext": "",
+        "video_url": "",
+        "collection": "e-heads",
+        "max_products": 12,
+        "per_row_desktop": 4,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
+    },
+    "hoosh_product_slider_bFWWH3": {
+      "type": "hoosh-product-slider",
+      "disabled": true,
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "hide_on_mobile": false,
+        "hide_pill": false,
+        "pill_text": "",
+        "pill_link": "",
+        "pill_anchor": "",
+        "label": "",
+        "subheading": "",
+        "heading": "",
+        "video_text": "",
+        "video_subtext": "",
+        "video_url": "",
+        "collection": "hookahs",
+        "max_products": 12,
+        "per_row_desktop": 5,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
+    },
+    "hoosh_product_slider_DyYcad": {
+      "type": "hoosh-product-slider",
+      "disabled": true,
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "hide_on_mobile": false,
+        "hide_pill": false,
+        "pill_text": "",
+        "pill_link": "",
+        "pill_anchor": "",
+        "label": "",
+        "subheading": "",
+        "heading": "",
+        "video_text": "",
+        "video_subtext": "",
+        "video_url": "",
+        "collection": "e-pod-package-0",
+        "max_products": 12,
+        "per_row_desktop": 4,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
+      }
+    },
+    "hoosh_product_slider_TN8XTH": {
+      "type": "hoosh-product-slider",
+      "name": "HOOSH Product Slider",
+      "settings": {
+        "hide_header": false,
+        "hide_on_mobile": false,
+        "hide_pill": false,
+        "pill_text": "",
+        "pill_link": "",
+        "pill_anchor": "",
+        "label": "0% никотин E-Pods",
+        "subheading": "",
+        "heading": "очаквайте скоро",
+        "video_text": "",
+        "video_subtext": "",
+        "video_url": "",
+        "collection": "e-pod-0",
+        "max_products": 12,
+        "per_row_desktop": 4,
+        "bg_color": "#000000",
+        "heading_color": "#ffffff",
+        "sub_color": "#8a8a8a",
+        "label_bg": "#1a1a1a",
+        "label_text": "#00e38a",
+        "arrow_bg": "#ffffff",
+        "arrow_icon": "#111111",
+        "arrow_hover_bg": "#00e38a",
+        "arrow_hover_icon": "#000000"
       }
     }
   },
   "order": [
-    "main"
+    "collection_list_Wfgh3m",
+    "hoosh_product_slider_qHfhKx",
+    "hoosh_product_slider_bFWWH3",
+    "hoosh_product_slider_DyYcad",
+    "hoosh_product_slider_TN8XTH"
   ]
 }

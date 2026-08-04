@@ -132,7 +132,7 @@
         "video_text": "Продуктови Указания Виж видеото",
         "video_subtext": "",
         "video_url": "https://cdn.shopify.com/videos/c/o/v/d2919cb1d6f54386898ff27cd2e0ce8d.mp4",
-        "collection": "e-pod-package-0",
+        "collection": "e-pod-nicotine",
         "max_products": 24,
         "layout": "grid",
         "per_row_desktop": 4,
@@ -214,7 +214,7 @@
             "heading": "ВКУСОВЕ",
             "description": "Открий интензивните и освежаващи вкусове за твоята премиум наргиле сесия.",
             "cta_label": "Към Всички Вкусове",
-            "cta_link": "shopify://collections/e-pod-package-0"
+            "cta_link": "shopify://collections/e-pod-nicotine"
           }
         },
         "image_6dxqKh": {

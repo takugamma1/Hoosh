@@ -70,11 +70,11 @@
                 class="hpp__thumb{% if forloop.first %} is-active{% endif %}"
                 data-thumb
                 data-src="{{ img | image_url: width: 1200 }}"
-                aria-label="Image {{ forloop.index }}"
+                aria-label="Изображение {{ forloop.index }}"
               >
                 <img
                   src="{{ img | image_url: width: 200 }}"
-                  alt=""
+                  alt="{{ img.alt | default: p.title | escape }} – изглед {{ forloop.index }}"
                   width="120"
                   height="120"
                   loading="lazy"

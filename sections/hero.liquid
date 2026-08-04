@@ -1,3 +1,9 @@
+{%- liquid
+  assign hero_alt_image_1 = section.settings.image_1.alt | default: shop.name
+  assign hero_alt_image_1m = section.settings.image_1_mobile.alt | default: shop.name
+  assign hero_alt_image_2 = section.settings.image_2.alt | default: shop.name
+  assign hero_alt_image_2m = section.settings.image_2_mobile.alt | default: shop.name
+-%}
 
 
 {% liquid
@@ -139,7 +145,7 @@
           width: section.settings.image_1.width,
           widths: widths,
           height: section.settings.image_1.height,
-          alt: section.settings.image_1.alt,
+          alt: hero_alt_image_1,
           class: 'hero__media',
           sizes: sizes,
           fetchpriority: fetch_priority,
@@ -155,7 +161,7 @@
           width: section.settings.image_1.width,
           widths: widths,
           height: section.settings.image_1.height,
-          alt: section.settings.image_1.alt,
+          alt: hero_alt_image_1,
           class: 'hero__media',
           sizes: sizes,
           fetchpriority: fetch_priority,
@@ -191,7 +197,7 @@
             width: section.settings.image_1_mobile.width,
             widths: mobile_widths,
             height: section.settings.image_1_mobile.height,
-            alt: section.settings.image_1_mobile.alt,
+            alt: hero_alt_image_1m,
             class: 'hero__media',
             sizes: sizes_mobile,
             fetchpriority: fetch_priority,
@@ -243,7 +249,7 @@
           width: section.settings.image_2.width,
           widths: widths,
           height: section.settings.image_2.height,
-          alt: section.settings.image_2.alt,
+          alt: hero_alt_image_2,
           class: 'hero__media',
           sizes: sizes,
           fetchpriority: fetch_priority,
@@ -259,7 +265,7 @@
           width: section.settings.image_2.width,
           widths: widths,
           height: section.settings.image_2.height,
-          alt: section.settings.image_2.alt,
+          alt: hero_alt_image_2,
           class: 'hero__media',
           sizes: sizes,
           fetchpriority: fetch_priority,
@@ -295,7 +301,7 @@
             width: section.settings.image_2_mobile.width,
             widths: mobile_widths,
             height: section.settings.image_2_mobile.height,
-            alt: section.settings.image_2_mobile.alt,
+            alt: hero_alt_image_2m,
             class: 'hero__media',
             sizes: sizes_mobile,
             fetchpriority: fetch_priority,

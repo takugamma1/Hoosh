@@ -28,6 +28,11 @@
   assign seo_title = page_title
   assign seo_description = page_description
 
+  # Homepage: fixes the Latin-o typo ("електрoнни") in the admin meta description
+  if template.name == 'index'
+    assign seo_description = 'HOOSH – премиум електронни наргилета без тютюн и въглен. Открий нашите е-глави, наргилета и е-подове. Поръчай лесно чрез WhatsApp!'
+  endif
+
   # The collections list has no admin SEO fields, so it always gets its own copy
   if template.name == 'list-collections'
     assign seo_title = 'Каталог – електрически наргилета, глави и вкусове'

@@ -120,13 +120,6 @@
   <div class="hf__divider"></div>
   <div class="hf__bottom">
     <span class="hf__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-    <div class="hf__policies">
-      {%- for policy in shop.policies -%}
-        {%- if policy != blank -%}
-          <a href="{{ policy.url }}" class="hf__policy-link">{{ policy.title }}</a>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
   </div>
 </footer>
 

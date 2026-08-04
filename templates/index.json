@@ -44,7 +44,7 @@
         "video_url": "",
         "collection": "e-heads",
         "max_products": 12,
-        "per_row_desktop": 4,
+        "per_row_desktop": 5,
         "bg_color": "#000000",
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
@@ -53,7 +53,10 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000"
+        "arrow_hover_icon": "#000000",
+        "layout": "grid",
+        "per_row_mobile": 2,
+        "grid_rows": 2
       }
     },
     "hoosh_mobile_grid_bestsellers": {
@@ -107,7 +110,10 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#00e38a",
-        "arrow_hover_icon": "#000000"
+        "arrow_hover_icon": "#000000",
+        "layout": "grid",
+        "per_row_mobile": 2,
+        "grid_rows": 2
       }
     },
     "hoosh_product_slider_9Pjx8E": {
@@ -137,7 +143,10 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#ffffff",
-        "arrow_hover_icon": "#000000"
+        "arrow_hover_icon": "#000000",
+        "layout": "grid",
+        "per_row_mobile": 2,
+        "grid_rows": 2
       }
     },
     "hoosh_product_slider_cDAddQ": {
@@ -167,7 +176,10 @@
         "arrow_bg": "#ffffff",
         "arrow_icon": "#111111",
         "arrow_hover_bg": "#ffffff",
-        "arrow_hover_icon": "#000000"
+        "arrow_hover_icon": "#000000",
+        "layout": "grid",
+        "per_row_mobile": 2,
+        "grid_rows": 2
       }
     },
     "hoosh_catalog_grid_HrrH84": {

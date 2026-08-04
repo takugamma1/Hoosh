@@ -37,8 +37,21 @@
   endif
 
   assign cols_desktop = s.per_row_desktop | default: 3
-  assign cols_mobile = 2
+  assign cols_mobile = s.per_row_mobile | default: 2
   assign uid = section.id
+
+  assign is_grid = false
+  if s.layout == 'grid'
+    assign is_grid = true
+  endif
+  assign grid_rows = s.grid_rows | default: 2
+  assign product_limit = s.max_products | default: 12
+  if is_grid
+    assign grid_cap = cols_desktop | times: grid_rows
+    if grid_cap < product_limit
+      assign product_limit = grid_cap
+    endif
+  endif
 
   assign bg_color = s.bg_color | default: 'rgba(0,0,0,0)'
   assign heading_color = s.heading_color | default: '#ffffff'
@@ -53,7 +66,7 @@
 
 <section
   id="hps-{{ uid }}"
-  class="hps{% unless has_header %} hps--no-header{% endunless %}{% if s.hide_on_mobile %} hps--hide-mobile{% endif %}"
+  class="hps{% unless has_header %} hps--no-header{% endunless %}{% if s.hide_on_mobile %} hps--hide-mobile{% endif %}{% if is_grid %} hps--grid{% endif %}"
   style="
     --hps-cols-d: {{ cols_desktop }};
     --hps-cols-m: {{ cols_mobile }};
@@ -107,21 +120,27 @@
       </div>
     {%- endif -%}
 
-    <div class="hps__frame" data-hps-root data-cols-d="{{ cols_desktop }}" data-cols-m="{{ cols_mobile }}">
-      <button type="button" class="hps__nav hps__nav--prev" data-hps-dir="-1" aria-label="Previous">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
+    <div class="hps__frame" data-hps-root data-layout="{{ s.layout | default: 'slider' }}" data-cols-d="{{ cols_desktop }}" data-cols-m="{{ cols_mobile }}">
+      {%- unless is_grid -%}
+        <button type="button" class="hps__nav hps__nav--prev" data-hps-dir="-1" aria-label="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      {%- endunless -%}
 
       <div class="hps__viewport">
         <ul class="hps__rail" data-hps-rail>
           {%- if s.collection != blank and s.collection.products.size > 0 -%}
-            {%- for product in s.collection.products limit: s.max_products -%}
+            {%- for product in s.collection.products limit: product_limit -%}
               <li class="hps__item">
                 {% render 'hoosh-product-card', product: product %}
               </li>
             {%- endfor -%}
           {%- else -%}
-            {%- for i in (1..6) -%}
+            {%- assign placeholder_count = 6 -%}
+            {%- if is_grid -%}
+              {%- assign placeholder_count = product_limit -%}
+            {%- endif -%}
+            {%- for i in (1..placeholder_count) -%}
               <li class="hps__item">
                 {% render 'hoosh-product-card' %}
               </li>
@@ -130,9 +149,11 @@
         </ul>
       </div>
 
-      <button type="button" class="hps__nav hps__nav--next" data-hps-dir="1" aria-label="Next">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+      {%- unless is_grid -%}
+        <button type="button" class="hps__nav hps__nav--next" data-hps-dir="1" aria-label="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      {%- endunless -%}
     </div>
   </div>
 
@@ -353,12 +374,34 @@
       flex: 0 0 calc((100% - (var(--hps-cols-m, 2) - 1) * var(--hps-gap-m)) / var(--hps-cols-m, 2));
     }
   }
+
+  /* ── Grid layout ── */
+  #hps-{{ uid }}.hps--grid .hps__rail {
+    display: grid;
+    grid-template-columns: repeat(var(--hps-cols-d, 3), minmax(0, 1fr));
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  #hps-{{ uid }}.hps--grid .hps__item {
+    flex: none;
+    width: 100%;
+  }
+  #hps-{{ uid }}.hps--grid .hps__viewport {
+    overflow: visible;
+  }
+  @media screen and (max-width: 767px) {
+    #hps-{{ uid }}.hps--grid .hps__rail {
+      grid-template-columns: repeat(var(--hps-cols-m, 2), minmax(0, 1fr));
+      gap: var(--hps-gap-m);
+    }
+  }
 </style>
 
 <script>
   (function () {
     var roots = document.querySelectorAll('[data-hps-root]');
     roots.forEach(function (root) {
+      if (root.getAttribute('data-layout') === 'grid') return;
       var rail = root.querySelector('[data-hps-rail]');
       if (!rail) return;
       var colsD = parseInt(root.getAttribute('data-cols-d'), 10) || 3;
@@ -478,7 +521,7 @@
     {
       "type": "range",
       "id": "max_products",
-      "label": "Max products in slider",
+      "label": "Max products",
       "min": 2,
       "max": 24,
       "step": 1,
@@ -489,14 +532,43 @@
       "content": "Layout"
     },
     {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "slider", "label": "Slider" },
+        { "value": "grid", "label": "Grid" }
+      ],
+      "default": "slider"
+    },
+    {
       "type": "range",
       "id": "per_row_desktop",
-      "label": "Products per row (desktop)",
+      "label": "Columns (desktop)",
       "min": 2,
       "max": 6,
       "step": 1,
       "default": 3,
-      "info": "Smaller number = bigger cards. Mobile is fixed at 2 per row and advances 2 at a time."
+      "info": "Smaller number = bigger cards."
+    },
+    {
+      "type": "range",
+      "id": "per_row_mobile",
+      "label": "Columns (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_rows",
+      "label": "Rows (grid layout only)",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2,
+      "info": "Grid shows at most columns × rows products (desktop count; on mobile the same products wrap into more rows). Slider layout ignores this."
     },
     {
       "type": "header",
@@ -563,6 +635,15 @@
       "settings": {
         "max_products": 12,
         "per_row_desktop": 3
+      }
+    },
+    {
+      "name": "HOOSH Product Grid",
+      "settings": {
+        "layout": "grid",
+        "max_products": 12,
+        "per_row_desktop": 3,
+        "grid_rows": 2
       }
     }
   ]

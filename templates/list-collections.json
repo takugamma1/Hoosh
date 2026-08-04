@@ -11,6 +11,19 @@
   "sections": {
     "hoosh_collection_list": {
       "type": "hoosh-collection-list",
+      "blocks": {
+        "collection_xUx6d3": {
+          "type": "collection",
+          "settings": {
+            "collection": "e-heads",
+            "image": "shopify://shop_images/03_EHeadrosegold.png",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_xUx6d3"
+      ],
       "settings": {
         "label": "Продукти",
         "heading": "Каталог.",

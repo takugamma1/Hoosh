@@ -5,7 +5,7 @@
     <span class="h-label">{{ section.settings.label | default: 'Join the Community' }}</span>
     <h2 class="h-display" style="font-size: var(--h-section-title);">{{ section.settings.heading | default: 'Follow Us' }}</h2>
     {%- if section.settings.handle != blank -%}
-      <a href="{{ section.settings.profile_url }}" target="_blank" rel="noopener" class="hsg__handle">@{{ section.settings.handle }}</a>
+      <a href="{{ section.settings.profile_url }}" target="_blank" rel="noopener noreferrer" class="hsg__handle">@{{ section.settings.handle }}</a>
     {%- endif -%}
   </div>
 
@@ -15,7 +15,7 @@
         class="hsg__item h-reveal"
         href="{{ section.settings.profile_url | default: '#' }}"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         {{ block.shopify_attributes }}
       >
         {%- if block.settings.image != blank -%}

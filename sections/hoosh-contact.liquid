@@ -1,0 +1,377 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+  assign phone_link = s.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
+-%}
+
+<section class="hct h-section" data-hoosh>
+  <div class="h-container">
+
+    <div class="hct__header h-reveal">
+      {%- if s.label != blank -%}
+        <span class="h-label">{{ s.label }}</span>
+      {%- endif -%}
+      <h1 class="h-display hct__heading">{{ s.heading | default: 'Свържи се с нас.' }}</h1>
+      {%- if s.lead != blank -%}
+        <p class="h-body hct__lead">{{ s.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="hct__grid">
+      <div class="hct__info h-reveal">
+        {%- if s.image != blank -%}
+          <div class="hct__media">
+            {{ s.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', class: 'hct__img', alt: s.image.alt | default: s.heading }}
+          </div>
+        {%- else -%}
+          <div class="hct__media">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'hct__img hct__placeholder' }}
+          </div>
+        {%- endif -%}
+
+        <ul class="hct__details" role="list">
+          {%- if s.phone != blank -%}
+            <li class="hct__detail">
+              <span class="hct__detail-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="hct__detail-body">
+                <span class="hct__detail-label">{{ s.phone_label | default: 'Телефон' }}</span>
+                <a href="tel:{{ phone_link }}" class="hct__detail-value">{{ s.phone }}</a>
+              </span>
+            </li>
+          {%- endif -%}
+
+          {%- if s.whatsapp != blank -%}
+            <li class="hct__detail">
+              <span class="hct__detail-icon hct__detail-icon--wa" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <span class="hct__detail-body">
+                <span class="hct__detail-label">WhatsApp</span>
+                <a href="https://wa.me/{{ s.whatsapp }}" target="_blank" rel="noopener noreferrer" class="hct__detail-value">{{ s.whatsapp_label | default: 'Пиши ни в WhatsApp' }}</a>
+              </span>
+            </li>
+          {%- endif -%}
+
+          {%- if s.email != blank -%}
+            <li class="hct__detail">
+              <span class="hct__detail-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <span class="hct__detail-body">
+                <span class="hct__detail-label">{{ s.email_label | default: 'Имейл' }}</span>
+                <a href="mailto:{{ s.email }}" class="hct__detail-value">{{ s.email }}</a>
+              </span>
+            </li>
+          {%- endif -%}
+
+          {%- if s.hours != blank -%}
+            <li class="hct__detail">
+              <span class="hct__detail-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="hct__detail-body">
+                <span class="hct__detail-label">{{ s.hours_label | default: 'Работно време' }}</span>
+                <span class="hct__detail-value hct__detail-value--multi">{{ s.hours | newline_to_br }}</span>
+              </span>
+            </li>
+          {%- endif -%}
+
+          {%- if s.address != blank -%}
+            <li class="hct__detail">
+              <span class="hct__detail-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="hct__detail-body">
+                <span class="hct__detail-label">{{ s.address_label | default: 'Адрес' }}</span>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ s.address | url_encode }}" target="_blank" rel="noopener noreferrer" class="hct__detail-value">{{ s.address }}</a>
+              </span>
+            </li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="hct__form-card h-reveal" id="hct-form-{{ uid }}">
+        <h2 class="h-display hct__form-heading">{{ s.form_heading | default: 'Форма за контакт' }}</h2>
+        {%- if s.form_text != blank -%}
+          <p class="h-small hct__form-text">{{ s.form_text }}</p>
+        {%- endif -%}
+
+        {%- form 'contact', id: 'hct-contact-form', class: 'hct__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="hct__success" role="status">{{ s.success_message | default: 'Благодарим ти! Получихме съобщението и ще се свържем с теб възможно най-скоро.' }}</p>
+          {%- elsif form.errors -%}
+            <p class="hct__error" role="alert">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[Тип запитване]" value="Контакт">
+
+          <label class="hct__field">
+            <span class="visually-hidden">{{ s.name_placeholder | default: 'Име и фамилия' }}</span>
+            <input class="hct__input" type="text" name="contact[name]" autocomplete="name" placeholder="{{ s.name_placeholder | default: 'Име и фамилия' | escape }}" required>
+          </label>
+
+          <label class="hct__field">
+            <span class="visually-hidden">{{ s.email_placeholder | default: 'Имейл' }}</span>
+            <input class="hct__input" type="email" name="contact[email]" autocomplete="email" placeholder="{{ s.email_placeholder | default: 'Имейл' | escape }}" required>
+          </label>
+
+          <label class="hct__field">
+            <span class="visually-hidden">{{ s.phone_placeholder | default: 'Телефон (по желание)' }}</span>
+            <input class="hct__input" type="tel" name="contact[phone]" autocomplete="tel" placeholder="{{ s.phone_placeholder | default: 'Телефон (по желание)' | escape }}">
+          </label>
+
+          <label class="hct__field">
+            <span class="visually-hidden">{{ s.message_placeholder | default: 'Твоето съобщение' }}</span>
+            <textarea class="hct__input hct__textarea" name="contact[body]" rows="5" placeholder="{{ s.message_placeholder | default: 'Твоето съобщение' | escape }}" required></textarea>
+          </label>
+
+          <button type="submit" class="h-btn h-btn--primary hct__submit">
+            {{ s.submit_label | default: 'Изпрати съобщение' }}
+          </button>
+
+          {%- if s.form_note != blank -%}
+            <p class="h-small hct__form-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              {{ s.form_note }}
+            </p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+
+    {%- if s.map_query != blank -%}
+      <div class="hct__map h-reveal{% if s.map_dark %} hct__map--dark{% endif %}">
+        <iframe
+          src="https://www.google.com/maps?q={{ s.map_query | url_encode }}&output=embed&hl=bg"
+          width="100%"
+          height="420"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="{{ s.address | default: s.map_query | escape }}"
+        ></iframe>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .hct {
+    background: var(--h-bg);
+    padding: clamp(48px, 8vw, 96px) 0;
+  }
+  .hct__header {
+    margin-bottom: clamp(28px, 5vw, 48px);
+  }
+  .hct__heading {
+    font-size: clamp(44px, 6.5vw, 88px);
+    line-height: 0.95;
+    margin: 12px 0 0;
+  }
+  .hct__lead {
+    margin: 16px 0 0;
+    max-width: 56ch;
+    font-size: 17px;
+  }
+
+  .hct__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 1fr);
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+
+  .hct__media {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--h-bg-card);
+  }
+  .hct__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hct__placeholder { fill: var(--h-text-muted); }
+
+  .hct__details {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .hct__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .hct__detail-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: var(--h-bg-card);
+    border: 1px solid var(--h-border);
+    color: var(--h-pink);
+  }
+  .hct__detail-icon--wa { color: var(--h-green); }
+  .hct__detail-body {
+    display: grid;
+    gap: 2px;
+  }
+  .hct__detail-label {
+    font-family: var(--h-font-body);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--h-text-muted);
+  }
+  .hct__detail-value {
+    font-family: var(--h-font-body);
+    font-size: 16px;
+    color: var(--h-text);
+    text-decoration: none;
+  }
+  a.hct__detail-value:hover { color: var(--h-pink); }
+  .hct__detail-value--multi { line-height: 1.6; }
+
+  .hct__form-card {
+    background: var(--h-bg-card);
+    border: 1px solid var(--h-border);
+    border-radius: 16px;
+    padding: clamp(24px, 3vw, 36px);
+  }
+  .hct__form-heading {
+    font-size: clamp(26px, 2.6vw, 34px);
+    margin: 0;
+  }
+  .hct__form-text {
+    margin: 8px 0 0;
+    color: var(--h-text-secondary);
+  }
+  .hct__form {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .hct .hct__input {
+    width: 100%;
+    background: var(--h-bg-elevated);
+    border: 1px solid var(--h-border-accent);
+    border-radius: 10px;
+    color: var(--h-text);
+    font-family: var(--h-font-body);
+    font-size: 15px;
+    padding: 13px 16px;
+    transition: border-color 0.2s ease;
+  }
+  .hct .hct__input::placeholder { color: var(--h-text-muted); }
+  .hct .hct__input:focus {
+    outline: none;
+    border-color: var(--h-pink);
+  }
+  .hct .hct__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .hct .hct__submit { width: 100%; margin-top: 4px; }
+  .hct .hct__form-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0 0;
+  }
+  .hct__form-note svg { flex-shrink: 0; margin-top: 2px; }
+  .hct .hct__success {
+    background: rgba(0, 230, 118, 0.08);
+    border: 1px solid var(--h-green);
+    color: var(--h-green);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: var(--h-font-body);
+    font-size: 14px;
+    margin: 0;
+  }
+  .hct .hct__error {
+    background: rgba(255, 20, 147, 0.08);
+    border: 1px solid var(--h-pink);
+    color: var(--h-pink);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: var(--h-font-body);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .hct__map {
+    margin-top: clamp(32px, 5vw, 56px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--h-border);
+    line-height: 0;
+  }
+  .hct__map--dark iframe {
+    filter: grayscale(1) invert(0.92) contrast(0.9);
+  }
+
+  @media (max-width: 900px) {
+    .hct__grid {
+      grid-template-columns: 1fr;
+    }
+    .hct__map iframe { height: 320px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Contact",
+  "tag": "section",
+  "class": "hoosh-section",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Контакти" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Свържи се с нас." },
+    { "type": "textarea", "id": "lead", "label": "Intro text", "default": "Имаш въпрос за продуктите, поръчка или партньорство? Пиши ни — отговаряме бързо." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+
+    { "type": "header", "content": "Contact details" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Телефон" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "+359 886 969 757" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp number", "info": "International format, no + sign (e.g. 359886969757)", "default": "359886969757" },
+    { "type": "text", "id": "whatsapp_label", "label": "WhatsApp link label", "default": "Пиши ни в WhatsApp" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Имейл" },
+    { "type": "text", "id": "email", "label": "Email" },
+    { "type": "text", "id": "hours_label", "label": "Hours label", "default": "Работно време" },
+    { "type": "textarea", "id": "hours", "label": "Working hours (one per line)", "default": "Понеделник – Петък: 09:00 – 18:00\nСъбота – Неделя: почивни дни" },
+    { "type": "text", "id": "address_label", "label": "Address label", "default": "Адрес" },
+    { "type": "text", "id": "address", "label": "Address", "default": "София, България" },
+
+    { "type": "header", "content": "Map" },
+    { "type": "text", "id": "map_query", "label": "Map location (address or place)", "default": "София, България" },
+    { "type": "checkbox", "id": "map_dark", "label": "Dark map style", "default": true },
+
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Форма за контакт" },
+    { "type": "textarea", "id": "form_text", "label": "Form text", "default": "Попълни формата и ще се свържем с теб." },
+    { "type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Име и фамилия" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "Имейл" },
+    { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "Телефон (по желание)" },
+    { "type": "text", "id": "message_placeholder", "label": "Message placeholder", "default": "Твоето съобщение" },
+    { "type": "text", "id": "submit_label", "label": "Submit label", "default": "Изпрати съобщение" },
+    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Благодарим ти! Получихме съобщението и ще се свържем с теб възможно най-скоро." },
+    { "type": "text", "id": "form_note", "label": "Note under form", "default": "Вашите данни са защитени и няма да бъдат споделяни." }
+  ],
+  "presets": [{ "name": "HOOSH Contact" }]
+}
+{% endschema %}

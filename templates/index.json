@@ -311,15 +311,8 @@
         "social_yt": {
           "type": "social_link",
           "settings": {
-            "platform": "youtube",
-            "url": "https://hooshbg.myshopify.com/#MainContent"
-          }
-        },
-        "social_tt": {
-          "type": "social_link",
-          "settings": {
-            "platform": "tiktok",
-            "url": "https://hooshbg.myshopify.com/#MainContent"
+            "platform": "facebook",
+            "url": "https://www.facebook.com/profile.php?id=61592340586918"
           }
         },
         "social_dc": {
@@ -333,7 +326,6 @@
       "block_order": [
         "social_ig",
         "social_yt",
-        "social_tt",
         "social_dc"
       ],
       "name": "HOOSH Social CTA",
@@ -360,7 +352,8 @@
         "heading": "Не пропускай последните ни новини",
         "placeholder": "Email",
         "button_label": "Абониране",
-        "success_message": "Благодарим ти, абонаментът е активиран!"
+        "success_message": "Благодарим ти, абонаментът е активиран!",
+        "consent_text": "<p>Съгласявам се да получавам маркетингови имейли и приемам политиката за поверителност.</p>"
       }
     }
   },

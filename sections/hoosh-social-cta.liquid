@@ -115,11 +115,12 @@
             aria-label="{{ vid_v | escape }}"
           >
             {%- if s.image_video != blank -%}
+              {%- assign img_alt = s.image_video.alt | default: 'HOOSH' -%}
               {{ s.image_video | image_url: width: 800 | image_tag:
                   loading: 'lazy',
                   widths: '400,600,800,1000',
                   sizes: '(min-width: 1024px) 30vw, 45vw',
-                  alt: s.image_video.alt | default: 'HOOSH'
+                  alt: img_alt
               }}
             {%- else -%}
               <div class="hsc__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
@@ -130,11 +131,12 @@
           </button>
         {%- else -%}
           {%- if s.image_video != blank -%}
+            {%- assign img_alt = s.image_video.alt | default: 'HOOSH' -%}
             {{ s.image_video | image_url: width: 800 | image_tag:
                 loading: 'lazy',
                 widths: '400,600,800,1000',
                 sizes: '(min-width: 1024px) 30vw, 45vw',
-                alt: s.image_video.alt | default: 'HOOSH'
+                alt: img_alt
             }}
           {%- else -%}
             <div class="hsc__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
@@ -144,11 +146,12 @@
 
       <div class="hsc__media hsc__media--photo h-reveal">
         {%- if s.image_photo != blank -%}
+          {%- assign img_alt = s.image_photo.alt | default: 'HOOSH community' -%}
           {{ s.image_photo | image_url: width: 800 | image_tag:
               loading: 'lazy',
               widths: '400,600,800,1000',
               sizes: '(min-width: 1024px) 30vw, 45vw',
-              alt: s.image_photo.alt | default: 'HOOSH community'
+              alt: img_alt
           }}
         {%- else -%}
           <div class="hsc__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>

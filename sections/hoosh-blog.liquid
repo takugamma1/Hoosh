@@ -26,7 +26,8 @@
             <a href="{{ article.url }}" class="hbl__card-link">
               <div class="hbl__media">
                 {%- if article.image != blank -%}
-                  {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hbl__img', alt: article.image.alt | default: article.title }}
+                  {%- assign img_alt = article.image.alt | default: article.title -%}
+                  {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hbl__img', alt: img_alt }}
                 {%- else -%}
                   {{ 'image' | placeholder_svg_tag: 'hbl__img hbl__placeholder' }}
                 {%- endif -%}

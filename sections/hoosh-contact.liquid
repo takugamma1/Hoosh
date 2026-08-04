@@ -23,7 +23,8 @@
       <div class="hct__info h-reveal">
         {%- if s.image != blank -%}
           <div class="hct__media">
-            {{ s.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', class: 'hct__img', alt: s.image.alt | default: s.heading }}
+            {%- assign img_alt = s.image.alt | default: s.heading -%}
+            {{ s.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', class: 'hct__img', alt: img_alt }}
           </div>
         {%- else -%}
           <div class="hct__media">

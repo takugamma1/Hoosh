@@ -23,7 +23,8 @@
 
       {%- if hero_img != blank and s.show_hero_image -%}
         <div class="hart__hero h-reveal">
-          {{ hero_img | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1600', class: 'hart__hero-img', alt: hero_img.alt | default: article.title }}
+          {%- assign img_alt = hero_img.alt | default: article.title -%}
+          {{ hero_img | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1600', class: 'hart__hero-img', alt: img_alt }}
         </div>
       {%- endif -%}
 
@@ -36,7 +37,8 @@
           {%- when 'image' -%}
             {%- if block.settings.image != blank -%}
               <figure class="hart__figure h-reveal" {{ block.shopify_attributes }}>
-                {{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700, 1000, 1400', class: 'hart__figure-img', alt: block.settings.image.alt | default: block.settings.caption | default: article.title }}
+                {%- assign img_alt = block.settings.image.alt | default: block.settings.caption | default: article.title -%}
+                {{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700, 1000, 1400', class: 'hart__figure-img', alt: img_alt }}
                 {%- if block.settings.caption != blank -%}
                   <figcaption class="hart__caption">{{ block.settings.caption }}</figcaption>
                 {%- endif -%}
@@ -45,10 +47,12 @@
           {%- when 'image_pair' -%}
             <div class="hart__pair h-reveal" {{ block.shopify_attributes }}>
               {%- if block.settings.image_left != blank -%}
-                {{ block.settings.image_left | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: block.settings.image_left.alt | default: article.title }}
+                {%- assign img_alt = block.settings.image_left.alt | default: article.title -%}
+                {{ block.settings.image_left | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: img_alt }}
               {%- endif -%}
               {%- if block.settings.image_right != blank -%}
-                {{ block.settings.image_right | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: block.settings.image_right.alt | default: article.title }}
+                {%- assign img_alt = block.settings.image_right.alt | default: article.title -%}
+                {{ block.settings.image_right | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: img_alt }}
               {%- endif -%}
             </div>
           {%- when 'text' -%}

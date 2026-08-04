@@ -123,10 +123,11 @@
                     assign focal_point_style = 'object-position: ' | append: media.presentation.focal_point | append: ';'
                   endif
                 %}
+                {%- assign slide_alt = media.alt | default: shop.name -%}
                 {{
                   media.preview_image
                   | image_url: width: 144
-                  | image_tag: loading: 'lazy', alt: media.alt, style: focal_point_style
+                  | image_tag: loading: 'lazy', alt: slide_alt, style: focal_point_style
                   | escape
                 }}
 

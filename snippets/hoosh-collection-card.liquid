@@ -10,7 +10,8 @@
 -%}
 <a href="{{ collection.url }}" class="hcl__card h-reveal" {{ attrs }}>
   {%- if card_image != blank -%}
-    {{ card_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', class: 'hcl__img', alt: card_image.alt | default: card_title }}
+    {%- assign img_alt = card_image.alt | default: card_title -%}
+    {{ card_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', class: 'hcl__img', alt: img_alt }}
   {%- else -%}
     {{ 'collection-1' | placeholder_svg_tag: 'hcl__img hcl__placeholder' }}
   {%- endif -%}

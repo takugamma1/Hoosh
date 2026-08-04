@@ -23,10 +23,35 @@
 >
 
 {%- liquid
-  assign og_title = page_title | default: shop.name
+  # HOOSH: unique per-template SEO fallbacks. They apply only while the page's
+  # admin SEO fields (Search engine listing) are empty — admin values always win.
+  assign seo_title = page_title
+  assign seo_description = page_description
+
+  if seo_description == blank
+    case template.name
+      when 'list-collections'
+        assign seo_title = 'Каталог – електрически наргилета, глави и вкусове'
+        assign seo_description = 'Разгледай пълния каталог на HOOSH – електрически шиши, E-Heads, E-Pod вкусове и аксесоари. Ново поколение изживяване без дим и без въглен.'
+      when 'blog'
+        assign seo_title = 'Блог – новини и тенденции от света на HOOSH'
+        assign seo_description = 'Новини, тенденции и истории от света на HOOSH – електрически наргилета, вкусове и лайфстайл без дим и без въглен.'
+      when 'page'
+        case template.suffix
+          when 'contact'
+            assign seo_title = 'Контакти – свържи се с нас'
+            assign seo_description = 'Свържи се с екипа на HOOSH – телефон, WhatsApp, имейл и форма за контакт. Отговаряме бързо в работни дни от 09:00 до 18:00 ч.'
+          when 'b2b-partner'
+            assign seo_title = 'Стани партньор – HOOSH за твоя бизнес'
+            assign seo_description = 'Предложи на клиентите си ново поколение изживяване без дим и без въглен. Партньорски условия за ресторанти, барове, магазини и хотели.'
+        endcase
+    endcase
+  endif
+
+  assign og_title = seo_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_description = seo_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -108,10 +133,10 @@
 >
 
 <title>
-  {{ page_title }}
+  {{ seo_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless seo_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
@@ -119,9 +144,9 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if seo_description %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ seo_description | escape }}"
   >
 {% endif %}

@@ -12,6 +12,14 @@
     "hoosh_collection_list": {
       "type": "hoosh-collection-list",
       "blocks": {
+        "collection_8wmjDW": {
+          "type": "collection",
+          "settings": {
+            "collection": "hookahs",
+            "image": "shopify://shop_images/hooka-portada-2.0-2048x1470.png",
+            "title": ""
+          }
+        },
         "collection_xUx6d3": {
           "type": "collection",
           "settings": {
@@ -22,6 +30,7 @@
         }
       },
       "block_order": [
+        "collection_8wmjDW",
         "collection_xUx6d3"
       ],
       "settings": {

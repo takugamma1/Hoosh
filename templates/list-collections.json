@@ -12,6 +12,14 @@
     "hoosh_collection_list": {
       "type": "hoosh-collection-list",
       "blocks": {
+        "collection_QP8iVA": {
+          "type": "collection",
+          "settings": {
+            "collection": "e-pod-0",
+            "image": "shopify://shop_images/Purple_Chill_Box.jpg",
+            "title": ""
+          }
+        },
         "collection_8wmjDW": {
           "type": "collection",
           "settings": {
@@ -30,6 +38,7 @@
         }
       },
       "block_order": [
+        "collection_QP8iVA",
         "collection_8wmjDW",
         "collection_xUx6d3"
       ],

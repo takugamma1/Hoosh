@@ -13,7 +13,7 @@
       "type": "hoosh-hero",
       "name": "HOOSH Hero",
       "settings": {
-        "bg_video": "https://hooshspain.com/wp-content/uploads/2024/04/BG-Video-HOOSH.mp4#t=1",
+        "bg_video": "https://cdn.shopify.com/videos/c/o/v/b07786f0b7fc4ab9b22b8fc200376cb0.mp4",
         "left_image": "shopify://shop_images/hooka-portada-2.0-2048x1470.png",
         "right_image": "shopify://shop_images/hookah-hoohs.png",
         "heading": "HOOSH",
@@ -214,7 +214,7 @@
             "heading": "ВКУСОВЕ",
             "description": "Открий интензивните и освежаващи вкусове за твоята премиум наргиле сесия.",
             "cta_label": "Към Всички Вкусове",
-            "cta_link": "shopify://collections/e-pod-nicotine"
+            "cta_link": "shopify://collections/e-pod-package-0"
           }
         },
         "image_6dxqKh": {

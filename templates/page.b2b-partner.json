@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "b2b_partner": {
+      "type": "hoosh-b2b-partner",
+      "settings": {
+        "label": "За бизнес партньори",
+        "heading": "HOOSH за твоя бизнес.",
+        "subheading": "Ново поколение изживяване.",
+        "lead": "Предложи на клиентите си нещо различно. Без дим. Без въглен. Без компромиси.",
+        "form_heading": "Стани партньор",
+        "form_text": "Попълни формата и нашият екип ще се свърже с теб.",
+        "name_placeholder": "Име и фамилия",
+        "business_placeholder": "Име на бизнес",
+        "phone_placeholder": "Телефон",
+        "email_placeholder": "Имейл",
+        "type_label": "Тип обект",
+        "business_types": "Ресторант,Бар / Клуб,Наргиле бар,Магазин,Хотел,Кафене,Друго",
+        "submit_label": "Изпрати запитване",
+        "success_message": "Благодарим ти! Получихме запитването и ще се свържем с теб възможно най-скоро.",
+        "form_note": "Вашите данни са защитени и няма да бъдат споделяни.",
+        "audience_label": "За кого е подходящо",
+        "audience_heading": "Ако си бизнес като:"
+      },
+      "blocks": {
+        "business_restaurant": {
+          "type": "business",
+          "settings": { "title": "Ресторант" }
+        },
+        "business_bar": {
+          "type": "business",
+          "settings": { "title": "Бар / Клуб" }
+        },
+        "business_shop": {
+          "type": "business",
+          "settings": { "title": "Магазин" }
+        },
+        "business_hotel": {
+          "type": "business",
+          "settings": { "title": "Хотел" }
+        },
+        "business_cafe": {
+          "type": "business",
+          "settings": { "title": "Кафене" }
+        },
+        "business_other": {
+          "type": "business",
+          "settings": { "title": "Друго" }
+        },
+        "feature_device": {
+          "type": "feature",
+          "settings": {
+            "title": "Едно устройство. Безкрайни възможности.",
+            "text": "Създадено за интензивна употреба в заведения, барове, клубове, хотели и др.",
+            "checks": "Премиум дизайн и материали\nРазнообразие от вкусове\nСигурност и качество"
+          }
+        },
+        "feature_partnership": {
+          "type": "feature",
+          "settings": {
+            "title": "Партньорство, което се изплаща.",
+            "text": "Работим с обекти в цяла България — с партньорски условия, обучение на екипа и постоянна наличност.",
+            "checks": "Изгодни търговски условия\nОбучение на екипа и поддръжка\nБърза доставка в цяла България"
+          }
+        }
+      },
+      "block_order": [
+        "business_restaurant",
+        "business_bar",
+        "business_shop",
+        "business_hotel",
+        "business_cafe",
+        "business_other",
+        "feature_device",
+        "feature_partnership"
+      ]
+    }
+  },
+  "order": [
+    "b2b_partner"
+  ]
+}

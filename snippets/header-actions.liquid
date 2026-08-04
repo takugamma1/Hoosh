@@ -521,15 +521,27 @@
   .header-call {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     color: var(--color-account-icon, var(--color-foreground));
     text-decoration: none;
     min-height: var(--minimum-touch-target, 44px);
+    min-width: var(--minimum-touch-target, 44px);
+    padding-inline: var(--padding-xs, 8px);
     transition: opacity 0.2s ease;
   }
   .header-call:hover { opacity: 0.7; }
-  .header-call__icon { flex-shrink: 0; }
+  .header-call__icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Icon-only on phones: the 44px box keeps the icon optically centred and
+     clear of the viewport edge, matching the touch target it replaced. */
   @media screen and (max-width: 749px) {
     .header-call__text { display: none; }
+    .header-call { padding-inline: 0; }
+    .header-call__icon { width: 20px; height: 20px; }
   }
 {% endstylesheet %}

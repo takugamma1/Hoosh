@@ -305,7 +305,7 @@
           "type": "social_link",
           "settings": {
             "platform": "instagram",
-            "url": "https://hooshbg.myshopify.com/#MainContent"
+            "url": "https://www.instagram.com/hooshwave/"
           }
         },
         "social_yt": {
@@ -314,19 +314,11 @@
             "platform": "facebook",
             "url": "https://www.facebook.com/profile.php?id=61592340586918"
           }
-        },
-        "social_dc": {
-          "type": "social_link",
-          "settings": {
-            "platform": "discord",
-            "url": "https://hooshbg.myshopify.com/#MainContent"
-          }
         }
       },
       "block_order": [
         "social_ig",
-        "social_yt",
-        "social_dc"
+        "social_yt"
       ],
       "name": "HOOSH Social CTA",
       "settings": {

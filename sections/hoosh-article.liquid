@@ -1,0 +1,257 @@
+{{ 'hoosh-main.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign hero_img = s.hero_image | default: article.image
+-%}
+
+<section class="hart h-section" data-hoosh>
+  <div class="h-container">
+    <article class="hart__wrap">
+
+      <header class="hart__header h-reveal">
+        <a href="{{ blog.url }}" class="hart__back">← {{ blog.title }}</a>
+        <h1 class="h-display hart__title">{{ article.title }}</h1>
+        <div class="hart__meta">
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%d.%m.%Y' }}</time>
+          {%- if s.show_author and article.author != blank -%}
+            <span aria-hidden="true">·</span>
+            <span>{{ article.author }}</span>
+          {%- endif -%}
+        </div>
+      </header>
+
+      {%- if hero_img != blank and s.show_hero_image -%}
+        <div class="hart__hero h-reveal">
+          {{ hero_img | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1600', class: 'hart__hero-img', alt: hero_img.alt | default: article.title }}
+        </div>
+      {%- endif -%}
+
+      <div class="hart__content h-reveal">
+        {{ article.content }}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            {%- if block.settings.image != blank -%}
+              <figure class="hart__figure h-reveal" {{ block.shopify_attributes }}>
+                {{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700, 1000, 1400', class: 'hart__figure-img', alt: block.settings.image.alt | default: block.settings.caption | default: article.title }}
+                {%- if block.settings.caption != blank -%}
+                  <figcaption class="hart__caption">{{ block.settings.caption }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endif -%}
+          {%- when 'image_pair' -%}
+            <div class="hart__pair h-reveal" {{ block.shopify_attributes }}>
+              {%- if block.settings.image_left != blank -%}
+                {{ block.settings.image_left | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: block.settings.image_left.alt | default: article.title }}
+              {%- endif -%}
+              {%- if block.settings.image_right != blank -%}
+                {{ block.settings.image_right | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', class: 'hart__pair-img', alt: block.settings.image_right.alt | default: article.title }}
+              {%- endif -%}
+            </div>
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="hart__content hart__extra h-reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- endif -%}
+          {%- when 'cta' -%}
+            <div class="hart__cta h-reveal" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="h-display hart__cta-heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="h-btn h-btn--primary">{{ block.settings.button_label }}</a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </article>
+  </div>
+</section>
+
+<style>
+  .hart {
+    background: var(--h-bg);
+    padding: clamp(40px, 7vw, 80px) 0;
+  }
+  .hart__wrap {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .hart__back {
+    font-family: var(--h-font-body);
+    font-size: 14px;
+    color: var(--h-text-secondary);
+    text-decoration: none;
+  }
+  .hart__back:hover { color: var(--h-pink); }
+  .hart__title {
+    font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 1;
+    margin: 14px 0 0;
+  }
+  .hart__meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    font-family: var(--h-font-body);
+    font-size: 14px;
+    color: var(--h-text-muted);
+  }
+  .hart__hero {
+    margin-top: clamp(20px, 4vw, 36px);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .hart__hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .hart__content {
+    margin-top: clamp(24px, 4vw, 40px);
+    font-family: var(--h-font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--h-text-secondary);
+  }
+  .hart__content h2 {
+    font-family: var(--h-font-display);
+    font-size: clamp(26px, 3vw, 38px);
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    color: var(--h-text);
+    text-transform: uppercase;
+    margin: 1.6em 0 0.5em;
+  }
+  .hart__content h3 {
+    font-family: var(--h-font-body);
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--h-text);
+    margin: 1.4em 0 0.4em;
+  }
+  .hart__content p { margin: 0 0 1em; }
+  .hart__content a { color: var(--h-pink); }
+  .hart__content ul, .hart__content ol { padding-left: 1.3em; margin: 0 0 1em; }
+  .hart__content li { margin-bottom: 0.4em; }
+  .hart__content li::marker { color: var(--h-green); }
+  .hart__content strong { color: var(--h-text); }
+  .hart__content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .hart__content blockquote {
+    border-left: 3px solid var(--h-pink);
+    margin: 1.4em 0;
+    padding: 4px 0 4px 18px;
+    color: var(--h-text);
+  }
+
+  .hart__figure {
+    margin: clamp(24px, 4vw, 40px) 0 0;
+  }
+  .hart__figure-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+  .hart__caption {
+    margin-top: 10px;
+    font-family: var(--h-font-body);
+    font-size: 13px;
+    color: var(--h-text-muted);
+    text-align: center;
+  }
+  .hart__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: clamp(24px, 4vw, 40px);
+  }
+  .hart__pair-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+  .hart__extra { margin-top: clamp(20px, 3vw, 32px); }
+  .hart__cta {
+    margin-top: clamp(32px, 5vw, 56px);
+    background: var(--h-bg-card);
+    border: 1px solid var(--h-border);
+    border-radius: 16px;
+    padding: clamp(24px, 4vw, 40px);
+    text-align: center;
+  }
+  .hart__cta-heading {
+    font-size: clamp(24px, 3vw, 36px);
+    margin: 0 0 18px;
+  }
+
+  @media (max-width: 560px) {
+    .hart__pair { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HOOSH Article",
+  "tag": "section",
+  "class": "hoosh-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_hero_image", "label": "Show hero image", "default": true },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image override",
+      "info": "Overrides the article's featured image on this template."
+    },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption" }
+      ]
+    },
+    {
+      "type": "image_pair",
+      "name": "Two images",
+      "settings": [
+        { "type": "image_picker", "id": "image_left", "label": "Left image" },
+        { "type": "image_picker", "id": "image_right", "label": "Right image" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Extra text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "CTA box",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Разгледай продуктите на HOOSH" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Към каталога" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "HOOSH Article" }]
+}
+{% endschema %}

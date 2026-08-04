@@ -11,6 +11,21 @@
   "sections": {
     "main": {
       "type": "hoosh-article",
+      "blocks": {
+        "image_1": {
+          "type": "image",
+          "settings": { "caption": "" }
+        },
+        "cta_1": {
+          "type": "cta",
+          "settings": {
+            "heading": "Разгледай продуктите на HOOSH",
+            "button_label": "Към каталога",
+            "button_link": "shopify://collections"
+          }
+        }
+      },
+      "block_order": ["image_1", "cta_1"],
       "settings": {
         "show_hero_image": true,
         "show_author": false

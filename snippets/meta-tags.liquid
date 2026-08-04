@@ -28,11 +28,14 @@
   assign seo_title = page_title
   assign seo_description = page_description
 
+  # The collections list has no admin SEO fields, so it always gets its own copy
+  if template.name == 'list-collections'
+    assign seo_title = 'Каталог – електрически наргилета, глави и вкусове'
+    assign seo_description = 'Разгледай пълния каталог на HOOSH – електрически шиши, E-Heads, E-Pod вкусове и аксесоари. Ново поколение изживяване без дим и без въглен.'
+  endif
+
   if seo_description == blank
     case template.name
-      when 'list-collections'
-        assign seo_title = 'Каталог – електрически наргилета, глави и вкусове'
-        assign seo_description = 'Разгледай пълния каталог на HOOSH – електрически шиши, E-Heads, E-Pod вкусове и аксесоари. Ново поколение изживяване без дим и без въглен.'
       when 'blog'
         assign seo_title = 'Блог – новини и тенденции от света на HOOSH'
         assign seo_description = 'Новини, тенденции и истории от света на HOOSH – електрически наргилета, вкусове и лайфстайл без дим и без въглен.'

@@ -290,7 +290,7 @@
         "video_subtext": "",
         "video_url": "",
         "collection": "e-pod-nicotine",
-        "max_products": 24,
+        "max_products": 50,
         "layout": "grid",
         "per_row_desktop": 4,
         "per_row_mobile": 2,

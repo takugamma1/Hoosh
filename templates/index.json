@@ -61,6 +61,7 @@
     },
     "hoosh_mobile_grid_bestsellers": {
       "type": "hoosh-mobile-grid",
+      "disabled": true,
       "name": "HOOSH Mobile Grid",
       "settings": {
         "hide_header": false,
@@ -81,8 +82,7 @@
         "heading_color": "#ffffff",
         "sub_color": "#8a8a8a",
         "label_text": "#ffffff"
-      },
-      "disabled": true
+      }
     },
     "hoosh_product_slider_h8nrzT": {
       "type": "hoosh-product-slider",
@@ -205,7 +205,7 @@
         "image_PpjXgb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Emerald_Dream_0.png",
+            "image": "shopify://shop_images/Emerald_Dream.png",
             "link": ""
           }
         },

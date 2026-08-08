@@ -44,9 +44,11 @@
   if s.layout == 'grid'
     assign is_grid = true
   endif
-  assign grid_rows = s.grid_rows | default: 2
+  assign grid_rows = s.grid_rows | default: 0
   assign product_limit = s.max_products | default: 12
-  if is_grid
+  # Grid shows every product up to "Max products". Set "Rows" above 0 only if
+  # you deliberately want to cut the grid off after a fixed number of rows.
+  if is_grid and grid_rows > 0
     assign grid_cap = cols_desktop | times: grid_rows
     if grid_cap < product_limit
       assign product_limit = grid_cap
@@ -523,7 +525,7 @@
       "id": "max_products",
       "label": "Max products",
       "min": 2,
-      "max": 24,
+      "max": 50,
       "step": 1,
       "default": 12
     },
@@ -564,11 +566,11 @@
       "type": "range",
       "id": "grid_rows",
       "label": "Rows (grid layout only)",
-      "min": 1,
+      "min": 0,
       "max": 6,
       "step": 1,
-      "default": 2,
-      "info": "Grid shows at most columns × rows products (desktop count; on mobile the same products wrap into more rows). Slider layout ignores this."
+      "default": 0,
+      "info": "0 = show all products (up to Max products). Any other value cuts the grid off after that many rows. Slider layout ignores this."
     },
     {
       "type": "header",

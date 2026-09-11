@@ -84,7 +84,7 @@
     "hoosh_phone": "359888711298",
     "hoosh_phone_display": "+359 88 871 1298",
     "hoosh_whatsapp": "+359888711298",
-    "hoosh_contact_url": "shopify://pages/359888711298",
+    "hoosh_contact_url": "shopify://pages/contact",
     "sections": {
       "hoosh-age-gate": {
         "type": "hoosh-age-gate",

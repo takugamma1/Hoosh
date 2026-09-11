@@ -14,22 +14,39 @@
       "blocks": {
         "link_shishi": {
           "type": "link",
-          "settings": { "title": "Наргилета", "url": "shopify://collections/hookahs" }
+          "settings": {
+            "title": "Наргилета",
+            "url": "shopify://collections/hookahs"
+          }
         },
         "link_eheads": {
           "type": "link",
-          "settings": { "title": "E-Heads", "url": "shopify://collections/e-heads" }
+          "settings": {
+            "title": "E-Heads",
+            "url": "shopify://collections/e-heads"
+          }
         },
         "link_flavors": {
           "type": "link",
-          "settings": { "title": "Вкусове", "url": "shopify://collections/e-pod-nicotine" }
+          "settings": {
+            "title": "Вкусове",
+            "url": "shopify://collections/e-pod-nicotine"
+          }
         },
         "link_contact": {
           "type": "link",
-          "settings": { "title": "Контакти", "url": "shopify://pages/contact" }
+          "settings": {
+            "title": "Контакти",
+            "url": "shopify://pages/359888711298"
+          }
         }
       },
-      "block_order": ["link_shishi", "link_eheads", "link_flavors", "link_contact"],
+      "block_order": [
+        "link_shishi",
+        "link_eheads",
+        "link_flavors",
+        "link_contact"
+      ],
       "settings": {
         "label": "Грешка 404",
         "heading": "Страницата не е намерена.",

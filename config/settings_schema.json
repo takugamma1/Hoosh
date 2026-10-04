@@ -2292,7 +2292,7 @@
         "type": "text",
         "id": "hoosh_phone",
         "label": "Phone number (for tel: link)",
-        "info": "International format without spaces, e.g. +359886969757"
+        "info": "International format without spaces, e.g. +359888711298"
       },
       {
         "type": "text",
@@ -2304,7 +2304,7 @@
         "type": "text",
         "id": "hoosh_whatsapp",
         "label": "WhatsApp number",
-        "info": "International format, no + or spaces, e.g. 359886969757"
+        "info": "International format, no + or spaces, e.g. 359888711298"
       },
       {
         "type": "url",

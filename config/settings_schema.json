@@ -2298,7 +2298,7 @@
         "type": "text",
         "id": "hoosh_phone_display",
         "label": "Phone number (display)",
-        "info": "How the phone number is shown, e.g. +359 88 696 9757"
+        "info": "How the phone number is shown, e.g. +359 88 871 1298"
       },
       {
         "type": "text",
